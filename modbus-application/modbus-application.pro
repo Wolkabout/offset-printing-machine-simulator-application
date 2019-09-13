@@ -38,3 +38,16 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../modbus-simulator-cpp/out/release/ -lmodbus_simulator_cpp
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../modbus-simulator-cpp/out/debug/ -lmodbus_simulator_cpp
+else:unix: LIBS += -L$$PWD/../modbus-simulator-cpp/out/ -lmodbus_simulator_cpp
+
+INCLUDEPATH += $$PWD/../modbus-simulator-cpp/out
+DEPENDPATH += $$PWD/../modbus-simulator-cpp/out
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/release/libmodbus_simulator_cpp.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/debug/libmodbus_simulator_cpp.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/release/modbus_simulator_cpp.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/debug/modbus_simulator_cpp.lib
+else:unix: PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/libmodbus_simulator_cpp.a
