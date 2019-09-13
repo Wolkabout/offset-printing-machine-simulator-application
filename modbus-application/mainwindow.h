@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "simulator.h"
+
 #include <QMainWindow>
 
 namespace Ui {
@@ -12,10 +14,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    MainWindow(Simulator &simulator, QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
+    Simulator &simulator;
     Ui::MainWindow *ui;
 };
 
