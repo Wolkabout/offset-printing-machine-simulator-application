@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QMessageBox>
+
 MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     QMainWindow(parent),
     simulator(simulator),
@@ -12,4 +14,11 @@ MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QMessageBox box(this);
+    box.setText("Hello World!");
+    box.exec();
 }

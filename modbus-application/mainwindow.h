@@ -17,6 +17,9 @@ public:
     MainWindow(Simulator &simulator, QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Simulator &simulator;
     Ui::MainWindow *ui;
