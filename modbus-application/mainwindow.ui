@@ -32,13 +32,13 @@
    <string>Wolkabout Modbus TCP</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QFrame" name="">
+   <widget class="QFrame" name="status">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
       <width>801</width>
-      <height>48</height>
+      <height>36</height>
      </rect>
     </property>
     <property name="styleSheet">
