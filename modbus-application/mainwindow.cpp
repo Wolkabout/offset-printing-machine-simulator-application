@@ -3,6 +3,9 @@
 #include "ui_mainwindow.h"
 
 #include <QMessageBox>
+#include <QTime>
+#include <QTimer>
+#include <qdatetime.h>
 
 MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     QMainWindow(parent),
@@ -10,6 +13,11 @@ MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    ui->clock->setText(QTime::currentTime().toString("hh:mm"));
+    ui->date->setText(QDate::currentDate().toString());
+    startTimer(100);
+
 //    uncomment when building for RPi
 //    QMainWindow::showFullScreen();
 }
@@ -26,4 +34,9 @@ void MainWindow::on_pushButton_clicked()
 //    QMessageBox box(this);
 //    box.setText("Hello World!");
 //    box.exec();
+}
+
+void MainWindow::timerEvent(QTimerEvent *event) {
+    ui->clock->setText(QTime::currentTime().toString("hh:mm"));
+    ui->date->setText(QDate::currentDate().toString("dddd, d. MMMM yyyy"));
 }

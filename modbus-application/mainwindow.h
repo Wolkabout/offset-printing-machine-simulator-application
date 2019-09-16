@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     MainWindow(Simulator &simulator, QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
 private slots:
     void on_pushButton_clicked();
@@ -22,6 +22,7 @@ private slots:
 private:
     Simulator &simulator;
     Ui::MainWindow *ui;
+    void timerEvent(QTimerEvent *event) override;
 };
 
 #endif // MAINWINDOW_H
