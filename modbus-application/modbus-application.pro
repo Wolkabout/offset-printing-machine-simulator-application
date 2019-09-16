@@ -26,15 +26,18 @@ CONFIG += c++11
 UI_DIR = $$PWD
 
 SOURCES += \
+        logs.cpp \
         main.cpp \
         mainwindow.cpp \
         simulator.cpp
 
 HEADERS += \
+        logs.h \
         mainwindow.h \
         simulator.h
 
 FORMS += \
+        logs.ui \
         mainwindow.ui
 
 # Default rules for deployment.

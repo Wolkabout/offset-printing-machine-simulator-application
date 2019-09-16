@@ -1,3 +1,4 @@
+#include "logs.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -9,7 +10,8 @@ MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QMainWindow::showFullScreen();
+//    uncomment when building for RPi
+//    QMainWindow::showFullScreen();
 }
 
 MainWindow::~MainWindow()
@@ -19,7 +21,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QMessageBox box(this);
-    box.setText("Hello World!");
-    box.exec();
+    Logs* logs = new Logs(ui->displayedWindow);
+    logs->show();
+//    QMessageBox box(this);
+//    box.setText("Hello World!");
+//    box.exec();
 }
