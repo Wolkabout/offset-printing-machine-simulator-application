@@ -9,6 +9,7 @@ MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QMainWindow::showFullScreen();
 }
 
 MainWindow::~MainWindow()
