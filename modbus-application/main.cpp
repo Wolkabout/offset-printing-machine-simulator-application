@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Simulator simulator;
+
     WindowManager windowManager;
 
     MainWindow w(simulator, windowManager);

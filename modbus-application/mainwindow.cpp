@@ -88,3 +88,10 @@ void MainWindow::on_toggleButton_clicked()
         simulator.getMachine()->start();
     }
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    QMessageBox popup(this);
+    popup.setText(QString::number(simulator.getFeeder()->getCount()) + " " + QString::number(simulator.getCyanPaint()->getCount()) + " " + QString::number(simulator.getDelivery()->getCount()));
+    popup.exec();
+}

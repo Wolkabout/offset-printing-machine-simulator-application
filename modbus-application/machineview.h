@@ -18,6 +18,7 @@ class MachineView : public QFrame
     std::map<QLabel*, QMovie*> labels;
     Simulator& simulator;
     std::shared_ptr<ExternalMachineStateReceiver> listener;
+    std::shared_ptr<CountMessageReceiver> feederListener;
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();
@@ -32,6 +33,16 @@ private:
     public:
         ViewMachineStateListener(MachineView&);
         void ReceiveMachineState(bool x) override;
+    };
+
+    class ComponentCountListener : public CountMessageReceiver {
+    private:
+        MachineView& machineView;
+        TempoComponent& tempoComponent;
+        QLabel * label;
+    public:
+        ComponentCountListener(MachineView&, TempoComponent&, QLabel *);
+        void ReceiveMessage(std::shared_ptr<CountMessage>) override;
     };
 };
 

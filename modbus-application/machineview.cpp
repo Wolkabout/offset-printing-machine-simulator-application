@@ -4,6 +4,7 @@
 #include <QMovie>
 #include <QDebug>
 #include <map>
+#include <QMessageBox>
 
 MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     QFrame(parent),
@@ -30,6 +31,9 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
 
     listener = std::make_shared<ViewMachineStateListener>(*this);
     simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
+
+    feederListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getFeeder().get()), ui->feederCount);
+    simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
 }
 
 MachineView::ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) { }
@@ -41,6 +45,13 @@ void MachineView::ViewMachineStateListener::ReceiveMachineState(bool x) {
         machineView.stopAnimation();
     }
 }
+
+MachineView::ComponentCountListener::ComponentCountListener(MachineView& machineView, TempoComponent& tempoComponent, QLabel * label)
+    : machineView(machineView), tempoComponent(tempoComponent), label(label) { }
+
+void MachineView::ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
+    label->setText(QString::fromStdString(std::to_string(message->getCount())));
+};
 
 void MachineView::startAnimation()
 {

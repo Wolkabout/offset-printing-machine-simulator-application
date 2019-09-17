@@ -118,6 +118,19 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="feederCount">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>330</y>
+     <width>59</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
