@@ -1,9 +1,10 @@
 #include "logs.h"
 #include "ui_logs.h"
 
-Logs::Logs(QWidget *parent) :
+Logs::Logs(Simulator& simulator, QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::Logs)
+    ui(new Ui::Logs),
+    simulator(simulator)
 {
     ui->setupUi(this);
 }

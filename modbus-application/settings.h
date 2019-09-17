@@ -1,6 +1,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include "simulator.h"
+
 #include <QFrame>
 
 namespace Ui {
@@ -10,9 +12,10 @@ class Settings;
 class Settings : public QFrame
 {
     Q_OBJECT
+    Simulator& simulator;
 
 public:
-    explicit Settings(QWidget *parent = nullptr);
+    Settings(Simulator& simulator, QWidget *parent = nullptr);
     ~Settings();
 
 private:

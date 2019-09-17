@@ -3,19 +3,54 @@
 
 #include <QMovie>
 #include <QDebug>
+#include <map>
 
-MachineView::MachineView(QWidget *parent) :
+MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::MachineView)
+    ui(new Ui::MachineView),
+    simulator(simulator)
 {
     ui->setupUi(this);
 
-    QMovie * movie = new QMovie(":/Animations/Resources/ConveyorAnimation1.gif");
-    if (!movie->isValid()) {
-        qDebug() << "The Movie isn't valid!" << endl;
+    labels = std::map<QLabel*, QMovie*> {
+            {ui->feeder, new QMovie(":/Animations/Resources/FeederAnimation1.gif")},
+            {ui->cyan, new QMovie(":/Animations/Resources/PaintStationAnimationC1.gif")},
+            {ui->magenta, new QMovie(":/Animations/Resources/PaintStationAnimationM1.gif")},
+            {ui->yellow, new QMovie(":/Animations/Resources/PaintStationAnimationY1.gif")},
+            {ui->black, new QMovie(":/Animations/Resources/PaintStationAnimationK1.gif")},
+            {ui->delivery, new QMovie(":/Animations/Resources/DeliveryAnimation1.gif")}
+    };
+
+    for (auto const& x : labels) {
+        x.first->setMovie(x.second);
     }
-    ui->imageTest->setMovie(movie);
-    movie->start();
+
+    listener = std::make_shared<ViewMachineStateListener>(*this);
+    simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
+}
+
+MachineView::ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) { }
+
+void MachineView::ViewMachineStateListener::ReceiveMachineState(bool x) {
+    if (x) {
+        machineView.startAnimation();
+    } else {
+        machineView.stopAnimation();
+    }
+}
+
+void MachineView::startAnimation()
+{
+    for (auto const& x : labels) {
+        x.second->start();
+    }
+}
+
+void MachineView::stopAnimation()
+{
+    for (auto const& x : labels) {
+        x.second->stop();
+    }
 }
 
 MachineView::~MachineView()

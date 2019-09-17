@@ -22,12 +22,92 @@
   <property name="styleSheet">
    <string notr="true">background-color: orange; color: black;</string>
   </property>
-  <widget class="QLabel" name="imageTest">
+  <widget class="QLabel" name="feeder">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>100</x>
      <y>140</y>
-     <width>200</width>
+     <width>100</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>c:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cyan">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>140</y>
+     <width>100</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>c:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="magenta">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>140</y>
+     <width>100</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>c:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="yellow">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>140</y>
+     <width>100</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>c:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="black">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>140</y>
+     <width>100</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>c:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="delivery">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>140</y>
+     <width>100</width>
      <height>200</height>
     </rect>
    </property>

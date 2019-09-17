@@ -16,9 +16,9 @@ int main(int argc, char *argv[])
     w.show();
 
     QFrame * parent = w.frameHolder();
-    int logIndex = windowManager.addFrame(std::make_shared<Logs>(parent)); // 0
-    int settingsIndex = windowManager.addFrame(std::make_shared<Settings>(parent)); // 1
-    int machineIndex = windowManager.addFrame(std::make_shared<MachineView>(parent)); // 2
+    int logIndex = windowManager.addFrame(std::make_shared<Logs>(simulator, parent)); // 0
+    int settingsIndex = windowManager.addFrame(std::make_shared<Settings>(simulator, parent)); // 1
+    int machineIndex = windowManager.addFrame(std::make_shared<MachineView>(simulator, parent)); // 2
 
     return a.exec();
 }

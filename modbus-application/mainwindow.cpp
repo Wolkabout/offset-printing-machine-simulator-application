@@ -23,6 +23,17 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
 //    QMainWindow::showFullScreen();
 }
 
+MainWindow::MainViewStateListener::MainViewStateListener(MainWindow& mainWindow) : mainWindow(mainWindow) { }
+
+void MainWindow::MainViewStateListener::ReceiveMachineState(bool x)
+{
+    if (x) {
+
+    } else {
+
+    }
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;

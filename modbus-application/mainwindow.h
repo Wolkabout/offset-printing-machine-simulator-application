@@ -34,6 +34,14 @@ private:
     WindowManager &windowManager;
     Ui::MainWindow *ui;
     void timerEvent(QTimerEvent *event) override;
+
+    class MainViewStateListener : public ExternalMachineStateReceiver {
+    private:
+        MainWindow& mainWindow;
+    public:
+        MainViewStateListener(MainWindow&);
+        void ReceiveMachineState(bool) override;
+    };
 };
 
 #endif // MAINWINDOW_H

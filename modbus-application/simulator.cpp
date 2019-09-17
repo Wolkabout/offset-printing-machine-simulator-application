@@ -11,3 +11,43 @@ Simulator::Simulator()
     delivery = std::make_shared<Delivery>("Delivery", *machine.get(), DELIVERY_CAPACITY, DELIVERY_START_COUNT);
     conveyor = std::make_shared<Conveyor>("Conveyor Belt", *machine.get(), CONVEYOR_MAX_RATE, CONVEYOR_START_RATE);
 }
+
+shared_ptr<Machine> Simulator::getMachine()
+{
+    return machine;
+}
+
+shared_ptr<Feeder> Simulator::getFeeder()
+{
+    return feeder;
+}
+
+shared_ptr<PaintStation> Simulator::getCyanPaint()
+{
+    return cyan;
+}
+
+shared_ptr<PaintStation> Simulator::getMagentaPaint()
+{
+    return magenta;
+}
+
+shared_ptr<PaintStation> Simulator::getYellowPaint()
+{
+    return yellow;
+}
+
+shared_ptr<PaintStation> Simulator::getBlackPaint()
+{
+    return black;
+}
+
+shared_ptr<Delivery> Simulator::getDelivery()
+{
+    return delivery;
+}
+
+shared_ptr<Conveyor> Simulator::getConveyor()
+{
+    return conveyor;
+}
