@@ -1,13 +1,22 @@
+#include "logs.h"
 #include "mainwindow.h"
+#include "settings.h"
 #include "simulator.h"
+#include "windowmanager.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Simulator simulator;
-    MainWindow w(simulator);
+    WindowManager windowManager;
+
+    MainWindow w(simulator, windowManager);
     w.show();
+
+    QFrame * parent = w.frameHolder();
+    int logIndex = windowManager.addFrame(std::make_shared<Logs>(parent));
+    int settingsIndex = windowManager.addFrame(std::make_shared<Settings>(parent));
 
     return a.exec();
 }

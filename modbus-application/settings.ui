@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Logs</class>
- <widget class="QFrame" name="Logs">
+ <class>Settings</class>
+ <widget class="QFrame" name="Settings">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,23 +10,29 @@
     <height>528</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: red;</string>
+   <string notr="true">background-color: black; color: white;</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>240</y>
-     <width>181</width>
+     <y>250</y>
+     <width>151</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>This is me, at the skatepark.</string>
+    <string>Hello! What the fuck</string>
    </property>
   </widget>
  </widget>

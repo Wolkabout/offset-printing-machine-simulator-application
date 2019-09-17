@@ -7,9 +7,10 @@
 #include <QTimer>
 #include <qdatetime.h>
 
-MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
+MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidget *parent) :
     QMainWindow(parent),
     simulator(simulator),
+    windowManager(windowManager),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -27,16 +28,31 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    Logs* logs = new Logs(ui->displayedWindow);
-    logs->show();
-//    QMessageBox box(this);
-//    box.setText("Hello World!");
-//    box.exec();
+QFrame * MainWindow::frameHolder() {
+    return ui->displayedWindow;
 }
 
 void MainWindow::timerEvent(QTimerEvent *event) {
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
     ui->date->setText(QDate::currentDate().toString("dddd, d. MMMM yyyy"));
+}
+
+void MainWindow::on_backButton_clicked()
+{
+    windowManager.goBack();
+}
+
+void MainWindow::on_homeButton_clicked()
+{
+    windowManager.hideEverything();
+}
+
+void MainWindow::on_logButton_clicked()
+{
+    windowManager.showFrame(0);
+}
+
+void MainWindow::on_settingsButton_clicked()
+{
+    windowManager.showFrame(1);
 }
