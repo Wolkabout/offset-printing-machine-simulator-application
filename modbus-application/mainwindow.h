@@ -27,6 +27,8 @@ private slots:
 
     void on_settingsButton_clicked();
 
+    void on_machineButton_clicked();
+
 private:
     Simulator &simulator;
     WindowManager &windowManager;

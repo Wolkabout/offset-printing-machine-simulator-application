@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/Animations">
+        <file>Resources/ConveyorAnimation1.gif</file>
+        <file>Resources/ConveyorAnimation2.gif</file>
+        <file>Resources/DeliveryAnimation1.gif</file>
+        <file>Resources/DeliveryAnimation2.gif</file>
+        <file>Resources/FeederAnimation1.gif</file>
+        <file>Resources/FeederAnimation2.gif</file>
+        <file>Resources/PaintStationAnimationC1.gif</file>
+        <file>Resources/PaintStationAnimationC2.gif</file>
+        <file>Resources/PaintStationAnimationK1.gif</file>
+        <file>Resources/PaintStationAnimationK2.gif</file>
+        <file>Resources/PaintStationAnimationM1.gif</file>
+        <file>Resources/PaintStationAnimationM2.gif</file>
+        <file>Resources/PaintStationAnimationY1.gif</file>
+        <file>Resources/PaintStationAnimationY2.gif</file>
+    </qresource>
+</RCC>

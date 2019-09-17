@@ -1,4 +1,5 @@
 #include "logs.h"
+#include "machineview.h"
 #include "mainwindow.h"
 #include "settings.h"
 #include "simulator.h"
@@ -15,8 +16,9 @@ int main(int argc, char *argv[])
     w.show();
 
     QFrame * parent = w.frameHolder();
-    int logIndex = windowManager.addFrame(std::make_shared<Logs>(parent));
-    int settingsIndex = windowManager.addFrame(std::make_shared<Settings>(parent));
+    int logIndex = windowManager.addFrame(std::make_shared<Logs>(parent)); // 0
+    int settingsIndex = windowManager.addFrame(std::make_shared<Settings>(parent)); // 1
+    int machineIndex = windowManager.addFrame(std::make_shared<MachineView>(parent)); // 2
 
     return a.exec();
 }

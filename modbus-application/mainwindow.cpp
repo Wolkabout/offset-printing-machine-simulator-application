@@ -56,3 +56,8 @@ void MainWindow::on_settingsButton_clicked()
 {
     windowManager.showFrame(1);
 }
+
+void MainWindow::on_machineButton_clicked()
+{
+    windowManager.showFrame(2);
+}
