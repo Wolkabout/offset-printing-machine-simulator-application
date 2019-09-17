@@ -15,12 +15,15 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
 {
     ui->setupUi(this);
 
+//    uncomment when building for RPi
+//    QMainWindow::showFullScreen();
+
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
     ui->date->setText(QDate::currentDate().toString());
     startTimer(100);
 
-//    uncomment when building for RPi
-//    QMainWindow::showFullScreen();
+    listener = std::make_shared<MainViewStateListener>(*this);
+    simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
 }
 
 MainWindow::MainViewStateListener::MainViewStateListener(MainWindow& mainWindow) : mainWindow(mainWindow) { }
@@ -28,9 +31,13 @@ MainWindow::MainViewStateListener::MainViewStateListener(MainWindow& mainWindow)
 void MainWindow::MainViewStateListener::ReceiveMachineState(bool x)
 {
     if (x) {
-
+        mainWindow.ui->statusLabel->setText("Machine running.");
+        mainWindow.ui->toggleButton->setText("Stop");
+        mainWindow.ui->toggleButton->setStyleSheet("background-color: green; color: white;");
     } else {
-
+        mainWindow.ui->statusLabel->setText("Machine not running.");
+        mainWindow.ui->toggleButton->setText("Start");
+        mainWindow.ui->toggleButton->setStyleSheet("background-color: red; color: white;");
     }
 }
 
@@ -71,4 +78,13 @@ void MainWindow::on_settingsButton_clicked()
 void MainWindow::on_machineButton_clicked()
 {
     windowManager.showFrame(2);
+}
+
+void MainWindow::on_toggleButton_clicked()
+{
+    if (simulator.getMachine()->isRunning()) {
+        simulator.getMachine()->stop();
+    } else {
+        simulator.getMachine()->start();
+    }
 }

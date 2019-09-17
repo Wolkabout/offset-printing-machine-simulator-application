@@ -14,19 +14,22 @@
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: red;</string>
+   <string notr="true">background-color:  rgb(255, 170, 127);</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QPlainTextEdit" name="logs">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>240</y>
-     <width>181</width>
-     <height>20</height>
+     <x>10</x>
+     <y>10</y>
+     <width>775</width>
+     <height>500</height>
     </rect>
    </property>
-   <property name="text">
-    <string>This is me, at the skatepark.</string>
+   <property name="styleSheet">
+    <string notr="true">background-color: white; color: black;</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

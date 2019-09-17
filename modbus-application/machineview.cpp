@@ -25,6 +25,9 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
         x.first->setMovie(x.second);
     }
 
+    startAnimation();
+    stopAnimation();
+
     listener = std::make_shared<ViewMachineStateListener>(*this);
     simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
 }

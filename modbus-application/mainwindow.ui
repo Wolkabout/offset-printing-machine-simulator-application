@@ -267,7 +267,7 @@ color: white;;</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="toggleButton">
     <property name="geometry">
      <rect>
       <x>350</x>
@@ -276,11 +276,15 @@ color: white;;</string>
       <height>40</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: red;
+color: white;</string>
+    </property>
     <property name="text">
      <string>Start</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="statusLabel">
     <property name="geometry">
      <rect>
       <x>430</x>

@@ -29,11 +29,14 @@ private slots:
 
     void on_machineButton_clicked();
 
+    void on_toggleButton_clicked();
+
 private:
     Simulator &simulator;
     WindowManager &windowManager;
     Ui::MainWindow *ui;
     void timerEvent(QTimerEvent *event) override;
+    std::shared_ptr<ExternalMachineStateReceiver> listener;
 
     class MainViewStateListener : public ExternalMachineStateReceiver {
     private:
