@@ -25,14 +25,14 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>310</x>
      <y>250</y>
-     <width>151</width>
+     <width>171</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Hello! What the fuck</string>
+    <string>Hello, this is not done yet</string>
    </property>
   </widget>
  </widget>

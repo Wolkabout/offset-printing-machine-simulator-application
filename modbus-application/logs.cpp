@@ -11,7 +11,7 @@ Logs::Logs(Simulator& simulator, QWidget *parent) :
 
     auto timestamp = QTime::currentTime().toString("hh:mm:ss.zzz");
     for (auto &message : simulator.getMachine()->getMessages()) {
-        ui->logs->appendPlainText("[" + timestamp + "] -> " + message->getType() + " | " + QString::fromStdString(message->getContent()) + '\n');
+        ui->logs->appendPlainText("[" + timestamp + "] -> " + QString::number(message->getType()) + " | " + QString::fromStdString(message->getContent()) + '\n');
     }
 
     listener = std::make_shared<LogsMessageReceiver>(*this);
@@ -23,7 +23,7 @@ Logs::LogsMessageReceiver::LogsMessageReceiver(Logs& logs) : logs(logs) { }
 void Logs::LogsMessageReceiver::ReceiveMessage(std::shared_ptr<ComponentMessage> message)
 {
     auto timestamp = QTime::currentTime().toString("hh:mm:ss.zzz");
-    logs.ui->logs->appendPlainText("[" + timestamp + "] -> " + message->getType() + " | " + QString::fromStdString(message->getContent()) + '\n');
+    logs.ui->logs->appendPlainText("[" + timestamp + "] -> " + QString::number(message->getType()) + " | " + QString::fromStdString(message->getContent()) + '\n');
 }
 
 Logs::~Logs()
