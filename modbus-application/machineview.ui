@@ -25,10 +25,10 @@
   <widget class="QLabel" name="feeder">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>140</y>
-     <width>100</width>
-     <height>200</height>
+     <x>10</x>
+     <y>110</y>
+     <width>130</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="text">
@@ -41,10 +41,10 @@
   <widget class="QLabel" name="cyan">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>140</y>
-     <width>100</width>
-     <height>200</height>
+     <x>140</x>
+     <y>110</y>
+     <width>130</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="text">
@@ -57,10 +57,10 @@
   <widget class="QLabel" name="magenta">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>140</y>
-     <width>100</width>
-     <height>200</height>
+     <x>270</x>
+     <y>110</y>
+     <width>130</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="text">
@@ -74,9 +74,9 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>140</y>
-     <width>100</width>
-     <height>200</height>
+     <y>110</y>
+     <width>130</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="text">
@@ -89,10 +89,10 @@
   <widget class="QLabel" name="black">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>140</y>
-     <width>100</width>
-     <height>200</height>
+     <x>530</x>
+     <y>110</y>
+     <width>130</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="text">
@@ -105,10 +105,10 @@
   <widget class="QLabel" name="delivery">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>140</y>
-     <width>100</width>
-     <height>200</height>
+     <x>660</x>
+     <y>110</y>
+     <width>130</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="text">
@@ -121,8 +121,8 @@
   <widget class="QLabel" name="feederCount">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>330</y>
+     <x>10</x>
+     <y>500</y>
      <width>59</width>
      <height>15</height>
     </rect>

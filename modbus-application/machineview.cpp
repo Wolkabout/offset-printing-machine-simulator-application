@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <map>
 #include <QMessageBox>
+#include <QMetaObject>
 
 MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     QFrame(parent),
@@ -50,6 +51,8 @@ MachineView::ComponentCountListener::ComponentCountListener(MachineView& machine
     : machineView(machineView), tempoComponent(tempoComponent), label(label) { }
 
 void MachineView::ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
+//    QMetaObject::invokeMethod(label, "setText", QString::number(message->getCount()));
+//    this is if you want your house to burn on fire
     label->setText(QString::fromStdString(std::to_string(message->getCount())));
 };
 
