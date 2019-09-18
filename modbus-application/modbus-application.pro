@@ -30,6 +30,7 @@ CONFIG += c++17 thread
 UI_DIR = $$PWD
 
 SOURCES += \
+        feedercontrol.cpp \
         logs.cpp \
         machineview.cpp \
         main.cpp \
@@ -39,6 +40,7 @@ SOURCES += \
         windowmanager.cpp
 
 HEADERS += \
+        feedercontrol.h \
         logs.h \
         machineview.h \
         mainwindow.h \
@@ -47,6 +49,7 @@ HEADERS += \
         windowmanager.h
 
 FORMS += \
+        feedercontrol.ui \
         logs.ui \
         machineview.ui \
         mainwindow.ui \

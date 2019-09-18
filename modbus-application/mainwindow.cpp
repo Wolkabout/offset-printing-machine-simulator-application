@@ -1,3 +1,4 @@
+#include "feedercontrol.h"
 #include "logs.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -91,7 +92,6 @@ void MainWindow::on_toggleButton_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QMessageBox popup(this);
-    popup.setText(QString::number(simulator.getFeeder()->getCount()) + " " + QString::number(simulator.getCyanPaint()->getCount()) + " " + QString::number(simulator.getDelivery()->getCount()));
-    popup.exec();
+    FeederControl * fc = new FeederControl();
+    fc->show();
 }
