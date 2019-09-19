@@ -1,6 +1,7 @@
 #ifndef PAINTSTATIONCONTROL_H
 #define PAINTSTATIONCONTROL_H
 
+#include <QLabel>
 #include <QWidget>
 
 #include <Components/PaintStation.h>
@@ -17,9 +18,28 @@ public:
     explicit PaintStationControl(PaintStation& paintStation, QWidget *parent = nullptr);
     ~PaintStationControl();
 
+private slots:
+    void on_edit_clicked();
+
+    void on_failure_clicked();
+
+    void on_ok_clicked();
+
 private:
     Ui::PaintStationControl *ui;
     PaintStation& paintStation;
+    std::shared_ptr<CountMessageReceiver> countListener;
+
+    class ComponentCountListener : public CountMessageReceiver {
+    private:
+        PaintStationControl& psc;
+        TempoComponent& tempoComponent;
+        QLabel * countLabel;
+        QLabel * percentageLabel;
+    public:
+        ComponentCountListener(PaintStationControl&, TempoComponent&, QLabel *, QLabel *);
+        void ReceiveMessage(std::shared_ptr<CountMessage>) override;
+    };
 };
 
 #endif // PAINTSTATIONCONTROL_H
