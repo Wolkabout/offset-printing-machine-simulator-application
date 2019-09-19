@@ -14,9 +14,11 @@ class Logs : public QFrame
     Q_OBJECT
     Simulator& simulator;
     std::shared_ptr<ExternalMachineMessageReceiver> listener;
+    QString convertType(ComponentMessageType type);
 public:
     Logs(Simulator& simulator, QWidget *parent = nullptr);
     ~Logs();
+    Q_INVOKABLE void createAlarmPopup(QString, QWidget*, QWidget*);
 
 private:
     Ui::Logs *ui;

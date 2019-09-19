@@ -30,6 +30,7 @@ CONFIG += c++17 thread
 UI_DIR = $$PWD
 
 SOURCES += \
+        alarmalert.cpp \
         feedercontrol.cpp \
         logs.cpp \
         machineview.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
         windowmanager.cpp
 
 HEADERS += \
+        alarmalert.h \
         feedercontrol.h \
         logs.h \
         machineview.h \
@@ -49,6 +51,7 @@ HEADERS += \
         windowmanager.h
 
 FORMS += \
+        alarmalert.ui \
         feedercontrol.ui \
         logs.ui \
         machineview.ui \
