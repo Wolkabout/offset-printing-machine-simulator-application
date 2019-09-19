@@ -31,31 +31,40 @@ UI_DIR = $$PWD
 
 SOURCES += \
         alarmalert.cpp \
+        conveyorcontrol.cpp \
+        deliverycontrol.cpp \
         feedercontrol.cpp \
         logs.cpp \
         machineview.cpp \
         main.cpp \
         mainwindow.cpp \
+        paintstationcontrol.cpp \
         settings.cpp \
         simulator.cpp \
         windowmanager.cpp
 
 HEADERS += \
         alarmalert.h \
+        conveyorcontrol.h \
+        deliverycontrol.h \
         feedercontrol.h \
         logs.h \
         machineview.h \
         mainwindow.h \
+        paintstationcontrol.h \
         settings.h \
         simulator.h \
         windowmanager.h
 
 FORMS += \
         alarmalert.ui \
+        conveyorcontrol.ui \
+        deliverycontrol.ui \
         feedercontrol.ui \
         logs.ui \
         machineview.ui \
         mainwindow.ui \
+        paintstationcontrol.ui \
         settings.ui
 
 # Default rules for deployment.
