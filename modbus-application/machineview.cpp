@@ -96,11 +96,6 @@ void MachineView::stopAnimation()
     }
 }
 
-MachineView::~MachineView()
-{
-    delete ui;
-}
-
 void MachineView::on_feederManage_clicked()
 {
     simulator.getFeederWidget()->show();
@@ -134,4 +129,9 @@ void MachineView::on_blackManage_clicked()
 void MachineView::on_tempoManage_clicked()
 {
     simulator.getConveyorWidget()->show();
+}
+
+MachineView::~MachineView()
+{
+    delete ui;
 }
