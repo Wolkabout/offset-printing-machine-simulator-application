@@ -17,6 +17,12 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
 
     ui->count->setText("<h2>" + QString::number(paintStation.getCount()) + "</h2>");
     ui->percentage->setText("<h2>" + QString::number(paintStation.getPercentage() * 100) + "% </h2>");
+    char paint = paintStation.getName()[0];
+    if (paint == 'B') {
+        paint = 'K';
+    }
+    std::string animationPath = ":/Animations/Resources/PaintStationAnimation" + std::string(1, paint) + "1.gif";
+    ui->image->setPixmap(QPixmap(QString::fromStdString(animationPath)));
 }
 
 PaintStationControl::ComponentCountListener::ComponentCountListener(PaintStationControl& psc, TempoComponent& tempoComponent, QLabel * countLabel, QLabel * percentageLabel)
