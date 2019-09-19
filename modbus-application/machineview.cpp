@@ -35,6 +35,21 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
 
     feederListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getFeeder().get()), ui->feederCount);
     simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
+
+    cyanListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getCyanPaint().get()), ui->cyanCount);
+    simulator.getCyanPaint()->getCountMessageReceiver().push_back(cyanListener);
+
+    magentaListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getMagentaPaint().get()), ui->magentaCount);
+    simulator.getMagentaPaint()->getCountMessageReceiver().push_back(magentaListener);
+
+    yellowListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getYellowPaint().get()), ui->yellowCount);
+    simulator.getYellowPaint()->getCountMessageReceiver().push_back(yellowListener);
+
+    blackListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getBlackPaint().get()), ui->blackCount);
+    simulator.getBlackPaint()->getCountMessageReceiver().push_back(blackListener);
+
+    deliveryListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getDelivery().get()), ui->deliveryCount);
+    simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
 }
 
 MachineView::ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) { }
@@ -51,7 +66,7 @@ MachineView::ComponentCountListener::ComponentCountListener(MachineView& machine
     : machineView(machineView), tempoComponent(tempoComponent), label(label) { }
 
 void MachineView::ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
-    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, QString::number(message->getCount())));
+    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, QString::number(message->getCount()) + "/" + QString::number(message->getPercentage() * 100) + "%"));
 //    this is if you want your house on fire
 //    label->setText(QString::fromStdString(std::to_string(message->getCount())));
 };
@@ -73,4 +88,34 @@ void MachineView::stopAnimation()
 MachineView::~MachineView()
 {
     delete ui;
+}
+
+void MachineView::on_feederManage_clicked()
+{
+    simulator.getFeederWidget()->show();
+}
+
+void MachineView::on_deliverManage_clicked()
+{
+    simulator.getDeliveyWidget()->show();
+}
+
+void MachineView::on_cyanManage_clicked()
+{
+    simulator.getCyanWidget()->show();
+}
+
+void MachineView::on_magentaManage_clicked()
+{
+    simulator.getMagentaWidget()->show();
+}
+
+void MachineView::on_yellowManage_clicked()
+{
+    simulator.getYellowWidget()->show();
+}
+
+void MachineView::on_blackManage_clicked()
+{
+    simulator.getBlackWidget()->show();
 }

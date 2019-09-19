@@ -19,9 +19,27 @@ class MachineView : public QFrame
     Simulator& simulator;
     std::shared_ptr<ExternalMachineStateReceiver> listener;
     std::shared_ptr<CountMessageReceiver> feederListener;
+    std::shared_ptr<CountMessageReceiver> cyanListener;
+    std::shared_ptr<CountMessageReceiver> magentaListener;
+    std::shared_ptr<CountMessageReceiver> yellowListener;
+    std::shared_ptr<CountMessageReceiver> blackListener;
+    std::shared_ptr<CountMessageReceiver> deliveryListener;
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();
+
+private slots:
+    void on_feederManage_clicked();
+
+    void on_deliverManage_clicked();
+
+    void on_cyanManage_clicked();
+
+    void on_magentaManage_clicked();
+
+    void on_yellowManage_clicked();
+
+    void on_blackManage_clicked();
 
 private:
     Ui::MachineView *ui;
