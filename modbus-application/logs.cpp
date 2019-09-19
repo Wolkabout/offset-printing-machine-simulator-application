@@ -34,7 +34,7 @@ Logs::Logs(Simulator& simulator, QWidget *parent) :
 
 void Logs::createAlarmPopup(QString message, QWidget *component, QWidget *parent)
 {
-    AlarmAlert * aa = new AlarmAlert(message, component, parent);
+    AlarmAlert * aa = new AlarmAlert(message, simulator, component, parent);
     aa->show();
 }
 

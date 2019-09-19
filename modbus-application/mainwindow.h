@@ -31,8 +31,6 @@ private slots:
 
     void on_toggleButton_clicked();
 
-    void on_pushButton_clicked();
-
 private:
     Simulator &simulator;
     WindowManager &windowManager;

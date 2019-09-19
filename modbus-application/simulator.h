@@ -2,6 +2,7 @@
 #define SIMULATOR_H
 
 #include <Machine.h>
+#include <QWidget>
 #include <Components/Feeder.h>
 #include <Components/PaintStation.h>
 #include <Components/Delivery.h>
@@ -24,10 +25,15 @@ class Simulator
 {
 private:
     shared_ptr<Machine> machine;
+    QWidget* machineWidget;
     shared_ptr<Feeder> feeder;
+    QWidget* feederWidget;
     shared_ptr<PaintStation> cyan, magenta, yellow, black;
+    QWidget *cyanWidget, *magentaWidget, *yellowWidget, *blackWidget;
     shared_ptr<Delivery> delivery;
+    QWidget* deliveyWidget;
     shared_ptr<Conveyor> conveyor;
+    QWidget* conveyorWidget;
 public:
     shared_ptr<Machine> getMachine();
 
@@ -46,6 +52,14 @@ public:
     shared_ptr<Conveyor> getConveyor();
 
     Simulator();
+    QWidget *getMachineWidget() const;
+    QWidget *getFeederWidget() const;
+    QWidget *getCyanWidget() const;
+    QWidget *getMagentaWidget() const;
+    QWidget *getYellowWidget() const;
+    QWidget *getBlackWidget() const;
+    QWidget *getDeliveyWidget() const;
+    QWidget *getConveyorWidget() const;
 };
 
 #endif // SIMULATOR_H

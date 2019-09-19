@@ -89,9 +89,3 @@ void MainWindow::on_toggleButton_clicked()
         simulator.getMachine()->start();
     }
 }
-
-void MainWindow::on_pushButton_clicked()
-{
-    FeederControl * fc = new FeederControl();
-    fc->show();
-}

@@ -3,10 +3,11 @@
 
 #include <QMessageBox>
 
-AlarmAlert::AlarmAlert(QString message, QWidget* component, QWidget *parent) :
+AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component, QWidget *parent) :
     QWidget(parent),
     message(message),
     component(component),
+    simulator(simulator),
     ui(new Ui::AlarmAlert)
 {
     ui->setupUi(this);
@@ -29,20 +30,21 @@ void AlarmAlert::on_ok_clicked()
 void AlarmAlert::on_goto_2_clicked()
 {
     if (message.contains("Feeder")) {
-
+        simulator.getFeederWidget()->show();
     } else if (message.contains("Cyan")) {
-
+        simulator.getCyanWidget()->show();
     } else if (message.contains("Magenta")) {
-
+        simulator.getMagentaWidget()->show();
     } else if (message.contains("Yellow")) {
-
+        simulator.getYellowWidget()->show();
     } else if (message.contains("Black")) {
-
+        simulator.getBlackWidget()->show();
     } else if (message.contains("Delivery")) {
-
+        simulator.getDeliveyWidget()->show();
     } else {
         QMessageBox * messageBox = new QMessageBox(this);
         messageBox->setText("Could not find component causing the error!");
         messageBox->exec();
     }
+    hide();
 }

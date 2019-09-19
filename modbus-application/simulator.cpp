@@ -1,3 +1,4 @@
+#include "feedercontrol.h"
 #include "simulator.h"
 
 Simulator::Simulator()
@@ -5,6 +6,7 @@ Simulator::Simulator()
     machine = std::make_shared<Machine>("Main Machine");
     feeder = std::make_shared<Feeder>("Feeder", *machine.get(), FEEDER_CAPACITY, FEEDER_START_COUNT);
     machine->addComponent(feeder);
+    feederWidget = new FeederControl(*feeder.get());
     cyan = std::make_shared<PaintStation>("Cyan Paint", *machine.get(), PAINT_STATION_CAPACITY, PAINT_STATION_START_COUNT);
     machine->addComponent(cyan);
     magenta = std::make_shared<PaintStation>("Magenta Paint", *machine.get(), PAINT_STATION_CAPACITY, PAINT_STATION_START_COUNT);
@@ -17,6 +19,46 @@ Simulator::Simulator()
     machine->addComponent(delivery);
     conveyor = std::make_shared<Conveyor>("Conveyor Belt", *machine.get(), CONVEYOR_MAX_RATE, CONVEYOR_START_RATE);
     machine->addComponent(conveyor);
+}
+
+QWidget *Simulator::getMachineWidget() const
+{
+    return machineWidget;
+}
+
+QWidget *Simulator::getFeederWidget() const
+{
+    return feederWidget;
+}
+
+QWidget *Simulator::getCyanWidget() const
+{
+    return cyanWidget;
+}
+
+QWidget *Simulator::getMagentaWidget() const
+{
+    return magentaWidget;
+}
+
+QWidget *Simulator::getYellowWidget() const
+{
+    return yellowWidget;
+}
+
+QWidget *Simulator::getBlackWidget() const
+{
+    return blackWidget;
+}
+
+QWidget *Simulator::getDeliveyWidget() const
+{
+    return deliveyWidget;
+}
+
+QWidget *Simulator::getConveyorWidget() const
+{
+    return conveyorWidget;
 }
 
 shared_ptr<Machine> Simulator::getMachine()

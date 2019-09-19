@@ -1,8 +1,9 @@
 #include "feedercontrol.h"
 #include "ui_feedercontrol.h"
 
-FeederControl::FeederControl(QWidget *parent) :
+FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
     QWidget(parent),
+    feeder(feeder),
     ui(new Ui::FeederControl)
 {
     ui->setupUi(this);

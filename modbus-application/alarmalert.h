@@ -1,6 +1,8 @@
 #ifndef ALARMALERT_H
 #define ALARMALERT_H
 
+#include "simulator.h"
+
 #include <QWidget>
 
 namespace Ui {
@@ -12,7 +14,7 @@ class AlarmAlert : public QWidget
     Q_OBJECT
 
 public:
-    explicit AlarmAlert(QString message, QWidget *component = nullptr, QWidget *parent = nullptr);
+    AlarmAlert(QString message, Simulator& simulator, QWidget *component = nullptr, QWidget *parent = nullptr);
     ~AlarmAlert();
 
 private slots:
@@ -24,6 +26,7 @@ private:
     QString message;
     QWidget *component;
     Ui::AlarmAlert *ui;
+    Simulator& simulator;
 };
 
 #endif // ALARMALERT_H
