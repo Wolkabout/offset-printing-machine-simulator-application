@@ -50,6 +50,10 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
 
     deliveryListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getDelivery().get()), ui->deliveryCount);
     simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
+
+    conveyorListener = std::make_shared<ConveyorListener>(*this, *(simulator.getConveyor().get()), ui->tempoCount);
+    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
+    ui->tempoCount->setText(QString::number(simulator.getConveyor()->getRatePerHour()) + " pph");
 }
 
 MachineView::ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) { }
@@ -69,6 +73,13 @@ void MachineView::ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMe
     QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, QString::number(message->getCount()) + "/" + QString::number(message->getPercentage() * 100) + "%"));
 //    this is if you want your house on fire
 //    label->setText(QString::fromStdString(std::to_string(message->getCount())));
+};
+
+MachineView::ConveyorListener::ConveyorListener(MachineView& machineView, Conveyor& conveyor, QLabel * label)
+    : machineView(machineView), conveyor(conveyor), label(label) { }
+
+void MachineView::ConveyorListener::ReceiveMessage(std::shared_ptr<ConveyorRateMessage> message) {
+    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, QString::number(message->getCurrentRate()) + " pph"));
 };
 
 void MachineView::startAnimation()
@@ -118,4 +129,9 @@ void MachineView::on_yellowManage_clicked()
 void MachineView::on_blackManage_clicked()
 {
     simulator.getBlackWidget()->show();
+}
+
+void MachineView::on_tempoManage_clicked()
+{
+    simulator.getConveyorWidget()->show();
 }

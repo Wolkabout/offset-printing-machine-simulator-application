@@ -24,6 +24,7 @@ class MachineView : public QFrame
     std::shared_ptr<CountMessageReceiver> yellowListener;
     std::shared_ptr<CountMessageReceiver> blackListener;
     std::shared_ptr<CountMessageReceiver> deliveryListener;
+    std::shared_ptr<ConveyorRateMessageReceiver> conveyorListener;
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();
@@ -40,6 +41,8 @@ private slots:
     void on_yellowManage_clicked();
 
     void on_blackManage_clicked();
+
+    void on_tempoManage_clicked();
 
 private:
     Ui::MachineView *ui;
@@ -61,6 +64,16 @@ private:
     public:
         ComponentCountListener(MachineView&, TempoComponent&, QLabel *);
         void ReceiveMessage(std::shared_ptr<CountMessage>) override;
+    };
+
+    class ConveyorListener : public ConveyorRateMessageReceiver {
+    private:
+        MachineView& machineView;
+        Conveyor& conveyor;
+        QLabel * label;
+    public:
+        ConveyorListener(MachineView&, Conveyor&, QLabel *);
+        void ReceiveMessage(std::shared_ptr<ConveyorRateMessage>);
     };
 };
 
