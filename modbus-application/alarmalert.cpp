@@ -2,6 +2,7 @@
 #include "ui_alarmalert.h"
 
 #include <QMessageBox>
+#include <QObject>
 
 AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component, QWidget *parent) :
     QWidget(parent),
@@ -11,10 +12,9 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     ui(new Ui::AlarmAlert)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint);
 
     QMetaObject::invokeMethod(ui->message, "setText", Qt::QueuedConnection, Q_ARG(QString, message));
-//    Again, this is only if you want your car to blow your wheels and brakes off
-//    ui->message->setText(message);
 }
 
 AlarmAlert::~AlarmAlert()

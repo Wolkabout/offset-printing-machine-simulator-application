@@ -1,4 +1,6 @@
+#include "countlistener.h"
 #include "machineview.h"
+#include "ratelistener.h"
 #include "ui_machineview.h"
 
 #include <QMovie>
@@ -33,56 +35,44 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     listener = std::make_shared<ViewMachineStateListener>(*this);
     simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
 
-    feederListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getFeeder().get()), ui->feederCount);
+    feederListener = std::make_shared<CountListener>(*(simulator.getFeeder().get()), ui->feederCount);
     simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
 
-    cyanListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getCyanPaint().get()), ui->cyanCount);
+    cyanListener = std::make_shared<CountListener>(*(simulator.getCyanPaint().get()), ui->cyanCount);
     simulator.getCyanPaint()->getCountMessageReceiver().push_back(cyanListener);
 
-    magentaListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getMagentaPaint().get()), ui->magentaCount);
+    magentaListener = std::make_shared<CountListener>(*(simulator.getMagentaPaint().get()), ui->magentaCount);
     simulator.getMagentaPaint()->getCountMessageReceiver().push_back(magentaListener);
 
-    yellowListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getYellowPaint().get()), ui->yellowCount);
+    yellowListener = std::make_shared<CountListener>(*(simulator.getYellowPaint().get()), ui->yellowCount);
     simulator.getYellowPaint()->getCountMessageReceiver().push_back(yellowListener);
 
-    blackListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getBlackPaint().get()), ui->blackCount);
+    blackListener = std::make_shared<CountListener>(*(simulator.getBlackPaint().get()), ui->blackCount);
     simulator.getBlackPaint()->getCountMessageReceiver().push_back(blackListener);
 
-    deliveryListener = std::make_shared<ComponentCountListener>(*this, *(simulator.getDelivery().get()), ui->deliveryCount);
+    deliveryListener = std::make_shared<CountListener>(*(simulator.getDelivery().get()), ui->deliveryCount);
     simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
 
-    conveyorListener = std::make_shared<ConveyorListener>(*this, *(simulator.getConveyor().get()), ui->tempoCount);
-    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
     ui->tempoCount->setText(QString::number(simulator.getConveyor()->getRatePerHour()) + " pph");
+    conveyorListener = std::make_shared<RateListener>(*(simulator.getConveyor().get()), ui->tempoCount);
+    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
 }
 
-MachineView::ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) { }
+ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) {
+    QObject::connect(this, SIGNAL(stateChange(bool)), &machineView, SLOT(animationChange(bool)), Qt::ConnectionType::QueuedConnection);
+}
 
-void MachineView::ViewMachineStateListener::ReceiveMachineState(bool x) {
-    if (x) {
-        machineView.startAnimation();
+void ViewMachineStateListener::ReceiveMachineState(bool x) {
+    emit stateChange(x);
+}
+
+void MachineView::animationChange(bool state) {
+    if (state) {
+        startAnimation();
     } else {
-        machineView.stopAnimation();
+        stopAnimation();
     }
 }
-
-ComponentCountListener::ComponentCountListener(MachineView& machineView, TempoComponent& tempoComponent, QLabel * label)
-    : machineView(machineView), tempoComponent(tempoComponent), label(label) {
-    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)), Qt::ConnectionType::QueuedConnection);
-}
-
-void ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
-    emit labelText(QString::number(message->getCount()) + "/" + QString::number(message->getPercentage() * 100) + "%");
-};
-
-ConveyorListener::ConveyorListener(MachineView& machineView, Conveyor& conveyor, QLabel * label)
-    : machineView(machineView), conveyor(conveyor), label(label) {
-    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)), Qt::ConnectionType::QueuedConnection);
-}
-
-void ConveyorListener::ReceiveMessage(std::shared_ptr<ConveyorRateMessage> message) {
-    emit labelText(QString::number(message->getCurrentRate()) + " pph");
-};
 
 void MachineView::startAnimation()
 {

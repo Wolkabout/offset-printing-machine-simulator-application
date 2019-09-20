@@ -32,6 +32,7 @@ UI_DIR = $$PWD
 SOURCES += \
         alarmalert.cpp \
         conveyorcontrol.cpp \
+        countlistener.cpp \
         deliverycontrol.cpp \
         feedercontrol.cpp \
         logs.cpp \
@@ -39,6 +40,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         paintstationcontrol.cpp \
+        ratelistener.cpp \
         settings.cpp \
         simulator.cpp \
         windowmanager.cpp
@@ -46,14 +48,17 @@ SOURCES += \
 HEADERS += \
         alarmalert.h \
         conveyorcontrol.h \
+        countlistener.h \
         deliverycontrol.h \
         feedercontrol.h \
         logs.h \
         machineview.h \
         mainwindow.h \
         paintstationcontrol.h \
+        ratelistener.h \
         settings.h \
         simulator.h \
+        utility.h \
         windowmanager.h
 
 FORMS += \

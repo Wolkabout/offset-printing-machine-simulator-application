@@ -29,17 +29,6 @@ private:
     Ui::PaintStationControl *ui;
     PaintStation& paintStation;
     std::shared_ptr<CountMessageReceiver> countListener;
-
-    class ComponentCountListener : public CountMessageReceiver {
-    private:
-        PaintStationControl& psc;
-        TempoComponent& tempoComponent;
-        QLabel * countLabel;
-        QLabel * percentageLabel;
-    public:
-        ComponentCountListener(PaintStationControl&, TempoComponent&, QLabel *, QLabel *);
-        void ReceiveMessage(std::shared_ptr<CountMessage>) override;
-    };
 };
 
 #endif // PAINTSTATIONCONTROL_H

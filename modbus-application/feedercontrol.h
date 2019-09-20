@@ -29,17 +29,6 @@ private:
     Ui::FeederControl *ui;
     Feeder &feeder;
     std::shared_ptr<CountMessageReceiver> countListener;
-
-    class ComponentCountListener : public CountMessageReceiver {
-    private:
-        FeederControl& fc;
-        TempoComponent& tempoComponent;
-        QLabel * countLabel;
-        QLabel * percentageLabel;
-    public:
-        ComponentCountListener(FeederControl&, TempoComponent&, QLabel *, QLabel *);
-        void ReceiveMessage(std::shared_ptr<CountMessage>) override;
-    };
 };
 
 #endif // FEEDERCONTROL_H

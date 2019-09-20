@@ -1,9 +1,10 @@
+#include "countlistener.h"
 #include "deliverycontrol.h"
 #include "ui_deliverycontrol.h"
 
+#include <math.h>
 #include <QInputDialog>
 #include <QMessageBox>
-
 
 
 DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
@@ -12,22 +13,15 @@ DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
     ui(new Ui::DeliveryControl)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint);
     ui->name->setText("<h2> " + QString::fromStdString(delivery.getName()) + "</h2>");
 
-    countListener = std::make_shared<ComponentCountListener>(*this, delivery, ui->count, ui->percentage);
-    delivery.getCountMessageReceiver().push_back(countListener);
-
     ui->count->setText("<h2>" + QString::number(delivery.getCount()) + "</h2>");
-    ui->percentage->setText("<h2>" + QString::number(delivery.getPercentage() * 100) + "% </h2>");
+    ui->percentage->setText("<h2>" + QString::number(std::round(delivery.getPercentage() * 100)) + "% </h2>");
+
+    countListener = std::make_shared<CountListener>(delivery, ui->count, ui->percentage);
+    delivery.getCountMessageReceiver().push_back(countListener);
 }
-
-DeliveryControl::ComponentCountListener::ComponentCountListener(DeliveryControl& dc, TempoComponent& tempoComponent, QLabel * countLabel, QLabel * percentageLabel)
-    : dc(dc), tempoComponent(tempoComponent), countLabel(countLabel), percentageLabel(percentageLabel) { }
-
-void DeliveryControl::ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
-    QMetaObject::invokeMethod(countLabel, "setText", Qt::QueuedConnection, Q_ARG(QString, "<h2>" + QString::number(message->getCount()) + "</h2>"));
-    QMetaObject::invokeMethod(percentageLabel, "setText", Qt::QueuedConnection, Q_ARG(QString, "<h2>" + QString::number(message->getPercentage() * 100) + "% </h2>"));
-};
 
 DeliveryControl::~DeliveryControl()
 {
@@ -61,6 +55,7 @@ void DeliveryControl::on_edit_clicked()
             QMessageBox * qb = new QMessageBox(this);
             qb->setText(QString("The ammount you entered is not in range (0 - " + QString::number(maxNew) + ")."));
             qb->exec();
+            return;
         }
         delivery.modifyCount(paper);
     } catch (std::exception &e) {

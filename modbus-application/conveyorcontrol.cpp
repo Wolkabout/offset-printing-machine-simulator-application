@@ -1,4 +1,5 @@
 #include "conveyorcontrol.h"
+#include "ratelistener.h"
 #include "ui_conveyorcontrol.h"
 
 ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
@@ -7,20 +8,13 @@ ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
     ui(new Ui::ConveyorControl)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint);
     ui->name->setText("<h2> " + QString::fromStdString(conveyor.getName()) + "</h2>");
-
-    listener = std::make_shared<RateListener>(*this, conveyor, ui->rate);
-    conveyor.getRateMessageReceivers().push_back(listener);
-
     ui->rate->setText("<h2>" + QString::number(conveyor.getRatePerHour()) + "</h2>");
+
+    listener = std::make_shared<RateListener>(conveyor, ui->rate);
+    conveyor.getRateMessageReceivers().push_back(listener);
 }
-
-ConveyorControl::RateListener::RateListener(ConveyorControl& cc, Conveyor& conveyor, QLabel * rateLabel)
-    : cc(cc), conveyor(conveyor), rateLabel(rateLabel) { }
-
-void ConveyorControl::RateListener::ReceiveMessage(std::shared_ptr<ConveyorRateMessage> message) {
-    QMetaObject::invokeMethod(rateLabel, "setText", Qt::QueuedConnection, Q_ARG(QString, "<h2>" + QString::number(message->getCurrentRate()) + "</h2>"));
-};
 
 ConveyorControl::~ConveyorControl()
 {

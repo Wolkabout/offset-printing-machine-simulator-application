@@ -1,3 +1,4 @@
+#include "countlistener.h"
 #include "paintstationcontrol.h"
 #include "ui_paintstationcontrol.h"
 
@@ -10,11 +11,9 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     ui(new Ui::PaintStationControl)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint);
+
     ui->name->setText("<h2>" + QString::fromStdString(paintStation.getName()) + "</h2>");
-
-    countListener = std::make_shared<ComponentCountListener>(*this, paintStation, ui->count, ui->percentage);
-    paintStation.getCountMessageReceiver().push_back(countListener);
-
     ui->count->setText("<h2>" + QString::number(paintStation.getCount()) + "</h2>");
     ui->percentage->setText("<h2>" + QString::number(paintStation.getPercentage() * 100) + "% </h2>");
     char paint = paintStation.getName()[0];
@@ -23,15 +22,10 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     }
     std::string animationPath = ":/Animations/Resources/PaintStationAnimation" + std::string(1, paint) + "1.gif";
     ui->image->setPixmap(QPixmap(QString::fromStdString(animationPath)));
+
+    countListener = std::make_shared<CountListener>(paintStation, ui->count, ui->percentage);
+    paintStation.getCountMessageReceiver().push_back(countListener);
 }
-
-PaintStationControl::ComponentCountListener::ComponentCountListener(PaintStationControl& psc, TempoComponent& tempoComponent, QLabel * countLabel, QLabel * percentageLabel)
-    : psc(psc), tempoComponent(tempoComponent), countLabel(countLabel), percentageLabel(percentageLabel) { }
-
-void PaintStationControl::ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
-    QMetaObject::invokeMethod(countLabel, "setText", Qt::QueuedConnection, Q_ARG(QString, "<h2>" + QString::number(message->getCount()) + "</h2>"));
-    QMetaObject::invokeMethod(percentageLabel, "setText", Qt::QueuedConnection, Q_ARG(QString, "<h2>" + QString::number(message->getPercentage() * 100) + "% </h2>"));
-};
 
 PaintStationControl::~PaintStationControl()
 {
@@ -65,6 +59,7 @@ void PaintStationControl::on_edit_clicked()
             QMessageBox * qb = new QMessageBox(this);
             qb->setText(QString("The ammount you entered is not in range (0 - " + QString::number(maxNew) + ")."));
             qb->exec();
+            return;
         }
         paintStation.modifyCount(paper);
     } catch (std::exception &e) {

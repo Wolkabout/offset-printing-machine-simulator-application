@@ -46,43 +46,20 @@ private slots:
 
 private:
     Ui::MachineView *ui;
+    Q_INVOKABLE void animationChange(bool);
     void startAnimation();
     void stopAnimation();
-    class ViewMachineStateListener : public ExternalMachineStateReceiver {
-    private:
-        MachineView& machineView;
-    public:
-        ViewMachineStateListener(MachineView&);
-        void ReceiveMachineState(bool x) override;
-    };
 };
 
-class ComponentCountListener : public QObject, public CountMessageReceiver {
-    Q_OBJECT
+class ViewMachineStateListener : public QObject, public ExternalMachineStateReceiver {
 private:
-    MachineView& machineView;
-    TempoComponent& tempoComponent;
-    QLabel * label;
-public:
-    ComponentCountListener(MachineView&, TempoComponent&, QLabel *);
-    void ReceiveMessage(std::shared_ptr<CountMessage>) override;
-
-signals:
-    void labelText(QString text);
-};
-
-class ConveyorListener : public QObject, public ConveyorRateMessageReceiver {
     Q_OBJECT
-private:
     MachineView& machineView;
-    Conveyor& conveyor;
-    QLabel * label;
 public:
-    ConveyorListener(MachineView&, Conveyor&, QLabel *);
-    void ReceiveMessage(std::shared_ptr<ConveyorRateMessage>);
-
+    ViewMachineStateListener(MachineView&);
+    void ReceiveMachineState(bool x) override;
 signals:
-    void labelText(QString text);
+    void stateChange(bool state);
 };
 
 #endif // MACHINEVIEW_H

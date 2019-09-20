@@ -29,17 +29,6 @@ private:
     Ui::DeliveryControl *ui;
     Delivery& delivery;
     std::shared_ptr<CountMessageReceiver> countListener;
-
-    class ComponentCountListener : public CountMessageReceiver {
-    private:
-        DeliveryControl& dc;
-        TempoComponent& tempoComponent;
-        QLabel * countLabel;
-        QLabel * percentageLabel;
-    public:
-        ComponentCountListener(DeliveryControl&, TempoComponent&, QLabel *, QLabel *);
-        void ReceiveMessage(std::shared_ptr<CountMessage>) override;
-    };
 };
 
 #endif // DELIVERYCONTROL_H
