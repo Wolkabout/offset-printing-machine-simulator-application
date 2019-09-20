@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 LIBS     += -lmodbus -pthread
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

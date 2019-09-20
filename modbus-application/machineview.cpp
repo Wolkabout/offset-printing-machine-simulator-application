@@ -66,20 +66,22 @@ void MachineView::ViewMachineStateListener::ReceiveMachineState(bool x) {
     }
 }
 
-MachineView::ComponentCountListener::ComponentCountListener(MachineView& machineView, TempoComponent& tempoComponent, QLabel * label)
-    : machineView(machineView), tempoComponent(tempoComponent), label(label) { }
+ComponentCountListener::ComponentCountListener(MachineView& machineView, TempoComponent& tempoComponent, QLabel * label)
+    : machineView(machineView), tempoComponent(tempoComponent), label(label) {
+    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)));
+}
 
-void MachineView::ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
-    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, QString::number(message->getCount()) + "/" + QString::number(message->getPercentage() * 100) + "%"));
-//    this is if you want your house on fire
-//    label->setText(QString::fromStdString(std::to_string(message->getCount())));
+void ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
+    emit labelText(QString::number(message->getCount()) + "/" + QString::number(message->getPercentage() * 100) + "%");
 };
 
-MachineView::ConveyorListener::ConveyorListener(MachineView& machineView, Conveyor& conveyor, QLabel * label)
-    : machineView(machineView), conveyor(conveyor), label(label) { }
+ConveyorListener::ConveyorListener(MachineView& machineView, Conveyor& conveyor, QLabel * label)
+    : machineView(machineView), conveyor(conveyor), label(label) {
+    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)));
+}
 
-void MachineView::ConveyorListener::ReceiveMessage(std::shared_ptr<ConveyorRateMessage> message) {
-    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, QString::number(message->getCurrentRate()) + " pph"));
+void ConveyorListener::ReceiveMessage(std::shared_ptr<ConveyorRateMessage> message) {
+    emit labelText(QString::number(message->getCurrentRate()) + " pph");
 };
 
 void MachineView::startAnimation()

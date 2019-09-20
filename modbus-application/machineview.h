@@ -55,26 +55,34 @@ private:
         ViewMachineStateListener(MachineView&);
         void ReceiveMachineState(bool x) override;
     };
+};
 
-    class ComponentCountListener : public CountMessageReceiver {
-    private:
-        MachineView& machineView;
-        TempoComponent& tempoComponent;
-        QLabel * label;
-    public:
-        ComponentCountListener(MachineView&, TempoComponent&, QLabel *);
-        void ReceiveMessage(std::shared_ptr<CountMessage>) override;
-    };
+class ComponentCountListener : public QObject, public CountMessageReceiver {
+    Q_OBJECT
+private:
+    MachineView& machineView;
+    TempoComponent& tempoComponent;
+    QLabel * label;
+public:
+    ComponentCountListener(MachineView&, TempoComponent&, QLabel *);
+    void ReceiveMessage(std::shared_ptr<CountMessage>) override;
 
-    class ConveyorListener : public ConveyorRateMessageReceiver {
-    private:
-        MachineView& machineView;
-        Conveyor& conveyor;
-        QLabel * label;
-    public:
-        ConveyorListener(MachineView&, Conveyor&, QLabel *);
-        void ReceiveMessage(std::shared_ptr<ConveyorRateMessage>);
-    };
+signals:
+    void labelText(QString text);
+};
+
+class ConveyorListener : public QObject, public ConveyorRateMessageReceiver {
+    Q_OBJECT
+private:
+    MachineView& machineView;
+    Conveyor& conveyor;
+    QLabel * label;
+public:
+    ConveyorListener(MachineView&, Conveyor&, QLabel *);
+    void ReceiveMessage(std::shared_ptr<ConveyorRateMessage>);
+
+signals:
+    void labelText(QString text);
 };
 
 #endif // MACHINEVIEW_H
