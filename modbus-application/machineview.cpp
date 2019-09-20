@@ -68,7 +68,7 @@ void MachineView::ViewMachineStateListener::ReceiveMachineState(bool x) {
 
 ComponentCountListener::ComponentCountListener(MachineView& machineView, TempoComponent& tempoComponent, QLabel * label)
     : machineView(machineView), tempoComponent(tempoComponent), label(label) {
-    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)));
+    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 void ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
@@ -77,7 +77,7 @@ void ComponentCountListener::ReceiveMessage(std::shared_ptr<CountMessage> messag
 
 ConveyorListener::ConveyorListener(MachineView& machineView, Conveyor& conveyor, QLabel * label)
     : machineView(machineView), conveyor(conveyor), label(label) {
-    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)));
+    QObject::connect(this, SIGNAL(labelText(QString)), label, SLOT(setText(QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 void ConveyorListener::ReceiveMessage(std::shared_ptr<ConveyorRateMessage> message) {
