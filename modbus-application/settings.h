@@ -23,6 +23,7 @@ public:
 
 private:
     Ui::Settings *ui;
+    void loop();
 };
 
 #endif // SETTINGS_H
