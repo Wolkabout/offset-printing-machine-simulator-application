@@ -17,10 +17,7 @@ private:
         sleep(2);
 
         while (true) {
-//            attempt to find client
-            qDebug((std::string("TCP_ACCEPT ") + std::to_string(modbus_tcp_accept(modbus, &listen))).c_str());
-            qDebug((std::string("LISTEN ") + std::to_string(listen)).c_str());
-
+            qDebug(std::to_string(modbus_tcp_accept(modbus, &listen)).c_str());
             sleep(1);
 
 //            if the connection is successful
