@@ -27,15 +27,19 @@ private:
 
 //            if the connection is successful
             while (true) {
-                uint8_t query[MODBUS_TCP_MAX_ADU_LENGTH];
-                int rc;
+                try {
+                    uint8_t query[MODBUS_TCP_MAX_ADU_LENGTH];
+                    int rc;
 
-                rc = modbus_receive(modbus, query);
-                if (rc > 0) {
-                    /* rc is the query size */
-                    modbus_reply(modbus, query, rc, mapping);
-                } else if (rc == -1) {
-                    break;
+                    rc = modbus_receive(modbus, query);
+                    if (rc > 0) {
+                        /* rc is the query size */
+                        modbus_reply(modbus, query, rc, mapping);
+                    } else if (rc == -1) {
+                        break;
+                    }
+                } catch (std::exception &e) {
+                    qDebug(e.what());
                 }
             }
         }
