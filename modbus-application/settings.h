@@ -25,6 +25,7 @@ public:
 
 private:
     Ui::Settings *ui;
+    void printMappings();
 };
 
 #endif // SETTINGS_H
