@@ -12,6 +12,7 @@ private:
     modbus_mapping_t * mapping;
     void run() {
         int listen = modbus_tcp_listen(modbus, 1);
+        qDebug(modbus_strerror(errno));
         qDebug((std::string("START : ") + std::to_string(listen)).c_str());
         sleep(2);
 
