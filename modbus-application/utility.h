@@ -1,7 +1,9 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include <QHostAddress>
 #include <QString>
+#include <qnetworkinterface.h>
 #include <regex>
 
 class Utility {
@@ -18,6 +20,17 @@ public:
         result = std::regex_replace(result, regex, newNumber.toStdString());
         result = std::regex_replace(result, returning, exclusionPattern);
         return QString::fromStdString(result);
+    }
+    static QString getIp() {
+        const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
+        QString addressString;
+        for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
+            if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost) {
+                 addressString += address.toString();
+                 break;
+            }
+        }
+        return addressString;
     }
 };
 

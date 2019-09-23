@@ -15,14 +15,11 @@ class Settings : public QFrame
     Q_OBJECT
     Simulator& simulator;
     QString addressString;
-    modbus_t * modbus;
-    modbus_mapping_t * mapping;
-    ModbusThread * thread;
+    ModbusThread &thread;
 
 public:
-    Settings(Simulator& simulator, QWidget *parent = nullptr);
+    Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent = nullptr);
     ~Settings();
-    void printMappings();
 
 private:
     Ui::Settings *ui;

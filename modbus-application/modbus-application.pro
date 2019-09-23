@@ -39,6 +39,7 @@ SOURCES += \
         machineview.cpp \
         main.cpp \
         mainwindow.cpp \
+        modbusthread.cpp \
         paintstationcontrol.cpp \
         ratelistener.cpp \
         settings.cpp \
