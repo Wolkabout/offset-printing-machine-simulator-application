@@ -11,9 +11,9 @@ private:
     modbus_t * modbus;
     modbus_mapping_t * mapping;
     void run() {
-        modbus = modbus_new_tcp("127.0.0.1", 502);
-        mapping = modbus_mapping_new(30, 30, 30, 30);
         int listen = modbus_tcp_listen(modbus, 1);
+        qDebug((std::string("START : ") + std::to_string(listen)).c_str());
+        sleep(2);
 
         while (true) {
 //            attempt to find client

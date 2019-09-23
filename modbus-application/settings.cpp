@@ -17,6 +17,9 @@ Settings::Settings(Simulator& simulator, QWidget *parent) :
              addressString += address.toString();
     }
 
+    modbus = modbus_new_tcp(addressString.toStdString().c_str(), 502);
+    mapping = modbus_mapping_new(30, 30, 30, 30);
+
     ui->ip->setText(addressString);
 
     if (mapping == nullptr) {
