@@ -30,8 +30,8 @@ private:
                 try {
                     uint8_t query[MODBUS_TCP_MAX_ADU_LENGTH];
                     int rc;
-
                     rc = modbus_receive(modbus, query);
+                    qDebug(std::to_string(rc).c_str());
                     if (rc > 0) {
                         /* rc is the query size */
                         modbus_reply(modbus, query, rc, mapping);
