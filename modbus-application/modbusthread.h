@@ -12,27 +12,32 @@ private:
     modbus_mapping_t * mapping;
     void run() {
         int listen = modbus_tcp_listen(modbus, 1);
-        qDebug(modbus_strerror(errno));
-        qDebug((std::string("START : ") + std::to_string(listen)).c_str());
-        sleep(2);
+        if (listen == -1) {
+            qDebug("The program doesn\'t have permissions to run modbus server.");
+            return;
+        }
+//        qDebug(modbus_strerror(errno));
+//        qDebug((std::string("START : ") + std::to_string(listen)).c_str());
+//        sleep(2);
 
         while (true) {
-            qDebug(std::to_string(modbus_tcp_accept(modbus, &listen)).c_str());
+            modbus_tcp_accept(modbus, &listen);
+            qDebug(std::string("ACCEPT " + std::to_string(listen)).c_str());
             sleep(1);
 
 //            if the connection is successful
-//            while (true) {
-//                uint8_t query[MODBUS_TCP_MAX_ADU_LENGTH];
-//                int rc;
+            while (true) {
+                uint8_t query[MODBUS_TCP_MAX_ADU_LENGTH];
+                int rc;
 
-//                rc = modbus_receive(modbus, query);
-//                if (rc > 0) {
-//                    /* rc is the query size */
-//                    modbus_reply(modbus, query, rc, mapping);
-//                } else if (rc == -1) {
-//                    break;
-//                }
-//            }
+                rc = modbus_receive(modbus, query);
+                if (rc > 0) {
+                    /* rc is the query size */
+                    modbus_reply(modbus, query, rc, mapping);
+                } else if (rc == -1) {
+                    break;
+                }
+            }
         }
     }
 public:
