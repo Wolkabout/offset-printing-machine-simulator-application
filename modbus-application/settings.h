@@ -22,10 +22,10 @@ class Settings : public QFrame
 public:
     Settings(Simulator& simulator, QWidget *parent = nullptr);
     ~Settings();
+    void printMappings();
 
 private:
     Ui::Settings *ui;
-    void printMappings();
 };
 
 #endif // SETTINGS_H

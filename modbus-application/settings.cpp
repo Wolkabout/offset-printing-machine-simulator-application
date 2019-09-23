@@ -19,7 +19,7 @@ Settings::Settings(Simulator& simulator, QWidget *parent) :
 
     modbus = modbus_new_tcp(addressString.toStdString().c_str(), 502);
     modbus_set_debug(modbus, TRUE);
-    mapping = modbus_mapping_new(30, 30, 30, 30);
+    mapping = modbus_mapping_new(0x1E, 0x1E, 0x1E, 0x1E);
 
     modbus_set_response_timeout(modbus, 60, 0);
 
