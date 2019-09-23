@@ -54,6 +54,7 @@ HEADERS += \
         logs.h \
         machineview.h \
         mainwindow.h \
+        modbusthread.h \
         paintstationcontrol.h \
         ratelistener.h \
         settings.h \
