@@ -1,19 +1,39 @@
+#include <math.h>
 #include "modbusthread.h"
 #include "utility.h"
 
-ModbusThread::ModbusThread()
+ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator)
 {
     addressString = Utility::getIp();
     modbus = modbus_new_tcp(addressString.toStdString().c_str(), 2222);
-    modbus_set_debug(modbus, TRUE);
-    modbus_set_response_timeout(modbus, 60, 0);
+//    modbus_set_debug(modbus, TRUE);
+    modbus_set_response_timeout(modbus, 0, 0);
 
     mapping = modbus_mapping_new(30, 30, 30, 30);
     if (mapping == nullptr) {
-        qDebug("The mapping couldn\'t be allocated!");
+        logger.Log("The mapping couldn\'t be allocated!");
         this->~ModbusThread();
         return;
     }
+
+    // Machine values
+    receiveState(simulator.getMachine()->isRunning());
+
+    // Conveyor static values
+    mapping->tab_input_registers[1] = simulator.getConveyor()->getMaxRatePerHour();
+    mapping->tab_input_registers[2] = simulator.getConveyor()->getMinRatePerHour();
+
+    // Feeder static values
+    mapping->tab_input_registers[4] = simulator.getFeeder()->getCapacity();
+
+    // Delivery static values
+    mapping->tab_input_registers[7] = simulator.getDelivery()->getCapacity();
+
+    // Paint Stations static values
+    mapping->tab_input_registers[10] = simulator.getCyanPaint()->getCapacity();
+    mapping->tab_input_registers[13] = simulator.getMagentaPaint()->getCapacity();
+    mapping->tab_input_registers[16] = simulator.getYellowPaint()->getCapacity();
+    mapping->tab_input_registers[19] = simulator.getBlackPaint()->getCapacity();
 
 //    printMappings();
 }
@@ -35,7 +55,7 @@ modbus_mapping_t *ModbusThread::getMapping() const
 void ModbusThread::run() {
     int listen = modbus_tcp_listen(modbus, 1);
     if (listen < 1) {
-        qDebug("The program doesn\'t have permissions to run modbus server.");
+        logger.Log("The program doesn\'t have permissions to run modbus server.");
         return;
     }
 
@@ -45,7 +65,7 @@ void ModbusThread::run() {
     while (true) {
 //            this line is blocking! if there's no connection, it won't continue from here until one shows up!
         modbus_tcp_accept(modbus, &listen);
-        sleep(1);
+        logger.Log("Connection accepted.");
 
 //            if the connection is successful
         while (true) {
@@ -53,24 +73,20 @@ void ModbusThread::run() {
                 int rc;
                 rc = modbus_receive(modbus, query);
 //                qDebug("%i", rc);
-//                for (int i = header_length; i < rc; i++) {
-//                    qDebug("%i", query[i]);
-//                }
                 if (rc > 0) {
-//                    printMappings();
-//                    if (query[header_length] == 3) {
-//                        qDebug("Reading multiple holding registers!");
-//                        // WHY AM I GETTING 36168 here?
-//                        int index = query[header_length + 1] | query[header_length + 2] << 8;
-//                        qDebug("%i", index);
-//                        qDebug("%i", mapping->tab_registers[index]);
-//                    }
+                    // printing the query
+                    std::string message;
+                    for (int i = header_length; i < rc; i++) {
+                        message += std::to_string(query[i]) + ' ';
+                    }
+                    logger.Log(message);
                     modbus_reply(modbus, query, rc, mapping);
                 } else if (rc == -1) {
+                    logger.Log("Connection stopped.");
                     break;
                 }
             } catch (std::exception &e) {
-                qDebug(e.what());
+                logger.Log(e.what());
             }
         }
     }
@@ -96,4 +112,25 @@ void ModbusThread::printMappings() {
     } catch (std::exception &e) {
         qDebug("%s", e.what());
     }
+}
+
+void ModbusThread::receiveState(bool state)
+{
+    mapping->tab_input_bits[0] = state;
+    mapping->tab_bits[0] = state;
+}
+
+void ModbusThread::receiveCount(int tempoComponent, int count, double percentage)
+{
+    int capacityIndex = (tempoComponent * 3) + 4;
+    int percentageIndex = capacityIndex + 1;
+    int countIndex = percentageIndex + 1;
+
+    mapping->tab_input_registers[percentageIndex] = std::round(percentage * 100);
+    mapping->tab_input_registers[countIndex] = count;
+}
+
+void ModbusThread::receiveRate(int rate)
+{
+    mapping->tab_input_registers[3] = rate;
 }

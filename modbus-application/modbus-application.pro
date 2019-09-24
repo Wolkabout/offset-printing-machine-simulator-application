@@ -40,6 +40,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         modbusthread.cpp \
+        modbusthread_listeners.cpp \
         paintstationcontrol.cpp \
         ratelistener.cpp \
         settings.cpp \
@@ -56,6 +57,7 @@ HEADERS += \
         machineview.h \
         mainwindow.h \
         modbusthread.h \
+        modbusthread_listeners.h \
         paintstationcontrol.h \
         ratelistener.h \
         settings.h \

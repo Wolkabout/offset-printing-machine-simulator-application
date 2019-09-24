@@ -21,6 +21,9 @@ public:
     Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent = nullptr);
     ~Settings();
 
+private slots:
+    void on_debugMapping_clicked();
+
 private:
     Ui::Settings *ui;
 };

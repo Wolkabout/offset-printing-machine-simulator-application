@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     MainWindow w(simulator, windowManager);
     w.show();
 
-    ModbusThread modbusThread;
+    ModbusThread modbusThread(simulator);
 
     QFrame * parent = w.frameHolder();
     int logIndex = windowManager.addFrame(std::make_shared<Logs>(simulator, parent)); // 0
