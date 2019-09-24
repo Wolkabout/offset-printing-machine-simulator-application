@@ -3,7 +3,7 @@
 #include "modbusthread_listeners.h"
 #include "utility.h"
 
-ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator), messageHandler(simulator)
+ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator), messageHandler(mapping, simulator)
 {
     addressString = Utility::getIp();
     modbus = modbus_new_tcp(addressString.toStdString().c_str(), 2222);
