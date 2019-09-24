@@ -1,5 +1,6 @@
 #include <math.h>
 #include "modbusthread.h"
+#include "modbusthread_listeners.h"
 #include "utility.h"
 
 ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator)
@@ -16,24 +17,59 @@ ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simul
         return;
     }
 
+    // Initial values
     // Machine values
     receiveState(simulator.getMachine()->isRunning());
 
     // Conveyor static values
     mapping->tab_input_registers[1] = simulator.getConveyor()->getMaxRatePerHour();
     mapping->tab_input_registers[2] = simulator.getConveyor()->getMinRatePerHour();
+    receiveRate(simulator.getConveyor()->getRatePerHour());
 
     // Feeder static values
     mapping->tab_input_registers[4] = simulator.getFeeder()->getCapacity();
+    receiveCount(0, simulator.getFeeder()->getCount(), std::round(simulator.getFeeder()->getPercentage()));
 
     // Delivery static values
     mapping->tab_input_registers[7] = simulator.getDelivery()->getCapacity();
+    receiveCount(1, simulator.getDelivery()->getCount(), std::round(simulator.getDelivery()->getPercentage()));
 
     // Paint Stations static values
     mapping->tab_input_registers[10] = simulator.getCyanPaint()->getCapacity();
+    receiveCount(2, simulator.getCyanPaint()->getCount(), std::round(simulator.getCyanPaint()->getPercentage()));
+
     mapping->tab_input_registers[13] = simulator.getMagentaPaint()->getCapacity();
+    receiveCount(3, simulator.getMagentaPaint()->getCount(), std::round(simulator.getMagentaPaint()->getPercentage()));
+
     mapping->tab_input_registers[16] = simulator.getYellowPaint()->getCapacity();
+    receiveCount(4, simulator.getYellowPaint()->getCount(), std::round(simulator.getYellowPaint()->getPercentage()));
+
     mapping->tab_input_registers[19] = simulator.getBlackPaint()->getCapacity();
+    receiveCount(5, simulator.getBlackPaint()->getCount(), std::round(simulator.getBlackPaint()->getPercentage()));
+
+    stateListener = std::make_shared<ModbusMachineStateListener>(*this);
+    simulator.getMachine()->getExternalMachineStateReceivers().push_back(stateListener);
+
+    feederListener = std::make_shared<ModbusCountListener>(*this, 0);
+    simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
+
+    deliveryListener = std::make_shared<ModbusCountListener>(*this, 1);
+    simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
+
+    cyanListener = std::make_shared<ModbusCountListener>(*this, 2);
+    simulator.getCyanPaint()->getCountMessageReceiver().push_back(cyanListener);
+
+    magentaListener = std::make_shared<ModbusCountListener>(*this, 3);
+    simulator.getMagentaPaint()->getCountMessageReceiver().push_back(magentaListener);
+
+    yellowListener = std::make_shared<ModbusCountListener>(*this, 4);
+    simulator.getYellowPaint()->getCountMessageReceiver().push_back(yellowListener);
+
+    blackListener = std::make_shared<ModbusCountListener>(*this, 5);
+    simulator.getBlackPaint()->getCountMessageReceiver().push_back(blackListener);
+
+    conveyorListener = std::make_shared<ModbusRateListener>(*this);
+    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
 
 //    printMappings();
 }
@@ -125,6 +161,7 @@ void ModbusThread::receiveCount(int tempoComponent, int count, double percentage
     int capacityIndex = (tempoComponent * 3) + 4;
     int percentageIndex = capacityIndex + 1;
     int countIndex = percentageIndex + 1;
+//    qDebug("%i %i %i", capacityIndex, percentageIndex, countIndex);
 
     mapping->tab_input_registers[percentageIndex] = std::round(percentage * 100);
     mapping->tab_input_registers[countIndex] = count;

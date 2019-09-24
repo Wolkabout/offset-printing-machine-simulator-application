@@ -6,6 +6,7 @@
 class ModbusMachineStateListener : public QObject, public ExternalMachineStateReceiver {
     Q_OBJECT
     ModbusThread& thread;
+public:
     ModbusMachineStateListener(ModbusThread&);
     void ReceiveMachineState(bool) override;
 signals:
@@ -16,6 +17,7 @@ class ModbusCountListener : public QObject, public CountMessageReceiver {
     Q_OBJECT
     ModbusThread& thread;
     int componentIndex;
+public:
     ModbusCountListener(ModbusThread&, int);
     void ReceiveMessage(std::shared_ptr<CountMessage>) override;
 signals:
@@ -25,6 +27,7 @@ signals:
 class ModbusRateListener : public QObject, public ConveyorRateMessageReceiver {
     Q_OBJECT
     ModbusThread& thread;
+public:
     ModbusRateListener(ModbusThread&);
     void ReceiveMessage(std::shared_ptr<ConveyorRateMessage>) override;
 signals:

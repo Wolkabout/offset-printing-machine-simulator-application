@@ -12,7 +12,7 @@ void ModbusMachineStateListener::ReceiveMachineState(bool state) {
 
 ModbusCountListener::ModbusCountListener(ModbusThread& thread, int componentIndex) : thread(thread) {
     this->componentIndex = componentIndex;
-    QObject::connect(this, SIGNAL(setCount(int, int, double)), &thread, SLOT(receiveState(int, int, double)), Qt::ConnectionType::QueuedConnection);
+    QObject::connect(this, SIGNAL(setCount(int, int, double)), &thread, SLOT(receiveCount(int, int, double)), Qt::ConnectionType::QueuedConnection);
 }
 
 void ModbusCountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
