@@ -41,6 +41,7 @@ SOURCES += \
         mainwindow.cpp \
         modbusthread.cpp \
         modbusthread_listeners.cpp \
+        modbusthreadmessagehandler.cpp \
         paintstationcontrol.cpp \
         ratelistener.cpp \
         settings.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
         mainwindow.h \
         modbusthread.h \
         modbusthread_listeners.h \
+        modbusthreadmessagehandler.h \
         paintstationcontrol.h \
         ratelistener.h \
         settings.h \

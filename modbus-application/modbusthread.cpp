@@ -3,7 +3,7 @@
 #include "modbusthread_listeners.h"
 #include "utility.h"
 
-ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator)
+ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator), messageHandler(simulator)
 {
     addressString = Utility::getIp();
     modbus = modbus_new_tcp(addressString.toStdString().c_str(), 2222);
@@ -111,11 +111,13 @@ void ModbusThread::run() {
 //                qDebug("%i", rc);
                 if (rc > 0) {
                     // printing the query
-                    std::string message;
-                    for (int i = header_length; i < rc; i++) {
-                        message += std::to_string(query[i]) + ' ';
+                    if (query[header_length] == 5 || query[header_length] == 6) {
+                        uint8_t message[5];
+                        for (int i = header_length; i < rc; i++) {
+                            message[i - header_length] = query[i];
+                        }
+                        messageHandler.handleMessage(message);
                     }
-                    logger.Log(message);
                     modbus_reply(modbus, query, rc, mapping);
                 } else if (rc == -1) {
                     logger.Log("Connection stopped.");

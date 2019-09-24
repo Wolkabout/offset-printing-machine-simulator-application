@@ -1,6 +1,7 @@
 #ifndef MODBUSTHREAD_H
 #define MODBUSTHREAD_H
 
+#include "modbusthreadmessagehandler.h"
 #include "simulator.h"
 #include <Interfaces/ConveyorRateMessageReceiver.h>
 #include <Interfaces/CountMessageReceiver.h>
@@ -20,10 +21,11 @@ private:
     QString addressString;
     Logger logger;
     Simulator& simulator;
+    ModbusThreadMessageHandler messageHandler;
 
     std::shared_ptr<ExternalMachineStateReceiver> stateListener;
     std::shared_ptr<CountMessageReceiver> feederListener; // 0
-    std::shared_ptr<CountMessageReceiver> deliveryListener; //1
+    std::shared_ptr<CountMessageReceiver> deliveryListener; // 1
     std::shared_ptr<CountMessageReceiver> cyanListener; // 2
     std::shared_ptr<CountMessageReceiver> magentaListener; // 3
     std::shared_ptr<CountMessageReceiver> yellowListener; // 4
