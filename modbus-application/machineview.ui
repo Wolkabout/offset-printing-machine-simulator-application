@@ -151,116 +151,6 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="feederCount">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>370</y>
-     <width>110</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="feederManage">
-   <property name="geometry">
-    <rect>
-     <x>35</x>
-     <y>400</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Manage Feeder</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="deliveryCount">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>370</y>
-     <width>110</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="deliverManage">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>400</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Manage Delivery</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cyanManage">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>460</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Manage Cyan</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="magentaManage">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>460</y>
-     <width>130</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Manage Magenta</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="yellowManage">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>460</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Manage Yellow</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="blackManage">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>460</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Manage Black</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="cyanCount">
    <property name="geometry">
     <rect>
@@ -325,35 +215,203 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="tempoManage">
+  <widget class="QPushButton" name="emergencyStop">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>395</y>
-     <width>110</width>
-     <height>30</height>
+     <x>340</x>
+     <y>80</y>
+     <width>140</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Manage Tempo</string>
+    <string>Emergency Stop</string>
    </property>
   </widget>
-  <widget class="QLabel" name="tempoCount">
+  <widget class="QPushButton" name="paperJam">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>400</y>
-     <width>110</width>
-     <height>20</height>
+     <x>340</x>
+     <y>270</y>
+     <width>140</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <string>Invoke Paper Jam</string>
    </property>
   </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>345</y>
+     <width>800</width>
+     <height>175</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #BBBBBB;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <widget class="QLabel" name="deliveryCount">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>30</y>
+      <width>110</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cyanManage">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>120</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manage Cyan</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="magentaManage">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>120</y>
+      <width>130</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manage Magenta</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="tempoCount">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>60</y>
+      <width>110</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deliverManage">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>60</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manage Delivery</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="blackManage">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>120</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manage Black</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tempoManage">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>55</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manage Tempo</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="yellowManage">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>120</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manage Yellow</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="feederManage">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>60</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manage Feeder</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="feederCount">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>110</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <zorder>frame</zorder>
+  <zorder>feeder</zorder>
+  <zorder>cyan</zorder>
+  <zorder>magenta</zorder>
+  <zorder>yellow</zorder>
+  <zorder>black</zorder>
+  <zorder>delivery</zorder>
+  <zorder>cyanCount</zorder>
+  <zorder>magentaCount</zorder>
+  <zorder>yellowCount</zorder>
+  <zorder>blackCount</zorder>
+  <zorder>emergencyStop</zorder>
+  <zorder>paperJam</zorder>
  </widget>
  <resources>
   <include location="animations.qrc"/>

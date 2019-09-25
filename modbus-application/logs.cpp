@@ -44,9 +44,8 @@ void Logs::LogsMessageReceiver::ReceiveMessage(std::shared_ptr<ComponentMessage>
 {
     auto timestamp = QTime::currentTime().toString("hh:mm:ss.zzz");
     logs.ui->logs->appendPlainText("[" + timestamp + "] -> " + logs.convertType(message->getType()) + " | " + QString::fromStdString(message->getContent()) + '\n');
-    if (message->getType() == Severe) {
-        QMetaObject::invokeMethod(&logs, "createAlarmPopup", Qt::QueuedConnection, Q_ARG(QString, QString::fromStdString(message->getContent())), Q_ARG(QWidget*, nullptr), Q_ARG(QWidget*, nullptr));
-    }
+    // Now we invoke for everything, not just severe alerts
+    QMetaObject::invokeMethod(&logs, "createAlarmPopup", Qt::QueuedConnection, Q_ARG(QString, QString::fromStdString(message->getContent())), Q_ARG(QWidget*, nullptr), Q_ARG(QWidget*, nullptr));
 }
 
 Logs::~Logs()
