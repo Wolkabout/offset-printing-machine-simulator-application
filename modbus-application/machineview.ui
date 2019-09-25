@@ -29,7 +29,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>135</y>
+     <y>100</y>
      <width>120</width>
      <height>250</height>
     </rect>
@@ -48,7 +48,7 @@
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>90</y>
+     <y>55</y>
      <width>120</width>
      <height>250</height>
     </rect>
@@ -79,7 +79,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>90</y>
+     <y>55</y>
      <width>120</width>
      <height>250</height>
     </rect>
@@ -98,7 +98,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>90</y>
+     <y>55</y>
      <width>120</width>
      <height>250</height>
     </rect>
@@ -117,7 +117,7 @@
    <property name="geometry">
     <rect>
      <x>520</x>
-     <y>90</y>
+     <y>55</y>
      <width>120</width>
      <height>250</height>
     </rect>
@@ -136,7 +136,7 @@
    <property name="geometry">
     <rect>
      <x>640</x>
-     <y>135</y>
+     <y>100</y>
      <width>120</width>
      <height>250</height>
     </rect>
@@ -155,7 +155,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>430</y>
+     <y>370</y>
      <width>110</width>
      <height>20</height>
     </rect>
@@ -170,10 +170,10 @@
   <widget class="QPushButton" name="feederManage">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>460</y>
-     <width>110</width>
-     <height>23</height>
+     <x>35</x>
+     <y>400</y>
+     <width>120</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -184,7 +184,7 @@
    <property name="geometry">
     <rect>
      <x>650</x>
-     <y>430</y>
+     <y>370</y>
      <width>110</width>
      <height>20</height>
     </rect>
@@ -200,9 +200,9 @@
    <property name="geometry">
     <rect>
      <x>650</x>
-     <y>460</y>
-     <width>110</width>
-     <height>23</height>
+     <y>400</y>
+     <width>120</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -212,10 +212,10 @@
   <widget class="QPushButton" name="cyanManage">
    <property name="geometry">
     <rect>
-     <x>165</x>
+     <x>160</x>
      <y>460</y>
-     <width>110</width>
-     <height>23</height>
+     <width>120</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -225,10 +225,10 @@
   <widget class="QPushButton" name="magentaManage">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>280</x>
      <y>460</y>
-     <width>110</width>
-     <height>23</height>
+     <width>130</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -238,10 +238,10 @@
   <widget class="QPushButton" name="yellowManage">
    <property name="geometry">
     <rect>
-     <x>405</x>
+     <x>410</x>
      <y>460</y>
-     <width>110</width>
-     <height>23</height>
+     <width>120</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -251,10 +251,10 @@
   <widget class="QPushButton" name="blackManage">
    <property name="geometry">
     <rect>
-     <x>525</x>
+     <x>530</x>
      <y>460</y>
-     <width>110</width>
-     <height>23</height>
+     <width>120</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -328,10 +328,10 @@
   <widget class="QPushButton" name="tempoManage">
    <property name="geometry">
     <rect>
-     <x>405</x>
-     <y>20</y>
+     <x>400</x>
+     <y>395</y>
      <width>110</width>
-     <height>23</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -341,8 +341,8 @@
   <widget class="QLabel" name="tempoCount">
    <property name="geometry">
     <rect>
-     <x>285</x>
-     <y>20</y>
+     <x>280</x>
+     <y>400</y>
      <width>110</width>
      <height>20</height>
     </rect>
