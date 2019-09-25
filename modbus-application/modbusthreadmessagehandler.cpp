@@ -9,6 +9,7 @@ void ModbusThreadMessageHandler::handleMessage(uint8_t message[])
     int registerIndex = message[2] | message[1] << 8;
     int value = message[4] | message[3] << 8;
 
+    qDebug("%i %i", registerIndex, value);
     if (message[0] == 5) {
         if (registerIndex == 0) {
             if (value != 0) {
@@ -25,34 +26,22 @@ void ModbusThreadMessageHandler::handleMessage(uint8_t message[])
         else {
             switch (registerIndex) {
                 case 6:
-                if (simulator.getFeeder()->modifyCount(value)) {
-                    mappings->tab_registers[registerIndex] = 0;
-                }
+                simulator.getFeeder()->modifyCount(value);
                 break;
                 case 9:
-                if (simulator.getDelivery()->modifyCount(value)) {
-                    mappings->tab_registers[registerIndex] = 0;
-                }
+                simulator.getDelivery()->modifyCount(value);
                 break;
                 case 12:
-                if (simulator.getCyanPaint()->modifyCount(value)) {
-                    mappings->tab_registers[registerIndex] = 0;
-                }
+                simulator.getCyanPaint()->modifyCount(value);
                 break;
                 case 15:
-                if (simulator.getMagentaPaint()->modifyCount(value)) {
-                    mappings->tab_registers[registerIndex] = 0;
-                }
+                simulator.getMagentaPaint()->modifyCount(value);
                 break;
                 case 18:
-                if (simulator.getYellowPaint()->modifyCount(value)) {
-                    mappings->tab_registers[registerIndex] = 0;
-                }
+                simulator.getYellowPaint()->modifyCount(value);
                 break;
                 case 21:
-                if (simulator.getBlackPaint()->modifyCount(value)) {
-                    mappings->tab_registers[registerIndex] = 0;
-                }
+                simulator.getBlackPaint()->modifyCount(value);
                 break;
             }
         }
