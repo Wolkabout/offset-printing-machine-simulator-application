@@ -30,6 +30,9 @@ Logs::Logs(Simulator& simulator, modbus_mapping_t * mappings, QWidget *parent) :
         }
     }
 
+    mappings->tab_input_registers[24] = 0;
+    mappings->tab_input_registers[25] = 0;
+
     listener = std::make_shared<LogsMessageReceiver>(*this);
     simulator.getMachine()->getExternalMessageReceivers().push_back(listener);
 }
@@ -40,11 +43,11 @@ void Logs::createAlarmPopup(QString message, QWidget *component, QWidget *parent
     aa->show();
 
     if (message == "The Emergency Button was triggered!") {
-        toggle = new BitToggleThread(1, mappings);
+        toggle = new BitToggleThread(24, mappings);
         toggle->start();
     }
     else if (message == "A paper jammed the machine!") {
-        toggle = new BitToggleThread(2, mappings);
+        toggle = new BitToggleThread(25, mappings);
         toggle->start();
     }
 }

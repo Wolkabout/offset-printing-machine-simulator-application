@@ -15,10 +15,10 @@ public:
         this->mappings = mappings;
     }
     void run() override {
-        qDebug("Invoked! %i", bit);
-        mappings->tab_bits[bit] = true;
-        std::this_thread::sleep_for(std::chrono::seconds(10));
-        mappings->tab_bits[bit] = false;
+//        qDebug("Invoked! %i", bit);
+        mappings->tab_input_registers[bit] = 1;
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+        mappings->tab_input_registers[bit] = 0;
     }
 };
 

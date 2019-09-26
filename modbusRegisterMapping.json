@@ -11,17 +11,21 @@
       {
          "name": "Emergency Stop Alarm",
          "reference": "ESTOPA",
-         "address": 1,
-         "registerType": "COIL",
-         "dataType": "BOOL",
+         "minimum": 0,
+         "maximum": 1,
+         "address": 24,
+         "registerType": "INPUT_REGISTER",
+         "dataType": "INT16",
          "slaveAddress": 1
       },
       {
          "name": "Paper Jam Alarm",
          "reference": "PJAM",
-         "address": 2,
-         "registerType": "COIL",
-         "dataType": "BOOL",
+         "minimum": 0,
+         "maximum": 1,
+         "address": 25,
+         "registerType": "INPUT_REGISTER",
+         "dataType": "INT16",
          "slaveAddress": 1
       },
       {
