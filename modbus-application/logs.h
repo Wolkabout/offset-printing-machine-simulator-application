@@ -1,6 +1,8 @@
 #ifndef LOGS_H
 #define LOGS_H
 
+#include "bittogglethread.h"
+#include "modbusthread.h"
 #include "simulator.h"
 
 #include <QFrame>
@@ -15,13 +17,14 @@ class Logs : public QFrame
     Simulator& simulator;
     std::shared_ptr<ExternalMachineMessageReceiver> listener;
     QString convertType(ComponentMessageType type);
+    modbus_mapping_t * mappings;
+    BitToggleThread * toggle;
+    Ui::Logs *ui;
 public:
-    Logs(Simulator& simulator, QWidget *parent = nullptr);
+    Logs(Simulator& simulator, modbus_mapping_t * mappings, QWidget *parent = nullptr);
     ~Logs();
     Q_INVOKABLE void createAlarmPopup(QString, QWidget*, QWidget*);
 
-private:
-    Ui::Logs *ui;
     class LogsMessageReceiver : public ExternalMachineMessageReceiver {
     private:
         Logs& logs;

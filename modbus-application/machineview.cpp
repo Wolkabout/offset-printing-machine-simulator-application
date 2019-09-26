@@ -123,7 +123,20 @@ void MachineView::on_tempoManage_clicked()
     simulator.getConveyorWidget()->show();
 }
 
+void MachineView::on_emergencyStop_clicked()
+{
+    std::shared_ptr<ComponentMessage> message = std::make_shared<ComponentMessage>(Severe, "The Emergency Button was triggered!");
+    simulator.getMachine()->receiveMessages(message);
+}
+
+void MachineView::on_paperJam_clicked()
+{
+    std::shared_ptr<ComponentMessage> message = std::make_shared<ComponentMessage>(Severe, "A paper jammed the machine!");
+    simulator.getMachine()->receiveMessages(message);
+}
+
 MachineView::~MachineView()
 {
     delete ui;
 }
+

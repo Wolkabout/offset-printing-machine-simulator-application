@@ -44,6 +44,10 @@ private slots:
 
     void on_tempoManage_clicked();
 
+    void on_paperJam_clicked();
+
+    void on_emergencyStop_clicked();
+
 private:
     Ui::MachineView *ui;
     Q_INVOKABLE void animationChange(bool);

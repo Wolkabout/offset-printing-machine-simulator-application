@@ -50,6 +50,7 @@ SOURCES += \
 
 HEADERS += \
         alarmalert.h \
+        bittogglethread.h \
         conveyorcontrol.h \
         countlistener.h \
         deliverycontrol.h \

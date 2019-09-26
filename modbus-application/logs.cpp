@@ -1,4 +1,5 @@
 #include "alarmalert.h"
+#include "bittogglethread.h"
 #include "logs.h"
 #include "ui_logs.h"
 #include <QMessageBox>
@@ -13,12 +14,13 @@ QString Logs::convertType(ComponentMessageType type)
     }
 }
 
-Logs::Logs(Simulator& simulator, QWidget *parent) :
+Logs::Logs(Simulator& simulator, modbus_mapping_t * mappings, QWidget *parent) :
     QFrame(parent),
     ui(new Ui::Logs),
     simulator(simulator)
 {
     ui->setupUi(this);
+    this->mappings = mappings;
 
     auto timestamp = QTime::currentTime().toString("hh:mm:ss.zzz");
     for (auto &message : simulator.getMachine()->getMessages()) {
@@ -36,6 +38,15 @@ void Logs::createAlarmPopup(QString message, QWidget *component, QWidget *parent
 {
     AlarmAlert * aa = new AlarmAlert(message, simulator, component, parent);
     aa->show();
+
+    if (message == "The Emergency Button was triggered!") {
+        toggle = new BitToggleThread(1, mappings);
+        toggle->start();
+    }
+    else if (message == "A paper jammed the machine!") {
+        toggle = new BitToggleThread(2, mappings);
+        toggle->start();
+    }
 }
 
 Logs::LogsMessageReceiver::LogsMessageReceiver(Logs& logs) : logs(logs) { }
