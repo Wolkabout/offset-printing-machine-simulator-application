@@ -111,6 +111,14 @@ void ModbusThread::run() {
 //                qDebug("%i", rc);
                 if (rc > 0) {
                     // printing the query
+                    if (query[header_length] == 2 || query[header_length] == 1 || query[header_length] == 23) {
+                        std::string messageString;
+                        for (int i = header_length; i < rc; i++) {
+                            messageString += std::to_string(query[i]) + ' ';
+                        }
+                        qDebug(messageString.c_str());
+                    }
+
                     if (query[header_length] == 5 || query[header_length] == 6) {
                         uint8_t message[5];
                         for (int i = header_length; i < rc; i++) {

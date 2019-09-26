@@ -9,6 +9,22 @@
          "slaveAddress": 1
       },
       {
+         "name": "Emergency Stop Alarm",
+         "reference": "ESTOPA",
+         "address": 1,
+         "registerType": "COIL",
+         "dataType": "BOOL",
+         "slaveAddress": 1
+      },
+      {
+         "name": "Paper Jam Alarm",
+         "reference": "PJAM",
+         "address": 2,
+         "registerType": "COIL",
+         "dataType": "BOOL",
+         "slaveAddress": 1
+      },
+      {
          "name": "Machine Running",
          "reference": "RUN",
          "address": 0,

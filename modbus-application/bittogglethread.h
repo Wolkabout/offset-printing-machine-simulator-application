@@ -16,9 +16,9 @@ public:
     }
     void run() override {
         qDebug("Invoked! %i", bit);
-        mappings->tab_input_bits[bit] = true;
-        std::this_thread::sleep_for(std::chrono::seconds(5));
-        mappings->tab_input_bits[bit] = false;
+        mappings->tab_bits[bit] = true;
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+        mappings->tab_bits[bit] = false;
     }
 };
 
