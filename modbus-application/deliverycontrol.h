@@ -17,6 +17,7 @@ class DeliveryControl : public QWidget
 public:
     DeliveryControl(Delivery& delivery, QWidget *parent = nullptr);
     ~DeliveryControl();
+    void windowActivationChange(bool) override;
 
 private slots:
     void on_edit_clicked();

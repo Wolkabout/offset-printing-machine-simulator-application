@@ -22,6 +22,13 @@ AlarmAlert::~AlarmAlert()
     delete ui;
 }
 
+void AlarmAlert::windowActivationChange(bool oldChange)
+{
+    if (oldChange) {
+        hide();
+    }
+}
+
 void AlarmAlert::on_ok_clicked()
 {
     this->hide();

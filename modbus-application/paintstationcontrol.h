@@ -17,6 +17,7 @@ class PaintStationControl : public QWidget
 public:
     explicit PaintStationControl(PaintStation& paintStation, QWidget *parent = nullptr);
     ~PaintStationControl();
+    void windowActivationChange(bool) override;
 
 private slots:
     void on_edit_clicked();

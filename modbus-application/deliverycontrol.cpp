@@ -28,6 +28,13 @@ DeliveryControl::~DeliveryControl()
     delete ui;
 }
 
+void DeliveryControl::windowActivationChange(bool oldChange)
+{
+    if (oldChange) {
+        hide();
+    }
+}
+
 void DeliveryControl::on_ok_clicked()
 {
     hide();

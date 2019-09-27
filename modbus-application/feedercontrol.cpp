@@ -27,6 +27,13 @@ FeederControl::~FeederControl()
     delete ui;
 }
 
+void FeederControl::windowActivationChange(bool oldActive)
+{
+    if (oldActive) {
+        hide();
+    }
+}
+
 void FeederControl::on_ok_clicked()
 {
     hide();

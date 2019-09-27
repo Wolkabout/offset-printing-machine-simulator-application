@@ -17,6 +17,7 @@ class ConveyorControl : public QWidget
 public:
     ConveyorControl(Conveyor& conveyor, QWidget *parent = nullptr);
     ~ConveyorControl();
+    void windowActivationChange(bool) override;
 
 private slots:
     void on_decrease_clicked();

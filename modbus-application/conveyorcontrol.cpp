@@ -21,6 +21,13 @@ ConveyorControl::~ConveyorControl()
     delete ui;
 }
 
+void ConveyorControl::windowActivationChange(bool oldChange)
+{
+    if (oldChange) {
+        hide();
+    }
+}
+
 void ConveyorControl::on_decrease_clicked()
 {
     if (conveyor.getRatePerHour() > conveyor.getMinRatePerHour()) {

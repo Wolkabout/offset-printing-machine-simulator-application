@@ -17,6 +17,7 @@ class FeederControl : public QWidget
 public:
     FeederControl(Feeder &feeder, QWidget *parent = nullptr);
     ~FeederControl();
+    void windowActivationChange(bool) override;
 
 private slots:
     void on_ok_clicked();

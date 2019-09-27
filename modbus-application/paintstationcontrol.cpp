@@ -32,6 +32,13 @@ PaintStationControl::~PaintStationControl()
     delete ui;
 }
 
+void PaintStationControl::windowActivationChange(bool oldChange)
+{
+    if (oldChange) {
+        hide();
+    }
+}
+
 void PaintStationControl::on_ok_clicked()
 {
     hide();

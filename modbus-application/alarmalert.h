@@ -16,6 +16,7 @@ class AlarmAlert : public QWidget
 public:
     AlarmAlert(QString message, Simulator& simulator, QWidget *component = nullptr, QWidget *parent = nullptr);
     ~AlarmAlert();
+    void windowActivationChange(bool) override;
 
 private slots:
     void on_ok_clicked();
