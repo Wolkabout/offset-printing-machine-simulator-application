@@ -17,7 +17,7 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
     ui->setupUi(this);
 
 //    uncomment when building for RPi
-//    QMainWindow::showFullScreen();
+    QMainWindow::showFullScreen();
 
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
     ui->date->setText(QDate::currentDate().toString());
