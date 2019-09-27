@@ -59,5 +59,8 @@ After that, you need to configure Modbus. IP address of the HMI will be displaye
 !!! Set the port to 2222 !!!.
 You need to use the .json file provided in this git, called modbusRegisterMapping.json, and place it in the out folder of the module, and run the module with that file.
 
+Place the modbus-application.desktop file in the /etc/xdg/autostart/ folder.
+Replace the [USER_NAME] part with your username/modify the path if that's necessary.
+
 (In development)
 The modbus module still doesn't support alarms, so you need to set them up in the rule engine of the platform.

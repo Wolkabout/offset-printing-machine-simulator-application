@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/[USER_NAME]/modbus-application-cpp/modbus-application/out/modbus-application
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Modbus Application
+Comment=Yello!
