@@ -6,7 +6,7 @@
 ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator), messageHandler(mapping, simulator)
 {
     addressString = Utility::getIp();
-    modbus = modbus_new_tcp(addressString.toStdString().c_str(), 2222);
+    modbus = modbus_new_tcp(nullptr, 2222);
 //    modbus_set_debug(modbus, TRUE);
     modbus_set_response_timeout(modbus, 0, 0);
 
