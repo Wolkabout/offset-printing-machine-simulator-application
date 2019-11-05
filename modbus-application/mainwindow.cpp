@@ -29,6 +29,11 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
     ui->date->setFont(robotoMedium12);
     QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
     ui->label->setFont(robotoMedium16);
+    ui->homeButton->setFont(robotoMedium16);
+    ui->logButton->setFont(robotoMedium16);
+    ui->machineButton->setFont(robotoMedium16);
+    QFont robotoRegular16(QFontDatabase::applicationFontFamilies(1).at(0), 12);
+    ui->welcomeText->setFont(robotoRegular16);
 
 //    uncomment when building for RPi
 //    QMainWindow::showFullScreen();
@@ -36,10 +41,6 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
     ui->backButton->setIcon(QIcon(":/Icons/Resources/ico_back.svg"));
     ui->settingsButton->setIcon(QIcon(":/Icons/Resources/ico_settings.svg"));
     ui->logo->setPixmap(QPixmap(":/Images/Resources/Logo_white.svg"));
-    ui->welcomeText->setFont(robotoMedium16);
-    ui->homeButton->setFont(robotoMedium16);
-    ui->logButton->setFont(robotoMedium16);
-    ui->machineButton->setFont(robotoMedium16);
 
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
     ui->date->setText(QDate::currentDate().toString());

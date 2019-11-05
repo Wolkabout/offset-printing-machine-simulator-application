@@ -339,7 +339,7 @@ border-radius: 4px;</string>
     <property name="styleSheet">
      <string notr="true">border-radius: 4px;
 background-color: #f5f5f5;
-background-size: cover</string>
+</string>
     </property>
     <property name="text">
      <string>Logs</string>

@@ -22,6 +22,9 @@ Logs::Logs(Simulator& simulator, modbus_mapping_t * mappings, QWidget *parent) :
     ui->setupUi(this);
     this->mappings = mappings;
 
+    QFont robotoMedium14(QFontDatabase::applicationFontFamilies(0).at(0), 10, QFont::DemiBold);
+    ui->logs->setFont(robotoMedium14);
+
     auto timestamp = QTime::currentTime().toString("hh:mm:ss.zzz");
     for (auto &message : simulator.getMachine()->getMessages()) {
         ui->logs->appendPlainText("[" + timestamp + "] -> " + convertType(message->getType()) + " | " + QString::fromStdString(message->getContent()) + '\n');
