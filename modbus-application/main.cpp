@@ -5,11 +5,15 @@
 #include "simulator.h"
 #include "windowmanager.h"
 #include <QApplication>
+#include <QFontDatabase>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Simulator simulator;
+
+    QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Medium.ttf"); // id 0
+    QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Regular.ttf"); // id 1
 
     WindowManager windowManager;
 

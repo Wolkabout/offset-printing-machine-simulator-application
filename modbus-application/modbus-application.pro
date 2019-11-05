@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network widgets
+QT       += core gui network widgets svg
 LIBS     += -lmodbus -pthread
 
 greaterThan(QT_MAJOR_VERSION, 4)
@@ -92,7 +92,9 @@ DEPENDPATH += $$PWD/../modbus-simulator-cpp
 unix:!macx: PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/libmodbus_simulator_cpp.a
 
 RESOURCES += \
-    animations.qrc
+    fonts.qrc \
+    icons.qrc \
+    images.qrc
 
 DISTFILES += \
     Resources/ConveyorAnimation1.gif \

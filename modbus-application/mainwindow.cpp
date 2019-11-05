@@ -7,6 +7,7 @@
 #include <QTime>
 #include <QTimer>
 #include <qdatetime.h>
+#include <QFontDatabase>
 
 MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidget *parent) :
     QMainWindow(parent),
@@ -16,30 +17,33 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
 {
     ui->setupUi(this);
 
+    // Setup the background for the main window
+    QPixmap background(":/Images/Resources/Background.svg");
+    QPalette palette;
+    palette.setBrush(QPalette::Background, background);
+    setPalette(palette);
+
+    // Setup the info bar
+    QFont robotoMedium12(QFontDatabase::applicationFontFamilies(0).at(0), 9, QFont::DemiBold);
+    ui->clock->setFont(robotoMedium12);
+    ui->date->setFont(robotoMedium12);
+    QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
+    ui->label->setFont(robotoMedium16);
+
 //    uncomment when building for RPi
 //    QMainWindow::showFullScreen();
+
+    ui->backButton->setIcon(QIcon(":/Icons/Resources/ico_back.svg"));
+    ui->settingsButton->setIcon(QIcon(":/Icons/Resources/ico_settings.svg"));
+    ui->logo->setPixmap(QPixmap(":/Images/Resources/Logo_white.svg"));
+    ui->welcomeText->setFont(robotoMedium16);
+    ui->homeButton->setFont(robotoMedium16);
+    ui->logButton->setFont(robotoMedium16);
+    ui->machineButton->setFont(robotoMedium16);
 
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
     ui->date->setText(QDate::currentDate().toString());
     startTimer(100);
-
-    listener = std::make_shared<MainViewStateListener>(*this);
-    simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
-}
-
-MainWindow::MainViewStateListener::MainViewStateListener(MainWindow& mainWindow) : mainWindow(mainWindow) { }
-
-void MainWindow::MainViewStateListener::ReceiveMachineState(bool x)
-{
-    if (x) {
-        mainWindow.ui->statusLabel->setText("Machine running.");
-        mainWindow.ui->toggleButton->setText("Stop");
-        mainWindow.ui->toggleButton->setStyleSheet("background-color: green; color: white;");
-    } else {
-        mainWindow.ui->statusLabel->setText("Machine not running.");
-        mainWindow.ui->toggleButton->setText("Start");
-        mainWindow.ui->toggleButton->setStyleSheet("background-color: red; color: white;");
-    }
 }
 
 MainWindow::~MainWindow()
@@ -53,7 +57,7 @@ QFrame * MainWindow::frameHolder() {
 
 void MainWindow::timerEvent(QTimerEvent *event) {
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
-    ui->date->setText(QDate::currentDate().toString("dddd, d. MMMM yyyy"));
+    ui->date->setText(QDate::currentDate().toString("dd.M.yyyy."));
 }
 
 void MainWindow::on_backButton_clicked()
