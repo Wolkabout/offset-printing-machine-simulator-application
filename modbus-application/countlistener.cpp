@@ -7,14 +7,28 @@ CountListener::CountListener(TempoComponent& tempoComponent, QLabel * label, QLa
     QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
 }
 
+CountListener::CountListener(TempoComponent& tempoComponent, QLabel * label)
+    : tempoComponent(tempoComponent), label(label) {
+    QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
+}
+
+CountListener::CountListener(TempoComponent& tempoComponent, QPushButton * button)
+    : tempoComponent(tempoComponent), button(button) {
+    QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
+}
+
 void CountListener::setLabels(QString one, QString two)
 {
-    if (optionalLabel == nullptr) {
-        QStringList list = label->text().split('/');
-        label->setText(one + '/' + two);
+    if (button == nullptr) {
+        if (optionalLabel == nullptr) {
+            QStringList list = label->text().split('/');
+            label->setText(one + '/' + two);
+        } else {
+            label->setText(Utility::replaceNumbers(label->text(), one));
+            optionalLabel->setText(Utility::replaceNumbers(optionalLabel->text(), two));
+        }
     } else {
-        label->setText(Utility::replaceNumbers(label->text(), one));
-        optionalLabel->setText(Utility::replaceNumbers(optionalLabel->text(), two));
+        button->setText(button->text().split(' ')[0] + " (" + one + "/" + two + ")");
     }
 };
 

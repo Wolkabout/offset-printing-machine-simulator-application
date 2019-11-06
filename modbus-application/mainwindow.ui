@@ -310,9 +310,9 @@ color: #323232;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">height: 48px;
-border: 1px solid #e0e0e0;
-border-radius: 4px;</string>
+     <string notr="true">border-radius: 4px;
+background-color: #f5f5f5;
+</string>
     </property>
     <property name="text">
      <string>Home</string>

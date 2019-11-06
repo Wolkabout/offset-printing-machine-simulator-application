@@ -4,15 +4,19 @@
 #include <Interfaces/CountMessageReceiver.h>
 #include <Components/TempoComponent.h>
 #include <QLabel>
+#include <QPushButton>
 
 class CountListener : public QObject, public CountMessageReceiver {
 private:
     Q_OBJECT
     TempoComponent& tempoComponent;
+    QPushButton * button;
     QLabel * label;
     QLabel * optionalLabel;
 public:
-    CountListener(TempoComponent&, QLabel *, QLabel * optionalLabel = nullptr);
+    CountListener(TempoComponent&, QLabel *, QLabel * optionalLabel);
+    CountListener(TempoComponent&, QLabel *);
+    CountListener(TempoComponent&, QPushButton *);
     void ReceiveMessage(std::shared_ptr<CountMessage>) override;
     Q_INVOKABLE void setLabels(QString, QString);
 signals:

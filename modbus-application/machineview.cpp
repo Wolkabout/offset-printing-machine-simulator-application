@@ -8,6 +8,7 @@
 #include <map>
 #include <QMessageBox>
 #include <QMetaObject>
+#include <QFontDatabase>
 
 MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     QFrame(parent),
@@ -16,18 +17,24 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    labels = std::map<QLabel*, QMovie*> {
-            {ui->feeder, new QMovie(":/Animations/Resources/FeederAnimation1.gif")},
-            {ui->cyan, new QMovie(":/Animations/Resources/PaintStationAnimationC1.gif")},
-            {ui->magenta, new QMovie(":/Animations/Resources/PaintStationAnimationM1.gif")},
-            {ui->yellow, new QMovie(":/Animations/Resources/PaintStationAnimationY1.gif")},
-            {ui->black, new QMovie(":/Animations/Resources/PaintStationAnimationK1.gif")},
-            {ui->delivery, new QMovie(":/Animations/Resources/DeliveryAnimation1.gif")}
-    };
+    QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
+    ui->cyanManage->setFont(robotoMedium16);
+    ui->magentaManage->setFont(robotoMedium16);
+    ui->yellowManage->setFont(robotoMedium16);
+    ui->blackManage->setFont(robotoMedium16);
+    ui->feederManage->setFont(robotoMedium16);
+    ui->deliverManage->setFont(robotoMedium16);
+    ui->feederManage->setFont(robotoMedium16);
+    ui->paperJam->setFont(robotoMedium16);
+    ui->emergencyStop->setFont(robotoMedium16);
+    ui->startButton->setFont(robotoMedium16);
+    QFont robotoMedium14(QFontDatabase::applicationFontFamilies(0).at(0), 10, QFont::DemiBold);
+    ui->cyanCount->setFont(robotoMedium14);
+    ui->magentaCount->setFont(robotoMedium14);
+    ui->yellowCount->setFont(robotoMedium14);
+    ui->blackCount->setFont(robotoMedium14);
 
-    for (auto const& x : labels) {
-        x.first->setMovie(x.second);
-    }
+    ui->image->setPixmap(QPixmap(":/Images/Resources/Offset.svg"));
 
     startAnimation();
     stopAnimation();
@@ -35,7 +42,7 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     listener = std::make_shared<ViewMachineStateListener>(*this);
     simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
 
-    feederListener = std::make_shared<CountListener>(*(simulator.getFeeder().get()), ui->feederCount);
+    feederListener = std::make_shared<CountListener>(*(simulator.getFeeder().get()), ui->feederManage);
     simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
 
     cyanListener = std::make_shared<CountListener>(*(simulator.getCyanPaint().get()), ui->cyanCount);
@@ -50,12 +57,12 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     blackListener = std::make_shared<CountListener>(*(simulator.getBlackPaint().get()), ui->blackCount);
     simulator.getBlackPaint()->getCountMessageReceiver().push_back(blackListener);
 
-    deliveryListener = std::make_shared<CountListener>(*(simulator.getDelivery().get()), ui->deliveryCount);
+    deliveryListener = std::make_shared<CountListener>(*(simulator.getDelivery().get()), ui->deliverManage);
     simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
 
-    ui->tempoCount->setText(QString::number(simulator.getConveyor()->getRatePerHour()) + " pph");
-    conveyorListener = std::make_shared<RateListener>(*(simulator.getConveyor().get()), ui->tempoCount);
-    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
+    ui->tempoManage->setText(QString::number(simulator.getConveyor()->getRatePerHour()) + " pph");
+//    conveyorListener = std::make_shared<RateListener>(*(simulator.getConveyor().get()), ui->tempoManage);
+//    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
 }
 
 ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) {

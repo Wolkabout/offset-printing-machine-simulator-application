@@ -2,5 +2,6 @@
     <qresource prefix="/Images">
         <file>Resources/Background.svg</file>
         <file>Resources/Logo_white.svg</file>
+        <file>Resources/Offset.svg</file>
     </qresource>
 </RCC>
