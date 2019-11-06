@@ -2,5 +2,6 @@
     <qresource prefix="/Icons">
         <file>Resources/ico_settings.svg</file>
         <file>Resources/ico_back.svg</file>
+        <file>Resources/ico_close.svg</file>
     </qresource>
 </RCC>

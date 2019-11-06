@@ -50,9 +50,6 @@ private slots:
 
 private:
     Ui::MachineView *ui;
-    Q_INVOKABLE void animationChange(bool);
-    void startAnimation();
-    void stopAnimation();
 };
 
 class ViewMachineStateListener : public QObject, public ExternalMachineStateReceiver {

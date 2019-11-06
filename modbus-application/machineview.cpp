@@ -25,6 +25,7 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     ui->feederManage->setFont(robotoMedium16);
     ui->deliverManage->setFont(robotoMedium16);
     ui->feederManage->setFont(robotoMedium16);
+    ui->tempoManage->setFont(robotoMedium16);
     ui->paperJam->setFont(robotoMedium16);
     ui->emergencyStop->setFont(robotoMedium16);
     ui->startButton->setFont(robotoMedium16);
@@ -35,9 +36,6 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     ui->blackCount->setFont(robotoMedium14);
 
     ui->image->setPixmap(QPixmap(":/Images/Resources/Offset.svg"));
-
-    startAnimation();
-    stopAnimation();
 
     listener = std::make_shared<ViewMachineStateListener>(*this);
     simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
@@ -60,39 +58,18 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     deliveryListener = std::make_shared<CountListener>(*(simulator.getDelivery().get()), ui->deliverManage);
     simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
 
-    ui->tempoManage->setText(QString::number(simulator.getConveyor()->getRatePerHour()) + " pph");
-//    conveyorListener = std::make_shared<RateListener>(*(simulator.getConveyor().get()), ui->tempoManage);
-//    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
+    ui->tempoManage->setText("Tempo " + QString::number(simulator.getConveyor()->getRatePerHour()) + " pph");
+    conveyorListener = std::make_shared<RateListener>(*(simulator.getConveyor().get()), ui->tempoManage);
+    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
 }
 
 ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) {
-    QObject::connect(this, SIGNAL(stateChange(bool)), &machineView, SLOT(animationChange(bool)), Qt::ConnectionType::QueuedConnection);
+    // write animation slot
+//    QObject::connect(this, SIGNAL(stateChange(bool)), &machineView, SLOT(animationChange(bool)), Qt::ConnectionType::QueuedConnection);
 }
 
 void ViewMachineStateListener::ReceiveMachineState(bool x) {
     emit stateChange(x);
-}
-
-void MachineView::animationChange(bool state) {
-    if (state) {
-        startAnimation();
-    } else {
-        stopAnimation();
-    }
-}
-
-void MachineView::startAnimation()
-{
-    for (auto const& x : labels) {
-        x.second->start();
-    }
-}
-
-void MachineView::stopAnimation()
-{
-    for (auto const& x : labels) {
-        x.second->stop();
-    }
 }
 
 void MachineView::on_feederManage_clicked()

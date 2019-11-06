@@ -1,6 +1,7 @@
 #include "alarmalert.h"
 #include "ui_alarmalert.h"
 
+#include <QFontDatabase>
 #include <QMessageBox>
 #include <QObject>
 
@@ -13,6 +14,20 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
+    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
+
+    QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
+    ui->label_2->setFont(robotoBold18);
+    QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
+    ui->goto_2->setFont(robotoMedium16);
+    ui->message->setFont(robotoMedium16);
+
+    if (!(message.contains("Feeder") || message.contains("Cyan") || message.contains("Magenta")
+            || message.contains("Yellow") || message.contains("Black") || message.contains("Delivery"))) {
+        ui->goto_2->setEnabled(false);
+    }
 
     QMetaObject::invokeMethod(ui->message, "setText", Qt::QueuedConnection, Q_ARG(QString, message));
 }
@@ -48,10 +63,6 @@ void AlarmAlert::on_goto_2_clicked()
         simulator.getBlackWidget()->show();
     } else if (message.contains("Delivery")) {
         simulator.getDeliveyWidget()->show();
-    } else {
-        QMessageBox * messageBox = new QMessageBox(this);
-        messageBox->setText("Could not find component causing the error!");
-        messageBox->exec();
     }
     hide();
 }

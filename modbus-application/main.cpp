@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 
     QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Medium.ttf"); // id 0
     QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Regular.ttf"); // id 1
+    QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Bold.ttf"); // id 2
 
     WindowManager windowManager;
 

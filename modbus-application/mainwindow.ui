@@ -159,9 +159,9 @@ color: #323232;</string>
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>285</x>
        <y>11</y>
-       <width>220</width>
+       <width>230</width>
        <height>19</height>
       </rect>
      </property>

@@ -2,5 +2,6 @@
     <qresource prefix="/Fonts">
         <file>Resources/Roboto-Medium.ttf</file>
         <file>Resources/Roboto-Regular.ttf</file>
+        <file>Resources/Roboto-Bold.ttf</file>
     </qresource>
 </RCC>
