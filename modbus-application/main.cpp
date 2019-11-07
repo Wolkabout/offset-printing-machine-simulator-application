@@ -30,5 +30,7 @@ int main(int argc, char *argv[])
 
     modbusThread.start();
 
-    return a.exec();
+    int res = a.exec();
+    modbusThread.exit();
+    return res;
 }

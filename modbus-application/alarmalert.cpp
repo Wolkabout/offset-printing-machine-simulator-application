@@ -13,7 +13,7 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     ui(new Ui::AlarmAlert)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
     ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
@@ -29,7 +29,8 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
         ui->goto_2->setEnabled(false);
     }
 
-    QMetaObject::invokeMethod(ui->message, "setText", Qt::QueuedConnection, Q_ARG(QString, message));
+    ui->message->setText(message);
+//    QMetaObject::invokeMethod(ui->message, "setText", Qt::QueuedConnection, Q_ARG(QString, message));
 }
 
 AlarmAlert::~AlarmAlert()

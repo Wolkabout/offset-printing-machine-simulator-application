@@ -17,6 +17,7 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Programatically setting the font for literally everything
     QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
     ui->cyanManage->setFont(robotoMedium16);
     ui->magentaManage->setFont(robotoMedium16);
@@ -40,6 +41,8 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     listener = std::make_shared<ViewMachineStateListener>(*this);
     simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
 
+    ui->feederManage->setText(ui->feederManage->text().split(' ')[0] +
+            " (" + QString::number(simulator.getFeeder()->getCount()) + "/" + QString::number(simulator.getFeeder()->getPercentage()) + "%)");
     feederListener = std::make_shared<CountListener>(*(simulator.getFeeder().get()), ui->feederManage);
     simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
 

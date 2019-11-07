@@ -35,15 +35,18 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
     QFont robotoRegular16(QFontDatabase::applicationFontFamilies(1).at(0), 12);
     ui->welcomeText->setFont(robotoRegular16);
 
-//    uncomment when building for RPi
-//    QMainWindow::showFullScreen();
+#ifdef QT_DEBUG
+    // do nothing
+#else
+    QMainWindow::showFullScreen();
+#endif
 
     ui->backButton->setIcon(QIcon(":/Icons/Resources/ico_back.svg"));
     ui->settingsButton->setIcon(QIcon(":/Icons/Resources/ico_settings.svg"));
     ui->logo->setPixmap(QPixmap(":/Images/Resources/Logo_white.svg"));
 
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
-    ui->date->setText(QDate::currentDate().toString());
+    ui->date->setText(QDate::currentDate().toString("dd.M.yyyy."));
     startTimer(100);
 }
 
@@ -84,13 +87,4 @@ void MainWindow::on_settingsButton_clicked()
 void MainWindow::on_machineButton_clicked()
 {
     windowManager.showFrame(2);
-}
-
-void MainWindow::on_toggleButton_clicked()
-{
-    if (simulator.getMachine()->isRunning()) {
-        simulator.getMachine()->stop();
-    } else {
-        simulator.getMachine()->start();
-    }
 }

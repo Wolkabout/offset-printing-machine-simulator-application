@@ -70,8 +70,6 @@ ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simul
 
     conveyorListener = std::make_shared<ModbusRateListener>(*this);
     simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
-
-//    printMappings();
 }
 
 ModbusThread::~ModbusThread() {
@@ -103,22 +101,11 @@ void ModbusThread::run() {
         modbus_tcp_accept(modbus, &listen);
         logger.Log("Connection accepted.");
 
-//            if the connection is successful
         while (true) {
             try {
                 int rc;
                 rc = modbus_receive(modbus, query);
-//                qDebug("%i", rc);
                 if (rc > 0) {
-                    // printing the query
-//                    if (query[header_length] == 2 || query[header_length] == 1 || query[header_length] == 23) {
-//                        std::string messageString;
-//                        for (int i = header_length; i < rc; i++) {
-//                            messageString += std::to_string(query[i]) + ' ';
-//                        }
-//                        qDebug(messageString.c_str());
-//                    }
-
                     if (query[header_length] == 5 || query[header_length] == 6) {
                         uint8_t message[5];
                         for (int i = header_length; i < rc; i++) {
@@ -138,28 +125,6 @@ void ModbusThread::run() {
     }
 }
 
-void ModbusThread::printMappings() {
-    try {
-        qDebug("tab_bits | starting at %#x", mapping->tab_bits);
-        for (int i = 0; i < 30; i++)
-            qDebug("%#x %u", (mapping->tab_bits + (sizeof(uint8_t) * i)), mapping->tab_bits[i]);
-
-        qDebug("tab_input_bits | starting at %#x", mapping->tab_input_bits);
-        for (int i = 0; i < 30; i++)
-            qDebug("%#x %u", (mapping->tab_input_bits + (sizeof(uint8_t) * i)), mapping->tab_input_bits[i]);
-
-        qDebug("tab_registers | starting at %#x", mapping->tab_registers);
-        for (int i = 0; i < 30; i++)
-            qDebug("%#x %u", (mapping->tab_registers + (sizeof(uint16_t) * i)), mapping->tab_registers[i]);
-
-        qDebug("tab_input_registers | %#x", mapping->tab_input_registers);
-        for (int i = 0; i < 30; i++)
-            qDebug("%#x %u", (mapping->tab_input_registers + (sizeof(uint16_t) * i)), mapping->tab_input_registers[i]);
-    } catch (std::exception &e) {
-        qDebug("%s", e.what());
-    }
-}
-
 void ModbusThread::receiveState(bool state)
 {
     mapping->tab_input_bits[0] = state;
@@ -171,7 +136,6 @@ void ModbusThread::receiveCount(int tempoComponent, int count, double percentage
     int capacityIndex = (tempoComponent * 3) + 4;
     int percentageIndex = capacityIndex + 1;
     int countIndex = percentageIndex + 1;
-//    qDebug("%i %i %i", capacityIndex, percentageIndex, countIndex);
 
     mapping->tab_input_registers[percentageIndex] = std::round(percentage * 100);
     mapping->tab_input_registers[countIndex] = count;

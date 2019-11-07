@@ -2,6 +2,7 @@
 #include "feedercontrol.h"
 #include "ui_feedercontrol.h"
 
+#include <QFontDatabase>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QMovie>
@@ -12,8 +13,16 @@ FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
     ui(new Ui::FeederControl)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint);
-    ui->name->setText("<h2>" + QString::fromStdString(feeder.getName()) + "</h2>");
+    setWindowFlags(Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
+//    QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
+//    ui->name->setFont(robotoBold18);
+//    QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
+//    ui->failure->setFont(robotoMedium16);
+//    ui->edit->setFont(robotoMedium16);
+
+    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
 
     ui->count->setText("<h2>" + QString::number(feeder.getCount()) + "</h2>");
     ui->percentage->setText("<h2>" + QString::number(feeder.getPercentage() * 100) + "% </h2>");

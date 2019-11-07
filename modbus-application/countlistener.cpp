@@ -3,17 +3,17 @@
 #include <math.h>
 
 CountListener::CountListener(TempoComponent& tempoComponent, QLabel * label, QLabel * optionalLabel)
-    : tempoComponent(tempoComponent), label(label), optionalLabel(optionalLabel) {
+    : tempoComponent(tempoComponent), label(label), optionalLabel(optionalLabel), button(nullptr) {
     QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 CountListener::CountListener(TempoComponent& tempoComponent, QLabel * label)
-    : tempoComponent(tempoComponent), label(label) {
+    : tempoComponent(tempoComponent), label(label), optionalLabel(nullptr), button(nullptr) {
     QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 CountListener::CountListener(TempoComponent& tempoComponent, QPushButton * button)
-    : tempoComponent(tempoComponent), button(button) {
+    : tempoComponent(tempoComponent), label(nullptr), optionalLabel(nullptr), button(button) {
     QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
 }
 
@@ -28,7 +28,7 @@ void CountListener::setLabels(QString one, QString two)
             optionalLabel->setText(Utility::replaceNumbers(optionalLabel->text(), two));
         }
     } else {
-        button->setText(button->text().split(' ')[0] + " (" + one + "/" + two + ")");
+        button->setText(button->text().split(' ')[0] + " (" + one + '/' + two + ')');
     }
 };
 

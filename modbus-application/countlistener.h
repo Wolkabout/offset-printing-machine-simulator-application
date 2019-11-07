@@ -10,7 +10,7 @@ class CountListener : public QObject, public CountMessageReceiver {
 private:
     Q_OBJECT
     TempoComponent& tempoComponent;
-    QPushButton * button;
+    QPushButton * button = nullptr;
     QLabel * label;
     QLabel * optionalLabel;
 public:

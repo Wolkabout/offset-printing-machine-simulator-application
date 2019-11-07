@@ -29,8 +29,6 @@ private slots:
 
     void on_machineButton_clicked();
 
-    void on_toggleButton_clicked();
-
 private:
     Simulator &simulator;
     WindowManager &windowManager;

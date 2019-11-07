@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QWidget>
+#include <QFontDatabase>
 
 #include <Components/Feeder.h>
 
