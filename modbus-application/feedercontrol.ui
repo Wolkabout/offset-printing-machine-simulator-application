@@ -59,10 +59,10 @@
   <widget class="QLabel" name="image">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>100</y>
-     <width>180</width>
-     <height>180</height>
+     <x>16</x>
+     <y>88</y>
+     <width>232</width>
+     <height>192</height>
     </rect>
    </property>
    <property name="text">
@@ -78,65 +78,68 @@
   <widget class="QLabel" name="countTitle">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>110</y>
-     <width>100</width>
+     <x>264</x>
+     <y>88</y>
+     <width>120</width>
      <height>15</height>
     </rect>
    </property>
    <property name="text">
     <string>Count</string>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
   </widget>
   <widget class="QLabel" name="percentageTitle">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>170</y>
-     <width>100</width>
-     <height>15</height>
+     <x>264</x>
+     <y>147</y>
+     <width>120</width>
+     <height>17</height>
     </rect>
    </property>
    <property name="text">
     <string>Percentage</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="count">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>130</y>
-     <width>100</width>
-     <height>30</height>
+     <x>264</x>
+     <y>110</y>
+     <width>120</width>
+     <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #00afff;</string>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="percentage">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>190</y>
-     <width>100</width>
-     <height>30</height>
+     <x>264</x>
+     <y>171</y>
+     <width>120</width>
+     <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #00afff;</string>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="edit">

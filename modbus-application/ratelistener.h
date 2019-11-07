@@ -13,6 +13,7 @@ private:
     Conveyor& conveyor;
     QLabel * rateLabel;
     QPushButton * button;
+
 public:
     RateListener(Conveyor&, QLabel *);
     RateListener(Conveyor&, QPushButton *);

@@ -3,5 +3,7 @@
         <file>Resources/ico_settings.svg</file>
         <file>Resources/ico_back.svg</file>
         <file>Resources/ico_close.svg</file>
+        <file>Resources/ico_minus.svg</file>
+        <file>Resources/ico_plus.svg</file>
     </qresource>
 </RCC>

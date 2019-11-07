@@ -53,17 +53,17 @@ void AlarmAlert::on_ok_clicked()
 void AlarmAlert::on_goto_2_clicked()
 {
     if (message.contains("Feeder")) {
-        simulator.getFeederWidget()->show();
+//        simulator.getFeederWidget()->show();
     } else if (message.contains("Cyan")) {
-        simulator.getCyanWidget()->show();
+//        simulator.getCyanWidget()->show();
     } else if (message.contains("Magenta")) {
-        simulator.getMagentaWidget()->show();
+//        simulator.getMagentaWidget()->show();
     } else if (message.contains("Yellow")) {
-        simulator.getYellowWidget()->show();
+//        simulator.getYellowWidget()->show();
     } else if (message.contains("Black")) {
-        simulator.getBlackWidget()->show();
+//        simulator.getBlackWidget()->show();
     } else if (message.contains("Delivery")) {
-        simulator.getDeliveyWidget()->show();
+//        simulator.getDeliveyWidget()->show();
     }
     hide();
 }

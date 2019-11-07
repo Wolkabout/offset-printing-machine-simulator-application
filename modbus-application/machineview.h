@@ -25,6 +25,10 @@ class MachineView : public QFrame
     std::shared_ptr<CountMessageReceiver> blackListener;
     std::shared_ptr<CountMessageReceiver> deliveryListener;
     std::shared_ptr<ConveyorRateMessageReceiver> conveyorListener;
+    QWidget* feederWidget;
+    QWidget *cyanWidget, *magentaWidget, *yellowWidget, *blackWidget;
+    QWidget* deliveyWidget;
+    QWidget* conveyorWidget;
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();

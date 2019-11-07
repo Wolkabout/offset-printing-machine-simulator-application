@@ -2,12 +2,12 @@
 #include "utility.h"
 
 RateListener::RateListener(Conveyor& conveyor, QLabel * rateLabel)
-    : conveyor(conveyor), rateLabel(rateLabel) {
+    : conveyor(conveyor), rateLabel(rateLabel), button(nullptr) {
     QObject::connect(this, SIGNAL(setRate(QString)), rateLabel, SLOT(setText(QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 RateListener::RateListener(Conveyor& conveyor, QPushButton * button)
-    : conveyor(conveyor), button(button) {
+    : conveyor(conveyor), rateLabel(nullptr), button(button) {
     QObject::connect(this, SIGNAL(setRate(QString)), button, SLOT(setText(QString)), Qt::ConnectionType::QueuedConnection);
 }
 

@@ -5,6 +5,7 @@
 #include <math.h>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QFontDatabase>
 
 
 DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
@@ -13,11 +14,25 @@ DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
     ui(new Ui::DeliveryControl)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint);
-    ui->name->setText("<h2> " + QString::fromStdString(delivery.getName()) + "</h2>");
+    setWindowFlags(Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
-    ui->count->setText("<h2>" + QString::number(delivery.getCount()) + "</h2>");
-    ui->percentage->setText("<h2>" + QString::number(std::round(delivery.getPercentage() * 100)) + "% </h2>");
+    QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
+    ui->name->setFont(robotoBold18);
+    QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
+    ui->failure->setFont(robotoMedium16);
+    ui->edit->setFont(robotoMedium16);
+    QFont robotoMedium14(QFontDatabase::applicationFontFamilies(0).at(0), 10, QFont::DemiBold);
+    ui->countTitle->setFont(robotoMedium14);
+    ui->percentageTitle->setFont(robotoMedium14);
+    QFont robotoMedium18(QFontDatabase::applicationFontFamilies(0).at(0), 14, QFont::DemiBold);
+    ui->count->setFont(robotoMedium18);
+    ui->percentage->setFont(robotoMedium18);
+
+    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
+
+    ui->count->setText(QString::number(delivery.getCount()));
+    ui->percentage->setText(QString::number(std::round(delivery.getPercentage() * 100)) + "%");
 
     countListener = std::make_shared<CountListener>(delivery, ui->count, ui->percentage);
     delivery.getCountMessageReceiver().push_back(countListener);

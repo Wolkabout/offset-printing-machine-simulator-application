@@ -2,6 +2,7 @@
 #include "paintstationcontrol.h"
 #include "ui_paintstationcontrol.h"
 
+#include <QFontDatabase>
 #include <QInputDialog>
 #include <QMessageBox>
 
@@ -11,7 +12,14 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     ui(new Ui::PaintStationControl)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
+    QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
+    ui->name->setFont(robotoBold18);
+    QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
+    ui->failure->setFont(robotoMedium16);
+    ui->edit->setFont(robotoMedium16);
 
     ui->name->setText("<h2>" + QString::fromStdString(paintStation.getName()) + "</h2>");
     ui->count->setText("<h2>" + QString::number(paintStation.getCount()) + "</h2>");

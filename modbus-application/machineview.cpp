@@ -1,5 +1,8 @@
 #include "countlistener.h"
+#include "deliverycontrol.h"
+#include "feedercontrol.h"
 #include "machineview.h"
+#include "paintstationcontrol.h"
 #include "ratelistener.h"
 #include "ui_machineview.h"
 
@@ -18,6 +21,7 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     ui->setupUi(this);
 
     // Programatically setting the font for literally everything
+
     QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
     ui->cyanManage->setFont(robotoMedium16);
     ui->magentaManage->setFont(robotoMedium16);
@@ -38,11 +42,19 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
 
     ui->image->setPixmap(QPixmap(":/Images/Resources/Offset.svg"));
 
+    feederWidget = new FeederControl(*simulator.getFeeder(), this);
+    cyanWidget = new PaintStationControl(*simulator.getCyanPaint(), this);
+    magentaWidget = new PaintStationControl(*simulator.getMagentaPaint(), this);
+    yellowWidget = new PaintStationControl(*simulator.getYellowPaint(), this);
+    blackWidget = new PaintStationControl(*simulator.getBlackPaint(), this);
+    deliveyWidget = new DeliveryControl(*simulator.getDelivery(), this);
+    conveyorWidget = new ConveyorControl(*simulator.getConveyor(), this);
+
     listener = std::make_shared<ViewMachineStateListener>(*this);
     simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
 
     ui->feederManage->setText(ui->feederManage->text().split(' ')[0] +
-            " (" + QString::number(simulator.getFeeder()->getCount()) + "/" + QString::number(simulator.getFeeder()->getPercentage()) + "%)");
+            " (" + QString::number(simulator.getFeeder()->getCount()) + "/" + QString::number(simulator.getFeeder()->getPercentage() * 100) + "%)");
     feederListener = std::make_shared<CountListener>(*(simulator.getFeeder().get()), ui->feederManage);
     simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
 
@@ -58,6 +70,8 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     blackListener = std::make_shared<CountListener>(*(simulator.getBlackPaint().get()), ui->blackCount);
     simulator.getBlackPaint()->getCountMessageReceiver().push_back(blackListener);
 
+    ui->deliverManage->setText(ui->deliverManage->text().split(' ')[0] +
+            " (" + QString::number(simulator.getDelivery()->getCount()) + "/" + QString::number(simulator.getDelivery()->getPercentage() * 100) + "%)");
     deliveryListener = std::make_shared<CountListener>(*(simulator.getDelivery().get()), ui->deliverManage);
     simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
 
@@ -77,37 +91,37 @@ void ViewMachineStateListener::ReceiveMachineState(bool x) {
 
 void MachineView::on_feederManage_clicked()
 {
-    simulator.getFeederWidget()->show();
+    feederWidget->show();
 }
 
 void MachineView::on_deliverManage_clicked()
 {
-    simulator.getDeliveyWidget()->show();
+    deliveyWidget->show();
 }
 
 void MachineView::on_cyanManage_clicked()
 {
-    simulator.getCyanWidget()->show();
+    cyanWidget->show();
 }
 
 void MachineView::on_magentaManage_clicked()
 {
-    simulator.getMagentaWidget()->show();
+    magentaWidget->show();
 }
 
 void MachineView::on_yellowManage_clicked()
 {
-    simulator.getYellowWidget()->show();
+    yellowWidget->show();
 }
 
 void MachineView::on_blackManage_clicked()
 {
-    simulator.getBlackWidget()->show();
+    blackWidget->show();
 }
 
 void MachineView::on_tempoManage_clicked()
 {
-    simulator.getConveyorWidget()->show();
+    conveyorWidget->show();
 }
 
 void MachineView::on_emergencyStop_clicked()
