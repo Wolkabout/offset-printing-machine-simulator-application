@@ -20,10 +20,18 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
     ui->failure->setFont(robotoMedium16);
     ui->edit->setFont(robotoMedium16);
+    QFont robotoMedium14(QFontDatabase::applicationFontFamilies(0).at(0), 10, QFont::DemiBold);
+    ui->countTitle->setFont(robotoMedium14);
+    ui->percentageTitle->setFont(robotoMedium14);
+    QFont robotoMedium18(QFontDatabase::applicationFontFamilies(0).at(0), 14, QFont::DemiBold);
+    ui->count->setFont(robotoMedium18);
+    ui->percentage->setFont(robotoMedium18);
 
-    ui->name->setText("<h2>" + QString::fromStdString(paintStation.getName()) + "</h2>");
-    ui->count->setText("<h2>" + QString::number(paintStation.getCount()) + "</h2>");
-    ui->percentage->setText("<h2>" + QString::number(paintStation.getPercentage() * 100) + "% </h2>");
+    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
+
+    ui->name->setText(QString::fromStdString(paintStation.getName()));
+    ui->count->setText(QString::number(paintStation.getCount()));
+    ui->percentage->setText(QString::number(paintStation.getPercentage() * 100) + "%");
     char paint = paintStation.getName()[0];
     if (paint == 'B') {
         paint = 'K';

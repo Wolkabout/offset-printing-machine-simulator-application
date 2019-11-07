@@ -81,12 +81,19 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
 }
 
 ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) {
-    // write animation slot
-//    QObject::connect(this, SIGNAL(stateChange(bool)), &machineView, SLOT(animationChange(bool)), Qt::ConnectionType::QueuedConnection);
+    QObject::connect(this, SIGNAL(stateChange(bool)), &machineView, SLOT(machineStateChange(bool)), Qt::ConnectionType::QueuedConnection);
 }
 
 void ViewMachineStateListener::ReceiveMachineState(bool x) {
     emit stateChange(x);
+}
+
+void MachineView::machineStateChange(bool state) {
+    if (state) {
+        ui->startButton->setText("Stop");
+    } else {
+        ui->startButton->setText("Start");
+    }
 }
 
 void MachineView::on_feederManage_clicked()
@@ -136,8 +143,16 @@ void MachineView::on_paperJam_clicked()
     simulator.getMachine()->receiveMessages(message);
 }
 
+void MachineView::on_startButton_clicked()
+{
+    if (simulator.getMachine()->isRunning()) {
+        simulator.getMachine()->stop();
+    } else {
+        simulator.getMachine()->start();
+    }
+}
+
 MachineView::~MachineView()
 {
     delete ui;
 }
-

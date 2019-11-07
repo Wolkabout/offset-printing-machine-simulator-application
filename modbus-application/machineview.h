@@ -32,6 +32,8 @@ class MachineView : public QFrame
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();
+public slots:
+    void machineStateChange(bool);
 
 private slots:
     void on_feederManage_clicked();
@@ -51,6 +53,8 @@ private slots:
     void on_paperJam_clicked();
 
     void on_emergencyStop_clicked();
+
+    void on_startButton_clicked();
 
 private:
     Ui::MachineView *ui;
