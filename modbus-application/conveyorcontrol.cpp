@@ -27,8 +27,8 @@ ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
 
     ui->rate->setText(QString::number(conveyor.getRatePerHour()));
 
-//    listener = std::make_shared<RateListener>(conveyor, ui->rate);
-//    conveyor.getRateMessageReceivers().push_back(listener);
+    listener = std::make_shared<RateListener>(conveyor, ui->rate);
+    conveyor.getRateMessageReceivers().push_back(listener);
 }
 
 ConveyorControl::~ConveyorControl()
