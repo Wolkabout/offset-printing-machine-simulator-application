@@ -19,7 +19,7 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
 
     QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
-    ui->label_2->setFont(robotoBold18);
+    ui->title->setFont(robotoBold18);
     QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
     ui->goto_2->setFont(robotoMedium16);
     ui->message->setFont(robotoMedium16);
@@ -30,7 +30,7 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     }
 
     ui->message->setText(message);
-//    QMetaObject::invokeMethod(ui->message, "setText", Qt::QueuedConnection, Q_ARG(QString, message));
+    //    QMetaObject::invokeMethod(ui->message, "setText", Qt::QueuedConnection, Q_ARG(QString, message));
 }
 
 AlarmAlert::~AlarmAlert()
@@ -53,17 +53,17 @@ void AlarmAlert::on_ok_clicked()
 void AlarmAlert::on_goto_2_clicked()
 {
     if (message.contains("Feeder")) {
-//        simulator.getFeederWidget()->show();
+        simulator.getFeederWidget()->show();
     } else if (message.contains("Cyan")) {
-//        simulator.getCyanWidget()->show();
+        simulator.getCyanWidget()->show();
     } else if (message.contains("Magenta")) {
-//        simulator.getMagentaWidget()->show();
+        simulator.getMagentaWidget()->show();
     } else if (message.contains("Yellow")) {
-//        simulator.getYellowWidget()->show();
+        simulator.getYellowWidget()->show();
     } else if (message.contains("Black")) {
-//        simulator.getBlackWidget()->show();
+        simulator.getBlackWidget()->show();
     } else if (message.contains("Delivery")) {
-//        simulator.getDeliveyWidget()->show();
+        simulator.getDeliveryWidget()->show();
     }
     hide();
 }

@@ -29,6 +29,8 @@ private:
     shared_ptr<PaintStation> cyan, magenta, yellow, black;
     shared_ptr<Delivery> delivery;
     shared_ptr<Conveyor> conveyor;
+    QWidget *feederWidget, *deliveryWidget, *conveyorWidget;
+    QWidget *cyanWidget, *magentaWidget, *yellowWidget, *blackWidget;
 public:
     shared_ptr<Machine> getMachine();
 
@@ -47,6 +49,20 @@ public:
     shared_ptr<Conveyor> getConveyor();
 
     Simulator();
+    QWidget *getFeederWidget() const;
+    void setFeederWidget(QWidget *value);
+    QWidget *getDeliveryWidget() const;
+    void setDeliveryWidget(QWidget *value);
+    QWidget *getConveyorWidget() const;
+    void setConveyorWidget(QWidget *value);
+    QWidget *getCyanWidget() const;
+    void setCyanWidget(QWidget *value);
+    QWidget *getMagentaWidget() const;
+    void setMagentaWidget(QWidget *value);
+    QWidget *getYellowWidget() const;
+    void setYellowWidget(QWidget *value);
+    QWidget *getBlackWidget() const;
+    void setBlackWidget(QWidget *value);
 };
 
 #endif // SIMULATOR_H

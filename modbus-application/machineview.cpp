@@ -13,6 +13,41 @@
 #include <QMetaObject>
 #include <QFontDatabase>
 
+QWidget *MachineView::getFeederWidget() const
+{
+    return feederWidget;
+}
+
+QWidget *MachineView::getCyanWidget() const
+{
+    return cyanWidget;
+}
+
+QWidget *MachineView::getMagentaWidget() const
+{
+    return magentaWidget;
+}
+
+QWidget *MachineView::getYellowWidget() const
+{
+    return yellowWidget;
+}
+
+QWidget *MachineView::getBlackWidget() const
+{
+    return blackWidget;
+}
+
+QWidget *MachineView::getDeliveyWidget() const
+{
+    return deliveyWidget;
+}
+
+QWidget *MachineView::getConveyorWidget() const
+{
+    return conveyorWidget;
+}
+
 MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     QFrame(parent),
     ui(new Ui::MachineView),

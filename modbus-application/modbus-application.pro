@@ -39,6 +39,7 @@ SOURCES += \
         machineview.cpp \
         main.cpp \
         mainwindow.cpp \
+        messagealert.cpp \
         modbusthread.cpp \
         modbusthread_listeners.cpp \
         modbusthreadmessagehandler.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
         ratelistener.cpp \
         settings.cpp \
         simulator.cpp \
+        valueinput.cpp \
         windowmanager.cpp
 
 HEADERS += \
@@ -58,6 +60,7 @@ HEADERS += \
         logs.h \
         machineview.h \
         mainwindow.h \
+        messagealert.h \
         modbusthread.h \
         modbusthread_listeners.h \
         modbusthreadmessagehandler.h \
@@ -66,6 +69,7 @@ HEADERS += \
         settings.h \
         simulator.h \
         utility.h \
+        valueinput.h \
         windowmanager.h
 
 FORMS += \
@@ -76,8 +80,10 @@ FORMS += \
         logs.ui \
         machineview.ui \
         mainwindow.ui \
+        messagealert.ui \
         paintstationcontrol.ui \
-        settings.ui
+        settings.ui \
+        valueinput.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

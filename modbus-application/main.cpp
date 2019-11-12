@@ -25,9 +25,18 @@ int main(int argc, char *argv[])
     ModbusThread modbusThread(simulator);
 
     QFrame * parent = w.frameHolder();
-    int logIndex = windowManager.addFrame(std::make_shared<Logs>(simulator, modbusThread.getMapping(), parent)); // 0
-    int settingsIndex = windowManager.addFrame(std::make_shared<Settings>(simulator, modbusThread, parent)); // 1
-    int machineIndex = windowManager.addFrame(std::make_shared<MachineView>(simulator, parent)); // 2
+    windowManager.addFrame(std::make_shared<Logs>(simulator, modbusThread.getMapping(), parent)); // 0
+    windowManager.addFrame(std::make_shared<Settings>(simulator, modbusThread, parent)); // 1
+    std::shared_ptr<MachineView> machineView = std::make_shared<MachineView>(simulator, parent);
+    windowManager.addFrame(machineView); // 2
+
+    simulator.setFeederWidget(machineView->getFeederWidget());
+    simulator.setCyanWidget(machineView->getCyanWidget());
+    simulator.setMagentaWidget(machineView->getMagentaWidget());
+    simulator.setYellowWidget(machineView->getYellowWidget());
+    simulator.setBlackWidget(machineView->getBlackWidget());
+    simulator.setDeliveryWidget(machineView->getDeliveyWidget());
+    simulator.setConveyorWidget(machineView->getConveyorWidget());
 
     modbusThread.start();
 

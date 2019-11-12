@@ -23,6 +23,76 @@ Simulator::Simulator()
     machine->addComponent(conveyor);
 }
 
+QWidget *Simulator::getFeederWidget() const
+{
+    return feederWidget;
+}
+
+void Simulator::setFeederWidget(QWidget *value)
+{
+    feederWidget = value;
+}
+
+QWidget *Simulator::getDeliveryWidget() const
+{
+    return deliveryWidget;
+}
+
+void Simulator::setDeliveryWidget(QWidget *value)
+{
+    deliveryWidget = value;
+}
+
+QWidget *Simulator::getConveyorWidget() const
+{
+    return conveyorWidget;
+}
+
+void Simulator::setConveyorWidget(QWidget *value)
+{
+    conveyorWidget = value;
+}
+
+QWidget *Simulator::getCyanWidget() const
+{
+    return cyanWidget;
+}
+
+void Simulator::setCyanWidget(QWidget *value)
+{
+    cyanWidget = value;
+}
+
+QWidget *Simulator::getMagentaWidget() const
+{
+    return magentaWidget;
+}
+
+void Simulator::setMagentaWidget(QWidget *value)
+{
+    magentaWidget = value;
+}
+
+QWidget *Simulator::getYellowWidget() const
+{
+    return yellowWidget;
+}
+
+void Simulator::setYellowWidget(QWidget *value)
+{
+    yellowWidget = value;
+}
+
+QWidget *Simulator::getBlackWidget() const
+{
+    return blackWidget;
+}
+
+void Simulator::setBlackWidget(QWidget *value)
+{
+    blackWidget = value;
+}
+
 shared_ptr<Machine> Simulator::getMachine()
 {
     return machine;

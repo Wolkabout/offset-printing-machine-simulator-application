@@ -32,6 +32,20 @@ class MachineView : public QFrame
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();
+    QWidget *getFeederWidget() const;
+
+    QWidget *getCyanWidget() const;
+
+    QWidget *getMagentaWidget() const;
+
+    QWidget *getYellowWidget() const;
+
+    QWidget *getBlackWidget() const;
+
+    QWidget *getDeliveyWidget() const;
+
+    QWidget *getConveyorWidget() const;
+
 public slots:
     void machineStateChange(bool);
 

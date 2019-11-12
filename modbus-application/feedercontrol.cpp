@@ -1,5 +1,6 @@
 #include "countlistener.h"
 #include "feedercontrol.h"
+#include "messagealert.h"
 #include "ui_feedercontrol.h"
 
 #include <QFontDatabase>
@@ -59,30 +60,24 @@ void FeederControl::on_edit_clicked()
     int maxNew = feeder.getCapacity() - feeder.getCount();
     maxNew = (maxNew / 100) * 100;
     if (maxNew < 1) {
-        QMessageBox * qb = new QMessageBox(this);
-        qb->setText(QString("There has to be atleast 100 papers missing!"));
-        qb->exec();
+        MessageAlert * ma = new MessageAlert("Feeder", "There has to be atleast 100 papers missing!", this);
         return;
     }
 
     bool ok;
     QString number = QInputDialog::getText(0, "Feeder",
-                                         QString("Ammount of paper to add (0 - " + QString::number(maxNew) + ")."),
+                                         QString("Amount of paper to add (0 - " + QString::number(maxNew) + ")."),
                                          QLineEdit::Normal, "", &ok);
 
     try {
         int paper = number.toInt();
         if (paper < 0 || paper > maxNew) {
-            QMessageBox * qb = new QMessageBox(this);
-            qb->setText(QString("The ammount you entered is not in range (0 - " + QString::number(maxNew) + ")."));
-            qb->exec();
+            MessageAlert * ma = new MessageAlert("Feeder", "The amount is not in range (0 - " + QString::number(maxNew) + ").", this);
             return;
         }
         feeder.modifyCount(paper);
     } catch (std::exception &e) {
-        QMessageBox * qb = new QMessageBox(this);
-        qb->setText(e.what());
-        qb->exec();
+        MessageAlert * ma = new MessageAlert("Feeder", e.what(), this);
     }
 }
 
