@@ -72,7 +72,7 @@ void PaintStationControl::on_edit_clicked()
         return;
     }
 
-    auto callback = [&](std::string number) {
+    auto callback = [=](std::string number) {
         try {
             int paper = atoi(number.c_str());
             if (paper < 0 || paper > maxNew) {
