@@ -1,3 +1,4 @@
+#include <QFontDatabase>
 #include <QMessageBox>
 #include <QNetworkInterface>
 #include "settings.h"
@@ -13,27 +14,35 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     thread(thread)
 {
     ui->setupUi(this);
+
+    QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
+    ui->title->setFont(robotoBold18);
+    ui->title_2->setFont(robotoBold18);
+    QFont robotoMedium14(QFontDatabase::applicationFontFamilies(0).at(0), 10, QFont::DemiBold);
+    ui->ip_title->setFont(robotoMedium14);
+    ui->label->setFont(robotoMedium14);
+    ui->label_2->setFont(robotoMedium14);
+    ui->label_3->setFont(robotoMedium14);
+    ui->label_4->setFont(robotoMedium14);
+    ui->label_5->setFont(robotoMedium14);
+    ui->label_6->setFont(robotoMedium14);
+    ui->label_7->setFont(robotoMedium14);
+    QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
+    ui->feeder->setFont(robotoMedium16);
+    ui->tempo->setFont(robotoMedium16);
+    ui->delivery->setFont(robotoMedium16);
+    ui->cyan->setFont(robotoMedium16);
+    ui->magenta->setFont(robotoMedium16);
+    ui->yellow->setFont(robotoMedium16);
+    ui->black->setFont(robotoMedium16);
+    QFont robotoMedium18(QFontDatabase::applicationFontFamilies(0).at(0), 14, QFont::DemiBold);
+    ui->ip->setFont(robotoMedium18);
+    QFont robotoRegular14(QFontDatabase::applicationFontFamilies(1).at(0), 10);
+    ui->desc->setFont(robotoRegular14);
+    ui->desc_2->setFont(robotoRegular14);
+
     addressString = Utility::getIp();
     ui->ip->setText(addressString);
-}
-
-void Settings::on_debugMapping_clicked()
-{
-    QMessageBox messageBox(this);
-    modbus_mapping_t * mapping = thread.getMapping();
-    std::string bits, input_bits, registers, input_registers;
-    for (int i = 0; i < 30; i++) {
-        bits += std::to_string(mapping->tab_bits[i]) + ' ';
-        input_bits += std::to_string(mapping->tab_input_bits[i]) + ' ';
-        registers += std::to_string(mapping->tab_registers[i]) + ' ';
-        input_registers += std::to_string(mapping->tab_input_registers[i]) + ' ';
-    }
-    bits += '\n';
-    input_bits += '\n';
-    registers += '\n';
-    input_registers += '\n';
-    messageBox.setText(QString::fromStdString(bits + input_bits + registers + input_registers));
-    messageBox.exec();
 }
 
 Settings::~Settings()
