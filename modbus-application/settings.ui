@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>528</height>
+    <height>488</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -76,22 +76,6 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="toggle">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>164</x>
-     <y>16</y>
-     <width>50</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Toggle</string>
    </property>
   </widget>
   <widget class="QLabel" name="ip_title">
@@ -410,6 +394,63 @@ background-color: #ffffff</string>
 border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancel">
+   <property name="geometry">
+    <rect>
+     <x>536</x>
+     <y>424</y>
+     <width>120</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 4px;
+background-color: #f5f5f5; color: #323232;</string>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="apply">
+   <property name="geometry">
+    <rect>
+     <x>664</x>
+     <y>424</y>
+     <width>120</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-radius: 4px;
+background-color: #00afff; color: white;</string>
+   </property>
+   <property name="text">
+    <string>Apply</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="horizontalSlider">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>16</y>
+     <width>31</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>1</number>
+   </property>
+   <property name="pageStep">
+    <number>1</number>
+   </property>
+   <property name="tracking">
+    <bool>false</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
  </widget>
