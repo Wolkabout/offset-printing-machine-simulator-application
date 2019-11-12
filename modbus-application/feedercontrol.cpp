@@ -2,6 +2,7 @@
 #include "feedercontrol.h"
 #include "messagealert.h"
 #include "ui_feedercontrol.h"
+#include "valueinput.h"
 
 #include <QFontDatabase>
 #include <QInputDialog>
@@ -64,21 +65,22 @@ void FeederControl::on_edit_clicked()
         return;
     }
 
-    bool ok;
-    QString number = QInputDialog::getText(0, "Feeder",
-                                         QString("Amount of paper to add (0 - " + QString::number(maxNew) + ")."),
-                                         QLineEdit::Normal, "", &ok);
-
-    try {
-        int paper = number.toInt();
-        if (paper < 0 || paper > maxNew) {
-            MessageAlert * ma = new MessageAlert("Feeder", "The amount is not in range (0 - " + QString::number(maxNew) + ").", this);
-            return;
+    auto callback = [&](std::string number) {
+        try {
+            int paper = atoi(number.c_str());
+            if (paper < 0 || paper > maxNew) {
+                MessageAlert * ma = new MessageAlert("Feeder", "The amount is not in range (0 - " + QString::number(maxNew) + ").", this);
+                return;
+            }
+            feeder.modifyCount(paper);
+        } catch (std::exception &e) {
+            MessageAlert * ma = new MessageAlert("Feeder", e.what(), this);
         }
-        feeder.modifyCount(paper);
-    } catch (std::exception &e) {
-        MessageAlert * ma = new MessageAlert("Feeder", e.what(), this);
-    }
+    };
+
+    ValueInput * input = new ValueInput("Feeder",
+                                        QString("Amount of paper to add (0 - " + QString::number(maxNew) + ")."),
+                                        this, callback);
 }
 
 void FeederControl::on_failure_clicked()

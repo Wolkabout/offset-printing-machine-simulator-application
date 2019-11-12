@@ -1,6 +1,8 @@
 #include "countlistener.h"
 #include "deliverycontrol.h"
+#include "messagealert.h"
 #include "ui_deliverycontrol.h"
+#include "valueinput.h"
 
 #include <math.h>
 #include <QInputDialog>
@@ -60,31 +62,26 @@ void DeliveryControl::on_edit_clicked()
     int maxNew = delivery.getCount();
     maxNew = (maxNew / 100) * 100;
     if (maxNew < 1) {
-        QMessageBox * qb = new QMessageBox(this);
-        qb->setText(QString("There has to be atleast 100 papers in delivery!"));
-        qb->exec();
+        MessageAlert * ma = new MessageAlert("Delivery", QString("There has to be atleast 100 papers in delivery!"), this);
         return;
     }
 
-    bool ok;
-    QString number = QInputDialog::getText(0, "Delivery",
-                                         QString("Ammount of paper to remove (0 - " + QString::number(maxNew) + ")."),
-                                         QLineEdit::Normal, "", &ok);
-
-    try {
-        int paper = number.toInt();
-        if (paper < 0 || paper > maxNew) {
-            QMessageBox * qb = new QMessageBox(this);
-            qb->setText(QString("The ammount you entered is not in range (0 - " + QString::number(maxNew) + ")."));
-            qb->exec();
-            return;
+    auto callback = [&](std::string number) {
+        try {
+            int paper = atoi(number.c_str());
+            if (paper < 0 || paper > maxNew) {
+                MessageAlert * ma = new MessageAlert("Delivery", QString("The ammount you entered is not in range (0 - " + QString::number(maxNew) + ")."), this);
+                return;
+            }
+            delivery.modifyCount(paper);
+        } catch (std::exception &e) {
+            MessageAlert * ma = new MessageAlert("Delivery", e.what(),this);
         }
-        delivery.modifyCount(paper);
-    } catch (std::exception &e) {
-        QMessageBox * qb = new QMessageBox(this);
-        qb->setText(e.what());
-        qb->exec();
-    }
+    };
+
+    ValueInput * input = new ValueInput("Delivery",
+                                        QString("Amount of paper to remove (0 - " + QString::number(maxNew) + ")."),
+                                        this, callback);
 }
 
 void DeliveryControl::on_failure_clicked()

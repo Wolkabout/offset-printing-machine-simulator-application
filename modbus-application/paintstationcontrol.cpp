@@ -1,6 +1,8 @@
 #include "countlistener.h"
+#include "messagealert.h"
 #include "paintstationcontrol.h"
 #include "ui_paintstationcontrol.h"
+#include "valueinput.h"
 
 #include <QFontDatabase>
 #include <QInputDialog>
@@ -65,31 +67,27 @@ void PaintStationControl::on_edit_clicked()
     int maxNew = paintStation.getCapacity() - paintStation.getCount();
     maxNew = (maxNew / 100) * 100;
     if (maxNew < 1) {
-        QMessageBox * qb = new QMessageBox(this);
-        qb->setText(QString("There has to be atleast 100ml of paint missing!"));
-        qb->exec();
+
+        MessageAlert * ma = new MessageAlert("Paint Station", QString("There has to be atleast 100ml of paint missing!"), this);
         return;
     }
 
-    bool ok;
-    QString number = QInputDialog::getText(0, "Paint Station",
-                                         QString("Ammount of paint to add (0 - " + QString::number(maxNew) + ")."),
-                                         QLineEdit::Normal, "", &ok);
-
-    try {
-        int paper = number.toInt();
-        if (paper < 0 || paper > maxNew) {
-            QMessageBox * qb = new QMessageBox(this);
-            qb->setText(QString("The ammount you entered is not in range (0 - " + QString::number(maxNew) + ")."));
-            qb->exec();
-            return;
+    auto callback = [&](std::string number) {
+        try {
+            int paper = atoi(number.c_str());
+            if (paper < 0 || paper > maxNew) {
+                MessageAlert * ma = new MessageAlert("Paint Station", QString("There has to be atleast 100 papers in delivery!"), this);
+                return;
+            }
+            paintStation.modifyCount(paper);
+        } catch (std::exception &e) {
+            MessageAlert * ma = new MessageAlert("Paint Station", e.what(), this);
         }
-        paintStation.modifyCount(paper);
-    } catch (std::exception &e) {
-        QMessageBox * qb = new QMessageBox(this);
-        qb->setText(e.what());
-        qb->exec();
-    }
+    };
+
+    ValueInput * input = new ValueInput("Paint Station",
+                                        QString("Ammount of paint to add (0 - " + QString::number(maxNew) + ")."),
+                                        this, callback);
 }
 
 void PaintStationControl::on_failure_clicked()

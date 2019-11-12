@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>ValueInput</class>
  <widget class="QWidget" name="ValueInput">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -66,6 +69,12 @@
      <height>40</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="styleSheet">
     <string notr="true">border-radius: 4px;
 background-color: #e0e0e0;
@@ -113,6 +122,42 @@ color: #212121;
    <property name="styleSheet">
     <string notr="true">border: 2px solid #00afff;
 border-radius: 4px;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="apply">
+   <property name="geometry">
+    <rect>
+     <x>224</x>
+     <y>208</y>
+     <width>120</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-radius: 4px;
+background-color: #00afff; color: white;</string>
+   </property>
+   <property name="text">
+    <string>Apply</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancel">
+   <property name="geometry">
+    <rect>
+     <x>96</x>
+     <y>208</y>
+     <width>120</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-radius: 4px;
+background-color: #F5F5F5; color: #323232;</string>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
    </property>
   </widget>
  </widget>
