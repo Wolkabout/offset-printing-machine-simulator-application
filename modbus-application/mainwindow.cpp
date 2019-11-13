@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <qdatetime.h>
 #include <QFontDatabase>
+#include <QPainter>
 
 MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidget *parent) :
     QMainWindow(parent),
@@ -45,6 +46,14 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
     ui->settingsButton->setIcon(QIcon(":/Icons/Resources/ico_settings.svg"));
     ui->logo->setPixmap(QPixmap(":/Images/Resources/Logo_white.svg"));
 
+    QPixmap dimmer(":/Images/Resources/Dimmer.svg");
+    QImage output(dimmer.size(), QImage::Format_ARGB32_Premultiplied);
+    output.fill(Qt::transparent);
+    QPainter painter(&output);
+    painter.setOpacity(0.8);
+    painter.drawPixmap(0, 0, dimmer);
+    ui->fade->setPixmap(QPixmap::fromImage(output));
+
     ui->clock->setText(QTime::currentTime().toString("hh:mm"));
     ui->date->setText(QDate::currentDate().toString("dd.M.yyyy."));
     startTimer(100);
@@ -57,6 +66,17 @@ MainWindow::~MainWindow()
 
 QFrame * MainWindow::frameHolder() {
     return ui->displayedWindow;
+}
+
+void MainWindow::windowActivationChange(bool oldChange)
+{
+    if (oldChange) {
+        // not in focus
+        ui->fade->show();
+    } else {
+        // in focus
+        ui->fade->hide();
+    }
 }
 
 void MainWindow::timerEvent(QTimerEvent *event) {

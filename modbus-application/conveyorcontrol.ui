@@ -62,11 +62,23 @@
      <height>180</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="text">
     <string/>
    </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
    <property name="pixmap">
-    <pixmap>:/Animations/Resources/ConveyorAnimation1.gif</pixmap>
+    <pixmap resource="images.qrc">:/Images/Resources/Conveyor_Belt.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -226,6 +238,8 @@ padding: 0px 8px;
   <zorder>increase</zorder>
   <zorder>rate</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

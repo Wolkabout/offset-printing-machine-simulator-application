@@ -9,6 +9,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QMovie>
+#include <QPicture>
 
 FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
     QWidget(parent),

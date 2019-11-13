@@ -3,5 +3,16 @@
         <file>Resources/Background.svg</file>
         <file>Resources/Logo_white.svg</file>
         <file>Resources/Offset.svg</file>
+        <file>Resources/Black.svg</file>
+        <file>Resources/Conveyor_Belt.svg</file>
+        <file>Resources/Cyan.svg</file>
+        <file>Resources/Delivery.svg</file>
+        <file>Resources/Feeder.svg</file>
+        <file>Resources/Magenta.svg</file>
+        <file>Resources/Yellow.svg</file>
+        <file>Resources/Conveyor_Belt.png</file>
+        <file>Resources/Delivery.png</file>
+        <file>Resources/Feeder.png</file>
+        <file>Resources/Dimmer.svg</file>
     </qresource>
 </RCC>

@@ -17,6 +17,7 @@ public:
     MainWindow(Simulator &simulator, WindowManager &windowManager, QWidget *parent = nullptr);
     ~MainWindow() override;
     QFrame *frameHolder();
+    void windowActivationChange(bool) override;
 
 private slots:
     void on_logButton_clicked();
