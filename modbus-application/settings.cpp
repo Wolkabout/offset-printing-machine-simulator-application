@@ -45,6 +45,7 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
 
     addressString = Utility::getIp();
     ui->ip->setText(addressString);
+    toggled = true;
 }
 
 Settings::~Settings()
@@ -52,3 +53,15 @@ Settings::~Settings()
     delete ui;
 }
 
+void Settings::on_toggle_clicked()
+{
+    if (toggled) {
+        ui->toggle->setText("Off");
+        ui->toggle->setStyleSheet("\nborder-radius: 4px;\nbackground-color: #f5f5f5; color: #323232;");
+        toggled = false;
+    } else {
+        ui->toggle->setText("On");
+        ui->toggle->setStyleSheet("\nborder-radius: 4px;\nbackground-color: #00afff; color: white;");
+        toggled = true;
+    }
+}

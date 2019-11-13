@@ -16,10 +16,13 @@ class Settings : public QFrame
     Simulator& simulator;
     QString addressString;
     ModbusThread &thread;
-
+    bool toggled;
 public:
     Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent = nullptr);
     ~Settings();
+
+private slots:
+    void on_toggle_clicked();
 
 private:
     Ui::Settings *ui;

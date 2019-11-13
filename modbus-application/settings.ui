@@ -397,6 +397,9 @@ background-color: #ffffff</string>
    </property>
   </widget>
   <widget class="QPushButton" name="cancel">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>536</x>
@@ -414,6 +417,9 @@ background-color: #f5f5f5; color: #323232;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="apply">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>664</x>
@@ -431,29 +437,22 @@ background-color: #00afff; color: white;</string>
     <string>Apply</string>
    </property>
   </widget>
-  <widget class="QSlider" name="horizontalSlider">
+  <widget class="QPushButton" name="toggle">
    <property name="geometry">
     <rect>
-     <x>164</x>
+     <x>160</x>
      <y>12</y>
-     <width>61</width>
-     <height>30</height>
+     <width>80</width>
+     <height>32</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">outline: 0; border: 0px;</string>
+    <string notr="true">
+border-radius: 4px;
+background-color: #00afff; color: white;</string>
    </property>
-   <property name="maximum">
-    <number>1</number>
-   </property>
-   <property name="pageStep">
-    <number>1</number>
-   </property>
-   <property name="tracking">
-    <bool>false</bool>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+   <property name="text">
+    <string>On</string>
    </property>
   </widget>
  </widget>

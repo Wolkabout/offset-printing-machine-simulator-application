@@ -126,8 +126,10 @@ void ViewMachineStateListener::ReceiveMachineState(bool x) {
 void MachineView::machineStateChange(bool state) {
     if (state) {
         ui->startButton->setText("Stop");
+        ui->startButton->setStyleSheet("color: #ffffff;\nborder-radius: 4px;\nbackground-color: #323232");
     } else {
         ui->startButton->setText("Start");
+        ui->startButton->setStyleSheet("color: #ffffff;\nborder-radius: 4px;\nbackground-color: #00afff");
     }
 }
 
