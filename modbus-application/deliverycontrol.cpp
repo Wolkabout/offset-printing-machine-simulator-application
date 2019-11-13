@@ -16,8 +16,14 @@ DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
     delivery(delivery),
     ui(new Ui::DeliveryControl)
 {
-    adjustSize();
-    move(QApplication::desktop()->screen()->rect().center());
+    setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

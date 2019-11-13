@@ -10,8 +10,14 @@ ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
     conveyor(conveyor),
     ui(new Ui::ConveyorControl)
 {
-    adjustSize();
-    move(QApplication::desktop()->screen()->rect().center());
+    setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

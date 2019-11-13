@@ -15,8 +15,14 @@ FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
     feeder(feeder),
     ui(new Ui::FeederControl)
 {
-    adjustSize();
-    move(QApplication::desktop()->screen()->rect().center());
+    setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

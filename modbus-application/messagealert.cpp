@@ -8,8 +8,14 @@ MessageAlert::MessageAlert(QString title, QString message, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MessageAlert)
 {
-    adjustSize();
-    move(QApplication::desktop()->screen()->rect().center());
+    setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

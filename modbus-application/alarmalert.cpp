@@ -13,8 +13,14 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     simulator(simulator),
     ui(new Ui::AlarmAlert)
 {
-    adjustSize();
-    move(QApplication::desktop()->screen()->rect().center());
+    setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
