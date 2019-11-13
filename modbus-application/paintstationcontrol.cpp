@@ -14,14 +14,9 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     paintStation(paintStation),
     ui(new Ui::PaintStationControl)
 {
-    setGeometry(
-        QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            size(),
-            qApp->desktop()->availableGeometry()
-        )
-    );
+    int x = (QApplication::desktop()->width() - size().width()) / 2;
+    int y = (QApplication::desktop()->height() - size().height()) / 2;
+    move(x, y);
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
