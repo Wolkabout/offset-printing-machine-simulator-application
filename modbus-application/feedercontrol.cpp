@@ -18,6 +18,7 @@ FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
 {
     int x = (QApplication::desktop()->width() - size().width()) / 2;
     int y = (QApplication::desktop()->height() - size().height()) / 2;
+    qDebug("%i %i %i %i", QApplication::desktop()->width(), x, QApplication::desktop()->height(), y);
     move(x, y);
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
