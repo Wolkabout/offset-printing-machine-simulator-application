@@ -5,6 +5,7 @@
 #include "valueinput.h"
 
 #include <math.h>
+#include <QDesktopWidget>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QFontDatabase>
@@ -15,6 +16,8 @@ DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
     delivery(delivery),
     ui(new Ui::DeliveryControl)
 {
+    adjustSize();
+    move(QApplication::desktop()->screen()->rect().center());
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

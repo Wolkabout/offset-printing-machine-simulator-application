@@ -27,6 +27,7 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     ui->label_5->setFont(robotoMedium14);
     ui->label_6->setFont(robotoMedium14);
     ui->label_7->setFont(robotoMedium14);
+    ui->toggle->setFont(robotoMedium14);
     QFont robotoMedium16(QFontDatabase::applicationFontFamilies(0).at(0), 12, QFont::DemiBold);
     ui->feeder->setFont(robotoMedium16);
     ui->tempo->setFont(robotoMedium16);

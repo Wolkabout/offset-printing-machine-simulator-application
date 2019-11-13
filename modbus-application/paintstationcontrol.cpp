@@ -4,6 +4,7 @@
 #include "ui_paintstationcontrol.h"
 #include "valueinput.h"
 
+#include <QDesktopWidget>
 #include <QFontDatabase>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -13,6 +14,8 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     paintStation(paintStation),
     ui(new Ui::PaintStationControl)
 {
+    adjustSize();
+    move(QApplication::desktop()->screen()->rect().center());
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

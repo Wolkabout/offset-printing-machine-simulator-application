@@ -2,6 +2,7 @@
 #include "ui_alarmalert.h"
 
 #include <QFontDatabase>
+#include <QDesktopWidget>
 #include <QMessageBox>
 #include <QObject>
 
@@ -12,6 +13,8 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     simulator(simulator),
     ui(new Ui::AlarmAlert)
 {
+    adjustSize();
+    move(QApplication::desktop()->screen()->rect().center());
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

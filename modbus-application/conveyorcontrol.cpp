@@ -2,6 +2,7 @@
 #include "ratelistener.h"
 #include "ui_conveyorcontrol.h"
 
+#include <QDesktopWidget>
 #include <QFontDatabase>
 
 ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
@@ -9,6 +10,8 @@ ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
     conveyor(conveyor),
     ui(new Ui::ConveyorControl)
 {
+    adjustSize();
+    move(QApplication::desktop()->screen()->rect().center());
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

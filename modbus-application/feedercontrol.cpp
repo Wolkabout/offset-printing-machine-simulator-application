@@ -4,6 +4,7 @@
 #include "ui_feedercontrol.h"
 #include "valueinput.h"
 
+#include <QDesktopWidget>
 #include <QFontDatabase>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -14,6 +15,8 @@ FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
     feeder(feeder),
     ui(new Ui::FeederControl)
 {
+    adjustSize();
+    move(QApplication::desktop()->screen()->rect().center());
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
