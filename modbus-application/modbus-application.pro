@@ -31,6 +31,7 @@ UI_DIR = $$PWD
 
 SOURCES += \
         alarmalert.cpp \
+        configurations.cpp \
         conveyorcontrol.cpp \
         countlistener.cpp \
         deliverycontrol.cpp \
@@ -53,6 +54,7 @@ SOURCES += \
 HEADERS += \
         alarmalert.h \
         bittogglethread.h \
+        configurations.h \
         conveyorcontrol.h \
         countlistener.h \
         deliverycontrol.h \

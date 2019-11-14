@@ -398,7 +398,7 @@ background-color: #ffffff</string>
   </widget>
   <widget class="QPushButton" name="cancel">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -418,7 +418,7 @@ background-color: #f5f5f5; color: #323232;</string>
   </widget>
   <widget class="QPushButton" name="apply">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -453,6 +453,26 @@ background-color: #00afff; color: white;</string>
    </property>
    <property name="text">
     <string>On</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reset">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>424</y>
+     <width>160</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 4px;
+background-color: #f5f5f5; color: #323232;</string>
+   </property>
+   <property name="text">
+    <string>Reset to Config</string>
    </property>
   </widget>
  </widget>

@@ -1,6 +1,7 @@
 #include <QFontDatabase>
 #include <QMessageBox>
 #include <QNetworkInterface>
+#include "messagealert.h"
 #include "settings.h"
 #include "ui_settings.h"
 #include "utility.h"
@@ -14,6 +15,12 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     thread(thread)
 {
     ui->setupUi(this);
+
+    forms = {ui->feeder, ui->tempo, ui->delivery, ui->cyan, ui->magenta, ui->yellow, ui->black};
+    if (!Configurations::exists()) {
+        // These are default values
+        Configurations::save({17000, 14400, 0, 10000, 10000, 10000, 10000});
+    }
 
     QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
     ui->title->setFont(robotoBold18);
@@ -38,6 +45,7 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     ui->black->setFont(robotoMedium16);
     ui->cancel->setFont(robotoMedium16);
     ui->apply->setFont(robotoMedium16);
+    ui->reset->setFont(robotoMedium16);
     QFont robotoMedium18(QFontDatabase::applicationFontFamilies(0).at(0), 14, QFont::DemiBold);
     ui->ip->setFont(robotoMedium18);
     QFont robotoRegular14(QFontDatabase::applicationFontFamilies(1).at(0), 10);
@@ -47,6 +55,9 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     addressString = Utility::getIp();
     ui->ip->setText(addressString);
     toggled = true;
+
+    currentConfig = Configurations::load();
+    place(currentConfig);
 }
 
 Settings::~Settings()
@@ -64,5 +75,48 @@ void Settings::on_toggle_clicked()
         ui->toggle->setText("On");
         ui->toggle->setStyleSheet("\nborder-radius: 4px;\nbackground-color: #00afff; color: white;");
         toggled = true;
+    }
+}
+
+void Settings::on_cancel_clicked()
+{
+    for (int i = 0; i < Configurations::LENGTH; i++) {
+        forms[i]->setText(QString::number(currentConfig[i]));
+    }
+}
+
+void Settings::on_apply_clicked()
+{
+    auto inputs = load();
+    for (int i = 0; i < Configurations::LENGTH; i++) {
+        if (currentConfig[i] != inputs[i]) {
+            // save, and change currentConfig
+            Configurations::save(inputs);
+            currentConfig = inputs;
+            return;
+        }
+    }
+    MessageAlert * ma = new MessageAlert("Settings", "No changes were entered!", this);
+}
+
+void Settings::on_reset_clicked()
+{
+
+}
+
+std::vector<int> Settings::load()
+{
+    std::vector<int> values;
+    for (auto form : forms) {
+        values.push_back(std::atoi(form->text().toStdString().c_str()));
+    }
+    return values;
+}
+
+void Settings::place(std::vector<int> values)
+{
+    std::vector<QLineEdit*> forms{ui->feeder, ui->tempo, ui->delivery, ui->cyan, ui->magenta, ui->yellow, ui->black};
+    for (int i = 0; i < Configurations::LENGTH; i++) {
+        forms[i]->setText(QString::number(values[i]));
     }
 }
