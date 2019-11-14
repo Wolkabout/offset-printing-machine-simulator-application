@@ -58,6 +58,7 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
 
     currentConfig = Configurations::load();
     place(currentConfig);
+    on_reset_clicked();
 }
 
 Settings::~Settings()
@@ -80,9 +81,7 @@ void Settings::on_toggle_clicked()
 
 void Settings::on_cancel_clicked()
 {
-    for (int i = 0; i < Configurations::LENGTH; i++) {
-        forms[i]->setText(QString::number(currentConfig[i]));
-    }
+    place(currentConfig);
 }
 
 void Settings::on_apply_clicked()
@@ -93,6 +92,7 @@ void Settings::on_apply_clicked()
             // save, and change currentConfig
             Configurations::save(inputs);
             currentConfig = inputs;
+            MessageAlert * ma = new MessageAlert("Settings", "Successfully applied!", this);
             return;
         }
     }
@@ -101,7 +101,15 @@ void Settings::on_apply_clicked()
 
 void Settings::on_reset_clicked()
 {
-
+    on_cancel_clicked();
+    simulator.getMachine()->stop();
+    simulator.getFeeder()->setCount(currentConfig[0]);
+    simulator.getConveyor()->setRatePerHour(currentConfig[1]);
+    simulator.getDelivery()->setCount(currentConfig[2]);
+    simulator.getCyanPaint()->setCount(currentConfig[3]);
+    simulator.getMagentaPaint()->setCount(currentConfig[4]);
+    simulator.getYellowPaint()->setCount(currentConfig[5]);
+    simulator.getBlackPaint()->setCount(currentConfig[6]);
 }
 
 std::vector<int> Settings::load()
@@ -115,7 +123,6 @@ std::vector<int> Settings::load()
 
 void Settings::place(std::vector<int> values)
 {
-    std::vector<QLineEdit*> forms{ui->feeder, ui->tempo, ui->delivery, ui->cyan, ui->magenta, ui->yellow, ui->black};
     for (int i = 0; i < Configurations::LENGTH; i++) {
         forms[i]->setText(QString::number(values[i]));
     }
