@@ -13,8 +13,10 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     simulator(simulator),
     ui(new Ui::AlarmAlert)
 {
-    int x = (QApplication::desktop()->width() - size().width()) / 2;
-    int y = (QApplication::desktop()->height() - size().height()) / 2;
+    int width = 360;
+    int height = 216;
+    int x = (QApplication::desktop()->width() - width) / 2;
+    int y = (QApplication::desktop()->height() - height) / 2;
     move(x, y);
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);

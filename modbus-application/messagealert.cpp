@@ -8,8 +8,10 @@ MessageAlert::MessageAlert(QString title, QString message, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MessageAlert)
 {
-    int x = (QApplication::desktop()->width() - size().width()) / 2;
-    int y = (QApplication::desktop()->height() - size().height()) / 2;
+    int width = 360;
+    int height = 180;
+    int x = (QApplication::desktop()->width() - width) / 2;
+    int y = (QApplication::desktop()->height() - height) / 2;
     move(x, y);
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);

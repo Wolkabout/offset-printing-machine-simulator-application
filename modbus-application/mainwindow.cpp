@@ -50,7 +50,7 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
     QImage output(dimmer.size(), QImage::Format_ARGB32_Premultiplied);
     output.fill(Qt::transparent);
     QPainter painter(&output);
-    painter.setOpacity(0.8);
+    painter.setOpacity(0.9);
     painter.drawPixmap(0, 0, dimmer);
     ui->fade->setPixmap(QPixmap::fromImage(output));
 

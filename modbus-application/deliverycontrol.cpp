@@ -16,8 +16,10 @@ DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
     delivery(delivery),
     ui(new Ui::DeliveryControl)
 {
-    int x = (QApplication::desktop()->width() - size().width()) / 2;
-    int y = (QApplication::desktop()->height() - size().height()) / 2;
+    int width = 400;
+    int height = 360;
+    int x = (QApplication::desktop()->width() - width) / 2;
+    int y = (QApplication::desktop()->height() - height) / 2;
     move(x, y);
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
