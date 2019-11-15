@@ -299,6 +299,12 @@ border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
    </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
+   </property>
   </widget>
   <widget class="QLineEdit" name="tempo">
    <property name="geometry">
@@ -314,6 +320,12 @@ background-color: #ffffff</string>
 border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
    </property>
   </widget>
   <widget class="QLineEdit" name="delivery">
@@ -331,6 +343,12 @@ border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
    </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
+   </property>
   </widget>
   <widget class="QLineEdit" name="cyan">
    <property name="geometry">
@@ -346,6 +364,12 @@ background-color: #ffffff</string>
 border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
    </property>
   </widget>
   <widget class="QLineEdit" name="magenta">
@@ -363,6 +387,12 @@ border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
    </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
+   </property>
   </widget>
   <widget class="QLineEdit" name="yellow">
    <property name="geometry">
@@ -379,6 +409,12 @@ border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
    </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
+   </property>
   </widget>
   <widget class="QLineEdit" name="black">
    <property name="geometry">
@@ -394,6 +430,12 @@ background-color: #ffffff</string>
 border: 1px solid #e0e0e0;
 border-radius: 4px;
 background-color: #ffffff</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
    </property>
   </widget>
   <widget class="QPushButton" name="cancel">

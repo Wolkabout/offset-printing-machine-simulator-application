@@ -70,6 +70,14 @@ ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simul
 
     conveyorListener = std::make_shared<ModbusRateListener>(*this);
     simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
+
+    mapping->tab_registers[22] = 0;
+    mapping->tab_registers[23] = 0;
+    mapping->tab_registers[24] = 0;
+    mapping->tab_registers[25] = 0;
+    mapping->tab_registers[26] = 0;
+    mapping->tab_registers[27] = 0;
+    mapping->tab_registers[28] = 0;
 }
 
 ModbusThread::~ModbusThread() {
@@ -107,11 +115,19 @@ void ModbusThread::run() {
                 rc = modbus_receive(modbus, query);
                 if (rc > 0) {
                     if (query[header_length] == 5 || query[header_length] == 6) {
+                        // write (single) coil or register
                         uint8_t message[5];
                         for (int i = header_length; i < rc; i++) {
                             message[i - header_length] = query[i];
                         }
                         messageHandler.handleMessage(message);
+                    } else if (query[header_length] == 3) {
+                        logger.Log("Having to read holding registers!");
+                        qDebug("%i %i", query[header_length + 2], query[header_length + 4]);
+                        // read holding registers
+                    } else if (query[header_length] == 16) {
+                        logger.Log("Having to write holding registers!");
+                        // write holding registers
                     }
                     modbus_reply(modbus, query, rc, mapping);
                 } else if (rc == -1) {

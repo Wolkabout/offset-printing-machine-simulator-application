@@ -17,6 +17,7 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     ui->setupUi(this);
 
     forms = {ui->feeder, ui->tempo, ui->delivery, ui->cyan, ui->magenta, ui->yellow, ui->black};
+
     if (!Configurations::exists()) {
         // These are default values
         Configurations::save({17000, 14400, 0, 10000, 10000, 10000, 10000});
@@ -72,10 +73,12 @@ void Settings::on_toggle_clicked()
         ui->toggle->setText("Off");
         ui->toggle->setStyleSheet("\nborder-radius: 4px;\nbackground-color: #f5f5f5; color: #323232;");
         toggled = false;
+        thread.exit();
     } else {
         ui->toggle->setText("On");
         ui->toggle->setStyleSheet("\nborder-radius: 4px;\nbackground-color: #00afff; color: white;");
         toggled = true;
+        thread.start();
     }
 }
 
@@ -102,14 +105,20 @@ void Settings::on_apply_clicked()
 void Settings::on_reset_clicked()
 {
     on_cancel_clicked();
-    simulator.getMachine()->stop();
-    simulator.getFeeder()->setCount(currentConfig[0]);
-    simulator.getConveyor()->setRatePerHour(currentConfig[1]);
-    simulator.getDelivery()->setCount(currentConfig[2]);
-    simulator.getCyanPaint()->setCount(currentConfig[3]);
-    simulator.getMagentaPaint()->setCount(currentConfig[4]);
-    simulator.getYellowPaint()->setCount(currentConfig[5]);
-    simulator.getBlackPaint()->setCount(currentConfig[6]);
+    try {
+        simulator.getMachine()->stop();
+        simulator.getFeeder()->setCount(currentConfig[0]);
+        simulator.getConveyor()->setRatePerHour(currentConfig[1]);
+        simulator.getDelivery()->setCount(currentConfig[2]);
+        simulator.getCyanPaint()->setCount(currentConfig[3]);
+        simulator.getMagentaPaint()->setCount(currentConfig[4]);
+        simulator.getYellowPaint()->setCount(currentConfig[5]);
+        simulator.getBlackPaint()->setCount(currentConfig[6]);
+    } catch (std::exception &e) {
+        MessageAlert * ma = new MessageAlert("Settings", "Your configuration is invalid!");
+        return;
+    }
+
     static int i = 0;
     if (i++ > 0) {
         MessageAlert * ma = new MessageAlert("Settings", "Reset to default values!", this);
@@ -120,7 +129,8 @@ std::vector<int> Settings::load()
 {
     std::vector<int> values;
     for (auto form : forms) {
-        values.push_back(std::atoi(form->text().toStdString().c_str()));
+        int value = std::atoi(form->text().toStdString().c_str());
+        values.push_back(value);
     }
     return values;
 }
