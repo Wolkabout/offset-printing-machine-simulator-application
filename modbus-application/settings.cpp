@@ -110,6 +110,10 @@ void Settings::on_reset_clicked()
     simulator.getMagentaPaint()->setCount(currentConfig[4]);
     simulator.getYellowPaint()->setCount(currentConfig[5]);
     simulator.getBlackPaint()->setCount(currentConfig[6]);
+    static int i = 0;
+    if (i++ > 0) {
+        MessageAlert * ma = new MessageAlert("Settings", "Reset to default values!", this);
+    }
 }
 
 std::vector<int> Settings::load()
