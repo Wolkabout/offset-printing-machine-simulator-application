@@ -132,7 +132,14 @@ void ModbusThread::run() {
                         messageHandler.handleMessage(message);
                     } else if (query[header_length] == 16) {
                         qDebug("%i %i %i", query[header_length], query[header_length + 2], query[header_length + 4]);
-                        // write holding registers
+                        if (query[header_length + 2] == 22) {
+                            int count = query[header_length + 4];
+                            auto values = Configurations::load();
+                            for (int j = 0, index = header_length + 6; j < count; j++, index+=2) {
+                                values[j] = query[index + 1] | query[index] << 8;
+                            }
+                            onConfigurations(values);
+                        }
                     }
                     modbus_reply(modbus, query, rc, mapping);
                 } else if (rc == -1) {

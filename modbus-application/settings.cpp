@@ -19,6 +19,7 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     forms = {ui->feeder, ui->tempo, ui->delivery, ui->cyan, ui->magenta, ui->yellow, ui->black};
 
     thread.onReceiveConfigurations([&] (std::vector<int> values) {
+        currentConfig = values;
         place(values);
         Configurations::save(values);
     });
