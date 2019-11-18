@@ -26,7 +26,8 @@ int main(int argc, char *argv[])
 
     QFrame * parent = w.frameHolder();
     windowManager.addFrame(std::make_shared<Logs>(simulator, modbusThread.getMapping(), parent)); // 0
-    windowManager.addFrame(std::make_shared<Settings>(simulator, modbusThread, parent)); // 1
+    std::shared_ptr<Settings> settingsView = std::make_shared<Settings>(simulator, modbusThread, parent);
+    windowManager.addFrame(settingsView); // 1
     std::shared_ptr<MachineView> machineView = std::make_shared<MachineView>(simulator, parent);
     windowManager.addFrame(machineView); // 2
 
@@ -37,7 +38,6 @@ int main(int argc, char *argv[])
     simulator.setBlackWidget(machineView->getBlackWidget());
     simulator.setDeliveryWidget(machineView->getDeliveyWidget());
     simulator.setConveyorWidget(machineView->getConveyorWidget());
-
     modbusThread.start();
 
     int res = a.exec();

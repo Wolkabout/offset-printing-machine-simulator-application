@@ -1,6 +1,9 @@
+#include "configurations.h"
 #include "modbusthreadmessagehandler.h"
 
-ModbusThreadMessageHandler::ModbusThreadMessageHandler(modbus_mapping_t * mappings, Simulator& simulator) : simulator(simulator) {
+ModbusThreadMessageHandler::ModbusThreadMessageHandler(modbus_mapping_t * mappings, Simulator& simulator) :
+    simulator(simulator),
+    callback(callback) {
     this->mappings = mappings;
 }
 
@@ -43,9 +46,23 @@ void ModbusThreadMessageHandler::handleMessage(uint8_t message[])
                 case 21:
                 simulator.getBlackPaint()->modifyCount(value);
                 break;
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                qDebug("Setting configuration value : %i %i", registerIndex, value);
+                auto values = Configurations::load();
+                values[registerIndex - 22] = value;
+                if (callback != nullptr) {
+                    callback(values);
+                }
+                break;
             }
         }
     }
 }
 
-
+void ModbusThreadMessageHandler::setCallback(std::function<void (std::vector<int>)> callback)
+{
+    this->callback = callback;
+}

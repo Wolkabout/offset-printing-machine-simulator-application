@@ -18,6 +18,11 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
 
     forms = {ui->feeder, ui->tempo, ui->delivery, ui->cyan, ui->magenta, ui->yellow, ui->black};
 
+    thread.onReceiveConfigurations([&] (std::vector<int> values) {
+        place(values);
+        Configurations::save(values);
+    });
+
     if (!Configurations::exists()) {
         // These are default values
         Configurations::save({17000, 14400, 0, 10000, 10000, 10000, 10000});
@@ -96,6 +101,7 @@ void Settings::on_apply_clicked()
             Configurations::save(inputs);
             currentConfig = inputs;
             MessageAlert * ma = new MessageAlert("Settings", "Successfully applied!", this);
+            thread.receiveConfigurations(inputs);
             return;
         }
     }

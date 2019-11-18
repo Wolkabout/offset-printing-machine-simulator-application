@@ -10,6 +10,7 @@
 #include <QThread>
 #include <iostream>
 #include <modbus/modbus.h>
+#include "configurations.h"
 
 class ModbusThread : public QThread
 {
@@ -38,11 +39,14 @@ private:
 public:
     ModbusThread(Simulator&);
     ~ModbusThread();
+    std::function<void(std::vector<int>)> onConfigurations;
 
     modbus_mapping_t *getMapping() const;
     Q_INVOKABLE void receiveState(bool);
     Q_INVOKABLE void receiveCount(int, int, double);
     Q_INVOKABLE void receiveRate(int);
+    void receiveConfigurations(std::vector<int> values);
+    void onReceiveConfigurations(std::function<void(std::vector<int>)>);
 };
 
 #endif // MODBUSTHREAD_H

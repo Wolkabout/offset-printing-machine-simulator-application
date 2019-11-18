@@ -1,14 +1,25 @@
+#include <QObject>
+#include <functional>
 #include <math.h>
 #include "modbusthread.h"
 #include "modbusthread_listeners.h"
 #include "utility.h"
 
-ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simulator(simulator), messageHandler(mapping, simulator)
+ModbusThread::ModbusThread(Simulator& simulator) :
+    logger("ModbusServer"),
+    simulator(simulator),
+    messageHandler(mapping, simulator)
 {
     addressString = Utility::getIp();
     modbus = modbus_new_tcp(nullptr, 2222);
 //    modbus_set_debug(modbus, TRUE);
     modbus_set_response_timeout(modbus, 0, 0);
+
+    messageHandler.setCallback([&](std::vector<int> values) {
+        if (onConfigurations != nullptr) {
+            onConfigurations(values);
+        }
+    });
 
     mapping = modbus_mapping_new(30, 30, 30, 30);
     if (mapping == nullptr) {
@@ -71,13 +82,11 @@ ModbusThread::ModbusThread(Simulator& simulator) : logger("ModbusServer"), simul
     conveyorListener = std::make_shared<ModbusRateListener>(*this);
     simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
 
-    mapping->tab_registers[22] = 0;
-    mapping->tab_registers[23] = 0;
-    mapping->tab_registers[24] = 0;
-    mapping->tab_registers[25] = 0;
-    mapping->tab_registers[26] = 0;
-    mapping->tab_registers[27] = 0;
-    mapping->tab_registers[28] = 0;
+    auto values = Configurations::load();
+
+    for (int i = 22; i <= 28; i++) {
+        mapping->tab_registers[i] = values[i - 22];
+    }
 }
 
 ModbusThread::~ModbusThread() {
@@ -121,12 +130,8 @@ void ModbusThread::run() {
                             message[i - header_length] = query[i];
                         }
                         messageHandler.handleMessage(message);
-                    } else if (query[header_length] == 3) {
-                        logger.Log("Having to read holding registers!");
-                        qDebug("%i %i", query[header_length + 2], query[header_length + 4]);
-                        // read holding registers
                     } else if (query[header_length] == 16) {
-                        logger.Log("Having to write holding registers!");
+                        qDebug("%i %i %i", query[header_length], query[header_length + 2], query[header_length + 4]);
                         // write holding registers
                     }
                     modbus_reply(modbus, query, rc, mapping);
@@ -160,4 +165,16 @@ void ModbusThread::receiveCount(int tempoComponent, int count, double percentage
 void ModbusThread::receiveRate(int rate)
 {
     mapping->tab_input_registers[3] = rate;
+}
+
+void ModbusThread::receiveConfigurations(std::vector<int> values)
+{
+    for (int i = 22; i <= 28; i++) {
+        mapping->tab_registers[i] = values[i - 22];
+    }
+}
+
+void ModbusThread::onReceiveConfigurations(std::function<void (std::vector<int>)> callback)
+{
+    onConfigurations = callback;
 }

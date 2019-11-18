@@ -21,9 +21,12 @@ class Settings : public QFrame
     bool toggled;
     std::vector<int> currentConfig;
     std::vector<QLineEdit*> forms;
+    Ui::Settings *ui;
 public:
     Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent = nullptr);
     ~Settings();
+    std::vector<int> load();
+    void place(std::vector<int>);
 
 private slots:
     void on_toggle_clicked();
@@ -33,11 +36,6 @@ private slots:
     void on_apply_clicked();
 
     void on_reset_clicked();
-
-private:
-    Ui::Settings *ui;
-    std::vector<int> load();
-    void place(std::vector<int>);
 };
 
 #endif // SETTINGS_H
