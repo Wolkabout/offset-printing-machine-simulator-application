@@ -62,6 +62,7 @@ Settings::Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent) 
     addressString = Utility::getIp();
     ui->ip->setText(addressString);
     toggled = true;
+    ui->toggle->hide();
 
     currentConfig = Configurations::load();
     place(currentConfig);

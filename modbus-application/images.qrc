@@ -14,5 +14,6 @@
         <file>Resources/Delivery.png</file>
         <file>Resources/Feeder.png</file>
         <file>Resources/Dimmer.svg</file>
+        <file>Resources/offset_machine.gif</file>
     </qresource>
 </RCC>

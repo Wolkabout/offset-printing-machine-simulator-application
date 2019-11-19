@@ -76,6 +76,12 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     ui->blackCount->setFont(robotoMedium14);
 
     ui->image->setPixmap(QPixmap(":/Images/Resources/Offset.svg"));
+    animation = new QMovie(":/Images/Resources/offset_machine.gif");
+    ui->image->setMovie(animation);
+    animation->setScaledSize(QSize(667, 390));
+    animation->start();
+    animation->stop();
+    animation->setSpeed(900);
 
     feederWidget = new FeederControl(*simulator.getFeeder(), this);
     cyanWidget = new PaintStationControl(*simulator.getCyanPaint(), this);
@@ -127,9 +133,11 @@ void MachineView::machineStateChange(bool state) {
     if (state) {
         ui->startButton->setText("Stop");
         ui->startButton->setStyleSheet("color: #ffffff;\nborder-radius: 4px;\nbackground-color: #323232");
+        animation->start();
     } else {
         ui->startButton->setText("Start");
         ui->startButton->setStyleSheet("color: #ffffff;\nborder-radius: 4px;\nbackground-color: #00afff");
+        animation->stop();
     }
 }
 

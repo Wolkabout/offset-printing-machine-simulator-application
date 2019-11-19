@@ -480,6 +480,9 @@ background-color: #00afff; color: white;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="toggle">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>160</x>

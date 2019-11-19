@@ -29,6 +29,7 @@ class MachineView : public QFrame
     QWidget *cyanWidget, *magentaWidget, *yellowWidget, *blackWidget;
     QWidget* deliveyWidget;
     QWidget* conveyorWidget;
+    QMovie* animation;
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();
