@@ -124,6 +124,9 @@ color: #212121;
 border-radius: 4px;
 padding: 0px 8px;</string>
    </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
   </widget>
   <widget class="QPushButton" name="apply">
    <property name="geometry">
