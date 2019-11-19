@@ -81,7 +81,7 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     animation->setScaledSize(QSize(667, 390));
     animation->start();
     animation->stop();
-    animation->setSpeed(900);
+    animation->setSpeed(500);
 
     feederWidget = new FeederControl(*simulator.getFeeder(), this);
     cyanWidget = new PaintStationControl(*simulator.getCyanPaint(), this);
