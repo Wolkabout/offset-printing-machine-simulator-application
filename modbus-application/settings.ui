@@ -300,7 +300,7 @@ border-radius: 4px;
 background-color: #ffffff</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhDigitsOnly</set>
+    <set>Qt::ImhNone</set>
    </property>
    <property name="maxLength">
     <number>5</number>
@@ -322,7 +322,7 @@ border-radius: 4px;
 background-color: #ffffff</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhDigitsOnly</set>
+    <set>Qt::ImhNone</set>
    </property>
    <property name="maxLength">
     <number>5</number>
@@ -344,7 +344,7 @@ border-radius: 4px;
 background-color: #ffffff</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhDigitsOnly</set>
+    <set>Qt::ImhNone</set>
    </property>
    <property name="maxLength">
     <number>5</number>
@@ -366,7 +366,7 @@ border-radius: 4px;
 background-color: #ffffff</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhDigitsOnly</set>
+    <set>Qt::ImhNone</set>
    </property>
    <property name="maxLength">
     <number>5</number>
@@ -388,7 +388,7 @@ border-radius: 4px;
 background-color: #ffffff</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhDigitsOnly</set>
+    <set>Qt::ImhNone</set>
    </property>
    <property name="maxLength">
     <number>5</number>
@@ -410,7 +410,7 @@ border-radius: 4px;
 background-color: #ffffff</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhDigitsOnly</set>
+    <set>Qt::ImhNone</set>
    </property>
    <property name="maxLength">
     <number>5</number>
@@ -432,7 +432,7 @@ border-radius: 4px;
 background-color: #ffffff</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhDigitsOnly</set>
+    <set>Qt::ImhNone</set>
    </property>
    <property name="maxLength">
     <number>5</number>
