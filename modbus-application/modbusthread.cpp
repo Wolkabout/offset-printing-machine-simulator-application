@@ -84,8 +84,10 @@ ModbusThread::ModbusThread(Simulator& simulator) :
 
     auto values = Configurations::load();
 
-    for (int i = 22; i <= 28; i++) {
-        mapping->tab_registers[i] = values[i - 22];
+    if (values.size() > 0) {
+        for (int i = 22; i <= 28; i++) {
+            mapping->tab_registers[i] = values[i - 22];
+        }
     }
 }
 
