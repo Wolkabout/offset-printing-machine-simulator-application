@@ -3,7 +3,7 @@
 WindowManager::WindowManager() { }
 
 WindowManager::~WindowManager() {
-    frameStack.~stack();
+    frameStack.empty();
     frames.clear();
 }
 

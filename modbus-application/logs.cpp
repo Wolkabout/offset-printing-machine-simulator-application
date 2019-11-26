@@ -12,12 +12,13 @@ QString Logs::convertType(ComponentMessageType type)
         case Alarming: return "Alarming";
         case Severe: return "Severe";
     }
+    return "";
 }
 
 Logs::Logs(Simulator& simulator, modbus_mapping_t * mappings, QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::Logs),
-    simulator(simulator)
+    simulator(simulator),
+    ui(new Ui::Logs)
 {
     ui->setupUi(this);
     this->mappings = mappings;

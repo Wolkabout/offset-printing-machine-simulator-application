@@ -10,10 +10,10 @@
 #include <QFontDatabase>
 #include <QPainter>
 
-MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidget *parent) :
+MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     QMainWindow(parent),
     simulator(simulator),
-    windowManager(windowManager),
+    windowManager(),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -62,6 +62,10 @@ MainWindow::MainWindow(Simulator &simulator, WindowManager &windowManager, QWidg
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+WindowManager& MainWindow::getWindowManager() {
+    return windowManager;
 }
 
 QFrame * MainWindow::frameHolder() {

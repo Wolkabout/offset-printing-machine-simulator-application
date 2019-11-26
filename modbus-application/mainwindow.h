@@ -14,10 +14,11 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    MainWindow(Simulator &simulator, WindowManager &windowManager, QWidget *parent = nullptr);
+    MainWindow(Simulator &simulator, QWidget *parent = nullptr);
     ~MainWindow() override;
     QFrame *frameHolder();
     void windowActivationChange(bool) override;
+    WindowManager& getWindowManager();
 
 private slots:
     void on_logButton_clicked();
@@ -31,8 +32,8 @@ private slots:
     void on_machineButton_clicked();
 
 private:
+    WindowManager windowManager;
     Simulator &simulator;
-    WindowManager &windowManager;
     Ui::MainWindow *ui;
     void timerEvent(QTimerEvent *event) override;
 };

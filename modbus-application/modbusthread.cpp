@@ -91,12 +91,15 @@ ModbusThread::ModbusThread(Simulator& simulator) :
     }
 }
 
-ModbusThread::~ModbusThread() {
-    terminate();
+ModbusThread::~ModbusThread()
+{
+    shouldListen = false;
     if (mapping != nullptr)
         modbus_mapping_free(mapping);
     modbus_close(modbus);
+    modbus_flush(modbus);
     modbus_free(modbus);
+    modbus = nullptr;
 }
 
 
@@ -114,13 +117,17 @@ void ModbusThread::run() {
 
     int header_length = modbus_get_header_length(modbus);
     query = new uint8_t[MODBUS_TCP_MAX_ADU_LENGTH] () ;
+    shouldListen = true;
 
-    while (true) {
+    while (shouldListen) {
+
 //            this line is blocking! if there's no connection, it won't continue from here until one shows up!
         modbus_tcp_accept(modbus, &listen);
         logger.Log("Connection accepted.");
 
-        while (true) {
+        bool connection = true;
+
+        while (connection) {
             try {
                 int rc;
                 rc = modbus_receive(modbus, query);
@@ -133,7 +140,7 @@ void ModbusThread::run() {
                         }
                         messageHandler.handleMessage(message);
                     } else if (query[header_length] == 16) {
-                        qDebug("%i %i %i", query[header_length], query[header_length + 2], query[header_length + 4]);
+                        // write multiple registers, starting from 22
                         if (query[header_length + 2] == 22) {
                             int count = query[header_length + 4];
                             auto values = Configurations::load();
@@ -146,7 +153,7 @@ void ModbusThread::run() {
                     modbus_reply(modbus, query, rc, mapping);
                 } else if (rc == -1) {
                     logger.Log("Connection stopped.");
-                    break;
+                    connection = false;
                 }
             } catch (std::exception &e) {
                 logger.Log(e.what());

@@ -18,6 +18,8 @@ private:
     Q_OBJECT
     modbus_t * modbus;
     modbus_mapping_t * mapping;
+    bool shouldListen;
+    std::function<void()> breaker;
     uint8_t * query;
     QString addressString;
     Logger logger;
