@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
         int res = a.exec();
         modbusThread.terminate();
-        modbusThread.wait();
+        modbusThread.wait(5);
         return res;
     } catch (std::exception &e) {
         qDebug("%s", e.what());
