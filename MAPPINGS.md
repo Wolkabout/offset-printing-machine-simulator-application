@@ -1,10 +1,11 @@
-### Data exposed through modbus registers
+## Data exposed through modbus registers
 
+```
 Additional notes:
-
 - Register addresses start from 0
+```
 
-### Mappings by Register Type
+## Mappings by Register Type
 
 #### INPUT_CONTACT
 
@@ -67,7 +68,7 @@ applies to 6, 9, 12, 15, 18, 21
 | Paint Station Yellow Count            	| 18                	|
 | Paint Station Black Count             	| 21                	|
 
-### Mappings by semantics
+## Mappings by semantics
 
 #### General
 
