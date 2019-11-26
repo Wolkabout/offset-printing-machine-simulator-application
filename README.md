@@ -37,11 +37,17 @@ and then you need to run the app
 ./modbus-application
 ```
 
+### Autostart
+
+Create a xdg autostart entry by copying [modbus-application.desktop](modbus-application.desktop) into */etc/xdg/autostart/*
+If you don't want application to start on boot, set
+```
+X-GNOME-Autostart-enabled=false
+```
+
 ### How it works
 
 Mostly, there are a few UI elements, that have defined listeners for machine components,
 and they receive the data. Next to it, inputs to the machine are also taken through UI 
 elements. Libmodbus is handling modbus things, and they run in a second thread,
 where messages that are meant to change states of machine are interpreted and handled.
-
-
