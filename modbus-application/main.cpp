@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
         modbusThread.start();
 
         int res = a.exec();
-        modbusThread.exit();
+        modbusThread.terminate();
+        modbusThread.wait();
         return res;
     } catch (std::exception &e) {
         qDebug("%s", e.what());

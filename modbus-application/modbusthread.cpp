@@ -109,11 +109,13 @@ modbus_mapping_t *ModbusThread::getMapping() const
 }
 
 void ModbusThread::run() {
-    int listen = modbus_tcp_listen(modbus, 1);
-    if (listen < 1) {
+    int socket = modbus_tcp_listen(modbus, 1);
+    if (socket < 1) {
         logger.Log("The program doesn\'t have permissions to run modbus server.");
         return;
     }
+
+    modbus_set_response_timeout(modbus, 0, 200000);
 
     int header_length = modbus_get_header_length(modbus);
     query = new uint8_t[MODBUS_TCP_MAX_ADU_LENGTH] () ;
@@ -122,41 +124,43 @@ void ModbusThread::run() {
     while (shouldListen) {
 
 //            this line is blocking! if there's no connection, it won't continue from here until one shows up!
-        modbus_tcp_accept(modbus, &listen);
-        logger.Log("Connection accepted.");
+        int success = modbus_tcp_accept(modbus, &socket);
+        if (success > 0) {
+            logger.Log("Connection accepted.");
 
-        bool connection = true;
+            bool connection = true;
 
-        while (connection) {
-            try {
-                int rc;
-                rc = modbus_receive(modbus, query);
-                if (rc > 0) {
-                    if (query[header_length] == 5 || query[header_length] == 6) {
-                        // write (single) coil or register
-                        uint8_t message[5];
-                        for (int i = header_length; i < rc; i++) {
-                            message[i - header_length] = query[i];
-                        }
-                        messageHandler.handleMessage(message);
-                    } else if (query[header_length] == 16) {
-                        // write multiple registers, starting from 22
-                        if (query[header_length + 2] == 22) {
-                            int count = query[header_length + 4];
-                            auto values = Configurations::load();
-                            for (int j = 0, index = header_length + 6; j < count; j++, index+=2) {
-                                values[j] = query[index + 1] | query[index] << 8;
+            while (connection) {
+                try {
+                    int rc;
+                    rc = modbus_receive(modbus, query);
+                    if (rc > 0) {
+                        if (query[header_length] == 5 || query[header_length] == 6) {
+                            // write (single) coil or register
+                            uint8_t message[5];
+                            for (int i = header_length; i < rc; i++) {
+                                message[i - header_length] = query[i];
                             }
-                            onConfigurations(values);
+                            messageHandler.handleMessage(message);
+                        } else if (query[header_length] == 16) {
+                            // write multiple registers, starting from 22
+                            if (query[header_length + 2] == 22) {
+                                int count = query[header_length + 4];
+                                auto values = Configurations::load();
+                                for (int j = 0, index = header_length + 6; j < count; j++, index+=2) {
+                                    values[j] = query[index + 1] | query[index] << 8;
+                                }
+                                onConfigurations(values);
+                            }
                         }
+                        modbus_reply(modbus, query, rc, mapping);
+                    } else if (rc == -1) {
+                        logger.Log("Connection stopped.");
+                        connection = false;
                     }
-                    modbus_reply(modbus, query, rc, mapping);
-                } else if (rc == -1) {
-                    logger.Log("Connection stopped.");
-                    connection = false;
+                } catch (std::exception &e) {
+                    logger.Log(e.what());
                 }
-            } catch (std::exception &e) {
-                logger.Log(e.what());
             }
         }
     }
