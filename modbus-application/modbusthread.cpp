@@ -115,6 +115,11 @@ void ModbusThread::run() {
         return;
     }
 
+    fd_set set;
+    timespec timeout;
+    timeout.tv_sec = 1;
+    timeout.tv_nsec = 0;
+
     modbus_set_response_timeout(modbus, 0, 200000);
 
     int header_length = modbus_get_header_length(modbus);
@@ -122,18 +127,20 @@ void ModbusThread::run() {
     shouldListen = true;
 
     while (shouldListen) {
-
 //            this line is blocking! if there's no connection, it won't continue from here until one shows up!
-        int success = modbus_tcp_accept(modbus, &socket);
+        FD_ZERO(&set);
+        FD_SET(socket, &set);
+        int success = pselect(socket + 1, &set, nullptr, nullptr, &timeout, nullptr);
+
         if (success > 0) {
+            modbus_tcp_accept(modbus, &socket);
             logger.Log("Connection accepted.");
 
             bool connection = true;
 
             while (connection) {
                 try {
-                    int rc;
-                    rc = modbus_receive(modbus, query);
+                    int rc = modbus_receive(modbus, query);
                     if (rc > 0) {
                         if (query[header_length] == 5 || query[header_length] == 6) {
                             // write (single) coil or register
