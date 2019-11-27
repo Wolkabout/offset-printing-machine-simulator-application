@@ -1,7 +1,7 @@
 #ifndef RATELISTENER_H
 #define RATELISTENER_H
 
-#include "conveyorcontrol.h"
+#include "Machine/conveyorcontrol.h"
 #include <regex>
 #include <QObject>
 #include <QPushButton>

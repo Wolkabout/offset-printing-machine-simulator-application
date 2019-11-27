@@ -1,8 +1,8 @@
 #ifndef LOGS_H
 #define LOGS_H
 
-#include "bittogglethread.h"
-#include "modbusthread.h"
+#include "Modbus/bittogglethread.h"
+#include "Modbus/modbusthread.h"
 #include "simulator.h"
 
 #include <QFrame>

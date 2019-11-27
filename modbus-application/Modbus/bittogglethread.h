@@ -1,7 +1,7 @@
 #ifndef BITTOGGLETHREAD_H
 #define BITTOGGLETHREAD_H
 
-#include "modbusthread.h"
+#include "Modbus/modbusthread.h"
 
 #include <QThread>
 

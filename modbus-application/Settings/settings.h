@@ -2,7 +2,7 @@
 #define SETTINGS_H
 
 #include "configurations.h"
-#include "modbusthread.h"
+#include "Modbus/modbusthread.h"
 #include "simulator.h"
 #include <modbus/modbus-tcp.h>
 #include <QFrame>

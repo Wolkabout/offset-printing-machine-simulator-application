@@ -1,7 +1,7 @@
-#include "logs.h"
-#include "machineview.h"
+#include "Logs/logs.h"
+#include "Machine/machineview.h"
 #include "mainwindow.h"
-#include "settings.h"
+#include "Settings/settings.h"
 #include "simulator.h"
 #include "windowmanager.h"
 #include <QApplication>

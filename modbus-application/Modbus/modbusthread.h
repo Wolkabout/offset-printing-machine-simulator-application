@@ -10,7 +10,7 @@
 #include <QThread>
 #include <iostream>
 #include <modbus/modbus.h>
-#include "configurations.h"
+#include "Settings/configurations.h"
 
 class ModbusThread : public QThread
 {

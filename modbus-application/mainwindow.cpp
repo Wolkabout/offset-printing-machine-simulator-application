@@ -1,5 +1,5 @@
-#include "feedercontrol.h"
-#include "logs.h"
+#include "Machine/feedercontrol.h"
+#include "Logs/logs.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 

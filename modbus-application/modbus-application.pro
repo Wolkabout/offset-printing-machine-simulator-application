@@ -30,62 +30,62 @@ CONFIG += c++17 thread
 UI_DIR = $$PWD
 
 SOURCES += \
-        alarmalert.cpp \
-        configurations.cpp \
-        conveyorcontrol.cpp \
-        countlistener.cpp \
-        deliverycontrol.cpp \
-        feedercontrol.cpp \
-        logs.cpp \
-        machineview.cpp \
+        Logs/alarmalert.cpp \
+        Settings/configurations.cpp \
+        Machine/conveyorcontrol.cpp \
+        Machine/countlistener.cpp \
+        Machine/deliverycontrol.cpp \
+        Machine/feedercontrol.cpp \
+        Logs/logs.cpp \
+        Machine/machineview.cpp \
         main.cpp \
         mainwindow.cpp \
-        messagealert.cpp \
-        modbusthread.cpp \
-        modbusthread_listeners.cpp \
-        modbusthreadmessagehandler.cpp \
-        paintstationcontrol.cpp \
-        ratelistener.cpp \
-        settings.cpp \
+        Settings/messagealert.cpp \
+        Modbus/modbusthread.cpp \
+        Modbus/modbusthread_listeners.cpp \
+        Modbus/modbusthreadmessagehandler.cpp \
+        Machine/paintstationcontrol.cpp \
+        Machine/ratelistener.cpp \
+        Settings/settings.cpp \
         simulator.cpp \
-        valueinput.cpp \
+        Machine/valueinput.cpp \
         windowmanager.cpp
 
 HEADERS += \
-        alarmalert.h \
-        bittogglethread.h \
-        configurations.h \
-        conveyorcontrol.h \
-        countlistener.h \
-        deliverycontrol.h \
-        feedercontrol.h \
-        logs.h \
-        machineview.h \
+        Logs/alarmalert.h \
+        Modbus/bittogglethread.h \
+        Settings/configurations.h \
+        Machine/conveyorcontrol.h \
+        Machine/countlistener.h \
+        Machine/deliverycontrol.h \
+        Machine/feedercontrol.h \
+        Logs/logs.h \
+        Machine/machineview.h \
         mainwindow.h \
-        messagealert.h \
-        modbusthread.h \
-        modbusthread_listeners.h \
-        modbusthreadmessagehandler.h \
-        paintstationcontrol.h \
-        ratelistener.h \
-        settings.h \
+        Settings/messagealert.h \
+        Modbus/modbusthread.h \
+        Modbus/modbusthread_listeners.h \
+        Modbus/modbusthreadmessagehandler.h \
+        Machine/paintstationcontrol.h \
+        Machine/ratelistener.h \
+        Settings/settings.h \
         simulator.h \
         utility.h \
-        valueinput.h \
+        Machine/valueinput.h \
         windowmanager.h
 
 FORMS += \
-        alarmalert.ui \
-        conveyorcontrol.ui \
-        deliverycontrol.ui \
-        feedercontrol.ui \
-        logs.ui \
-        machineview.ui \
+        Logs/alarmalert.ui \
+        Machine/conveyorcontrol.ui \
+        Machine/deliverycontrol.ui \
+        Machine/feedercontrol.ui \
+        Logs/logs.ui \
+        Machine/machineview.ui \
         mainwindow.ui \
-        messagealert.ui \
-        paintstationcontrol.ui \
-        settings.ui \
-        valueinput.ui
+        Settings/messagealert.ui \
+        Machine/paintstationcontrol.ui \
+        Settings/settings.ui \
+        Machine/valueinput.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

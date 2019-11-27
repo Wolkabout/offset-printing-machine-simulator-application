@@ -1,7 +1,7 @@
-#include "conveyorcontrol.h"
-#include "deliverycontrol.h"
-#include "feedercontrol.h"
-#include "paintstationcontrol.h"
+#include "Machine/conveyorcontrol.h"
+#include "Machine/deliverycontrol.h"
+#include "Machine/feedercontrol.h"
+#include "Machine/paintstationcontrol.h"
 #include "simulator.h"
 
 Simulator::Simulator()
