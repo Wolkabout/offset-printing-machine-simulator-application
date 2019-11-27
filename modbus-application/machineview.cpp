@@ -75,8 +75,8 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     ui->yellowCount->setFont(robotoMedium14);
     ui->blackCount->setFont(robotoMedium14);
 
-    ui->image->setPixmap(QPixmap(":/Images/Resources/Offset.svg"));
-    animation = new QMovie(":/Images/Resources/offset_machine.gif");
+    ui->image->setPixmap(QPixmap(":/Images/Offset.svg"));
+    animation = new QMovie(":/Images/offset_machine.gif");
     ui->image->setMovie(animation);
     animation->setScaledSize(QSize(667, 390));
     animation->start();

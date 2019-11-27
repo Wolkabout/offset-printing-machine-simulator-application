@@ -35,13 +35,13 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     ui->count->setFont(robotoMedium18);
     ui->percentage->setFont(robotoMedium18);
 
-    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
+    ui->ok->setIcon(QIcon(":/Icons/ico_close.svg"));
 
     ui->name->setText(QString::fromStdString(paintStation.getName()));
     ui->count->setText(QString::number(paintStation.getCount()));
     ui->percentage->setText(QString::number(paintStation.getPercentage() * 100) + "%");
     std::string paint = paintStation.getName().substr(0, paintStation.getName().find(' '));
-    std::string animationPath = ":/Images/Resources/" + paint + ".svg";
+    std::string animationPath = ":/Images/" + paint + ".svg";
     ui->image->setPixmap(QPixmap(QString::fromStdString(animationPath)));
 
     countListener = std::make_shared<CountListener>(paintStation, ui->count, ui->percentage);

@@ -13,7 +13,7 @@ public:
     BitToggleThread(int bit, modbus_mapping_t * mappings) {
         this->bit = bit;
         this->mappings = mappings;
-        qDebug("Created thread for bit %i", bit);
+//        qDebug("Created thread for bit %i", bit);
     }
     void run() override {
 //        qDebug("Starting thread for bit %i (prev. value %i, setting to %i)", bit, mappings->tab_input_registers[bit], 1);

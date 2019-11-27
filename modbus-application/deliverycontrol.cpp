@@ -37,7 +37,7 @@ DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
     ui->count->setFont(robotoMedium18);
     ui->percentage->setFont(robotoMedium18);
 
-    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
+    ui->ok->setIcon(QIcon(":/Icons/ico_close.svg"));
 
     ui->count->setText(QString::number(delivery.getCount()));
     ui->percentage->setText(QString::number(std::round(delivery.getPercentage() * 100)) + "%");

@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
 
         Simulator simulator;
 
-        QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Medium.ttf"); // id 0
-        QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Regular.ttf"); // id 1
-        QFontDatabase::addApplicationFont(":/Fonts/Resources/Roboto-Bold.ttf"); // id 2
+        QFontDatabase::addApplicationFont(":/Fonts/Roboto-Medium.ttf"); // id 0
+        QFontDatabase::addApplicationFont(":/Fonts/Roboto-Regular.ttf"); // id 1
+        QFontDatabase::addApplicationFont(":/Fonts/Roboto-Bold.ttf"); // id 2
 
         MainWindow w(simulator);
         w.show();

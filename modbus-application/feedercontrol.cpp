@@ -37,7 +37,7 @@ FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
     ui->count->setFont(robotoMedium18);
     ui->percentage->setFont(robotoMedium18);
 
-    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
+    ui->ok->setIcon(QIcon(":/Icons/ico_close.svg"));
 
     ui->count->setText(QString::number(feeder.getCount()));
     ui->percentage->setText(QString::number(feeder.getPercentage() * 100) + "%");

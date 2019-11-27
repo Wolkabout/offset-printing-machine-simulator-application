@@ -22,7 +22,7 @@ AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
-    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close_white.svg"));
+    ui->ok->setIcon(QIcon(":/Icons/ico_close_white.svg"));
 
     QFont robotoBold18(QFontDatabase::applicationFontFamilies(2).at(0), 14, QFont::DemiBold);
     ui->title->setFont(robotoBold18);

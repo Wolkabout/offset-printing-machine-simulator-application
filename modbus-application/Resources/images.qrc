@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/Background.svg</file>
+        <file>Images/Black.svg</file>
+        <file>Images/Conveyor_Belt.png</file>
+        <file>Images/Conveyor_Belt.svg</file>
+        <file>Images/Cyan.svg</file>
+        <file>Images/Delivery.png</file>
+        <file>Images/Delivery.svg</file>
+        <file>Images/Dimmer.svg</file>
+        <file>Images/Feeder.png</file>
+        <file>Images/Feeder.svg</file>
+        <file>Images/Logo_white.svg</file>
+        <file>Images/Magenta.svg</file>
+        <file>Images/offset_machine.gif</file>
+        <file>Images/Offset.svg</file>
+        <file>Images/Yellow.svg</file>
+    </qresource>
+</RCC>

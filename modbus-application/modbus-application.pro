@@ -100,22 +100,6 @@ DEPENDPATH += $$PWD/../modbus-simulator-cpp
 unix:!macx: PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/libmodbus_simulator_cpp.a
 
 RESOURCES += \
-    fonts.qrc \
-    icons.qrc \
-    images.qrc
-
-DISTFILES += \
-    Resources/ConveyorAnimation1.gif \
-    Resources/ConveyorAnimation2.gif \
-    Resources/DeliveryAnimation1.gif \
-    Resources/DeliveryAnimation2.gif \
-    Resources/FeederAnimation1.gif \
-    Resources/FeederAnimation2.gif \
-    Resources/PaintStationAnimationC1.gif \
-    Resources/PaintStationAnimationC2.gif \
-    Resources/PaintStationAnimationK1.gif \
-    Resources/PaintStationAnimationK2.gif \
-    Resources/PaintStationAnimationM1.gif \
-    Resources/PaintStationAnimationM2.gif \
-    Resources/PaintStationAnimationY1.gif \
-    Resources/PaintStationAnimationY2.gif
+    Resources/fonts.qrc \
+    Resources/icons.qrc \
+    Resources/images.qrc

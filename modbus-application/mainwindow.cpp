@@ -19,7 +19,7 @@ MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     ui->setupUi(this);
 
     // Setup the background for the main window
-    QPixmap background(":/Images/Resources/Background.svg");
+    QPixmap background(":/Images/Background.svg");
     QPalette palette;
     palette.setBrush(QPalette::Background, background);
     setPalette(palette);
@@ -42,11 +42,11 @@ MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     QMainWindow::showFullScreen();
 #endif
 
-    ui->backButton->setIcon(QIcon(":/Icons/Resources/ico_back.svg"));
-    ui->settingsButton->setIcon(QIcon(":/Icons/Resources/ico_settings.svg"));
-    ui->logo->setPixmap(QPixmap(":/Images/Resources/Logo_white.svg"));
+    ui->backButton->setIcon(QIcon(":/Icons/ico_back.svg"));
+    ui->settingsButton->setIcon(QIcon(":/Icons/ico_settings.svg"));
+    ui->logo->setPixmap(QPixmap(":/Images/Logo_white.svg"));
 
-    QPixmap dimmer(":/Images/Resources/Dimmer.svg");
+    QPixmap dimmer(":/Images/Dimmer.svg");
     QImage output(dimmer.size(), QImage::Format_ARGB32_Premultiplied);
     output.fill(Qt::transparent);
     QPainter painter(&output);

@@ -27,9 +27,9 @@ ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
     QFont robotoMedium14(QFontDatabase::applicationFontFamilies(0).at(0), 10, QFont::DemiBold);
     ui->rateTitle->setFont(robotoMedium14);
 
-    ui->ok->setIcon(QIcon(":/Icons/Resources/ico_close.svg"));
-    ui->increase->setIcon(QIcon(":/Icons/Resources/ico_plus.svg"));
-    ui->decrease->setIcon(QIcon(":/Icons/Resources/ico_minus.svg"));
+    ui->ok->setIcon(QIcon(":/Icons/ico_close.svg"));
+    ui->increase->setIcon(QIcon(":/Icons/ico_plus.svg"));
+    ui->decrease->setIcon(QIcon(":/Icons/ico_minus.svg"));
 
     ui->rate->setText(QString::number(conveyor.getRatePerHour()));
 
