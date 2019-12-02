@@ -1,5 +1,7 @@
 # Offset Printing Machine HMI, with Modbus TCP
 
+![](user-guide/img/Offset.svg)
+
 This is an HMI QT application. This application is simulating the workings of an offset printing machine in HMI format,
 and exposes its data through Modbus registers (specifically, Modbus TCP).
 
@@ -11,9 +13,10 @@ refer to the [Mappings](MAPPINGS.md).
 
 ## Building & Installation
 
-Clone this repository, and don't forget to add the  ```--recurse-submodules``` flag.
-Otherwise you're not going to pull the library, which is necessary for the 
-application to work.
+Clone the repository:
+```
+git clone *link to here* --recurse-submodules
+```
 
 ### Dependencies
 
