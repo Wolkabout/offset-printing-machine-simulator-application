@@ -26,11 +26,10 @@ There is a shortcut for this, you can just run my shell script
 ```
 
 Or do this,
-dependencies are QT 4, and to install that, you need
+dependencies are gcc, make & cmake, libpthread, libmodbus and QT 4, and to install that, you need
 ```
-sudo apt install libqt4-dev libqt4-dev-bin \
-                 libpthread-stubs0-dev \
-                 libmodbus-dev
+sudo snap install cmake --classic
+sudo apt install gcc make libmodbus-dev libqt4-dev libqt4-dev-bin libpthread-stubs0-dev
 ```
 
 ### Compile & Run
