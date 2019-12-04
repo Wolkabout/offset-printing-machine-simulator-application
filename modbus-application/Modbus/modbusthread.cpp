@@ -1,6 +1,7 @@
 #include <QObject>
 #include <functional>
 #include <math.h>
+#include <sys/ioctl.h>
 #include "modbusthread.h"
 #include "modbusthread_listeners.h"
 #include "utility.h"
@@ -140,6 +141,9 @@ void ModbusThread::run() {
             while (connection) {
                 try {
                     int rc = modbus_receive(modbus, query);
+                    logger.Log("Socket : " + std::to_string(socket));
+                    int status = ioctl(socket + 1, 0);
+                    logger.Log("Status : " + std::to_string(status) + " | errno " + std::to_string(errno));
                     if (rc > 0) {
                         if (query[header_length] == 5 || query[header_length] == 6) {
                             // write (single) coil or register
