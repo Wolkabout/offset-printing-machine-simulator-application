@@ -127,7 +127,6 @@ void ModbusThread::run() {
     shouldListen = true;
 
     while (shouldListen) {
-//            this line is blocking! if there's no connection, it won't continue from here until one shows up!
         FD_ZERO(&set);
         FD_SET(socket, &set);
         int success = pselect(socket + 1, &set, nullptr, nullptr, &timeout, nullptr);
@@ -141,6 +140,8 @@ void ModbusThread::run() {
             while (connection) {
                 try {
                     int rc = modbus_receive(modbus, query);
+                    int status = pselect(socket + 1, &set, nullptr, nullptr, &timeout, nullptr);
+                    logger.Log("Status : " + std::to_string(status));
                     if (rc > 0) {
                         if (query[header_length] == 5 || query[header_length] == 6) {
                             // write (single) coil or register
