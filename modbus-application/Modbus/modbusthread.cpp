@@ -143,7 +143,9 @@ void ModbusThread::run() {
                     int rc = modbus_receive(modbus, query);
                     try {
                         byte buffer[] = {(byte)1};
-                        logger.Log("Status : " + std::to_string(write(socket + 1, buffer, 0)) + " | errno " + std::to_string(errno));
+                        ssize_t status = write(socket + 1, buffer, 0);
+                        ssize_t readLen = read(socket + 1, buffer, 0);
+                        logger.Log("Status : " + std::to_string(status) + " | ReadLen : " + std::to_string(readLen) + " | errno " + std::to_string(errno));
                     } catch (std::exception& e) {
                         logger.Log(std::string(e.what()) + " | " + std::to_string(errno));
                     }
