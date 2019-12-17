@@ -141,14 +141,6 @@ void ModbusThread::run() {
             while (connection) {
                 try {
                     int rc = modbus_receive(modbus, query);
-                    try {
-                        byte buffer[] = {(byte)1};
-                        ssize_t status = write(socket + 1, buffer, 0);
-                        ssize_t readLen = read(socket + 1, buffer, 0);
-                        logger.Log("Status : " + std::to_string(status) + " | ReadLen : " + std::to_string(readLen) + " | errno " + std::to_string(errno));
-                    } catch (std::exception& e) {
-                        logger.Log(std::string(e.what()) + " | " + std::to_string(errno));
-                    }
                     if (rc > 0) {
                         if (query[header_length] == 5 || query[header_length] == 6) {
                             // write (single) coil or register
