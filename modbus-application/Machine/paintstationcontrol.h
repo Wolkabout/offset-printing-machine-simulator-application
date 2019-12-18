@@ -28,8 +28,8 @@ private slots:
 
 private:
     Ui::PaintStationControl *ui;
-    PaintStation& paintStation;
-    std::shared_ptr<CountMessageReceiver> countListener;
+    PaintStation& m_paintStation;
+    std::shared_ptr<CountMessageReceiver> m_countListener;
 };
 
 #endif // PAINTSTATIONCONTROL_H

@@ -29,7 +29,7 @@ private slots:
 
 private:
     Ui::FeederControl *ui;
-    Feeder &feeder;
+    Feeder &m_feeder;
     std::shared_ptr<CountMessageReceiver> countListener;
 };
 

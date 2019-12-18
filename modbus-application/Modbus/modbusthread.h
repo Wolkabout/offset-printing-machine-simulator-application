@@ -16,24 +16,24 @@ class ModbusThread : public QThread
 {
 private:
     Q_OBJECT
-    modbus_t * modbus;
-    modbus_mapping_t * mapping;
-    bool shouldListen;
-    std::function<void()> breaker;
-    uint8_t * query;
-    QString addressString;
-    Logger logger;
-    Simulator& simulator;
-    ModbusThreadMessageHandler messageHandler;
+    modbus_t * m_modbus;
+    modbus_mapping_t * m_mapping;
+    bool m_shouldListen;
+    std::function<void()> m_breaker;
+    uint8_t * m_query;
+    QString m_addressString;
+    Logger m_logger;
+    Simulator& m_simulator;
+    ModbusThreadMessageHandler m_messageHandler;
 
-    std::shared_ptr<ExternalMachineStateReceiver> stateListener;
-    std::shared_ptr<CountMessageReceiver> feederListener; // 0
-    std::shared_ptr<CountMessageReceiver> deliveryListener; // 1
-    std::shared_ptr<CountMessageReceiver> cyanListener; // 2
-    std::shared_ptr<CountMessageReceiver> magentaListener; // 3
-    std::shared_ptr<CountMessageReceiver> yellowListener; // 4
-    std::shared_ptr<CountMessageReceiver> blackListener; // 5
-    std::shared_ptr<ConveyorRateMessageReceiver> conveyorListener;
+    std::shared_ptr<ExternalMachineStateReceiver> m_stateListener;
+    std::shared_ptr<CountMessageReceiver> m_feederListener; // 0
+    std::shared_ptr<CountMessageReceiver> m_deliveryListener; // 1
+    std::shared_ptr<CountMessageReceiver> m_cyanListener; // 2
+    std::shared_ptr<CountMessageReceiver> m_magentaListener; // 3
+    std::shared_ptr<CountMessageReceiver> m_yellowListener; // 4
+    std::shared_ptr<CountMessageReceiver> m_blackListener; // 5
+    std::shared_ptr<ConveyorRateMessageReceiver> m_conveyorListener;
 
     void run() override;
     void printMappings();

@@ -6,9 +6,9 @@
 
 class ModbusThreadMessageHandler
 {
-    modbus_mapping_t * mappings;
-    Simulator& simulator;
-    std::function<void(std::vector<int>)> callback;
+    modbus_mapping_t * m_mappings;
+    Simulator& m_simulator;
+    std::function<void(std::vector<int>)> m_callback;
 public:
     ModbusThreadMessageHandler(modbus_mapping_t *, Simulator&);
     void handleMessage(uint8_t message[]);

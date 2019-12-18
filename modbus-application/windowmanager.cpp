@@ -21,8 +21,8 @@ int WindowManager::addFrame(std::shared_ptr<QFrame> frame)
 void WindowManager::showFrame(int index)
 {
     if (frameStack.size() > 0) {
-        int index = frameStack.top();
-        frames[index]->hide();
+        int m_index = frameStack.top();
+        frames[m_index]->hide();
     }
     if (frameStack.size() == 0 || frameStack.top() != index) {
         frameStack.push(index);

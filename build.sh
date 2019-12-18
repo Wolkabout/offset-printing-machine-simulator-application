@@ -1,4 +1,4 @@
-cd modbus-simulator-cpp
+cd offset-printing-machine-simulator-lib
 . build.sh
 cd ../..
 cd modbus-application

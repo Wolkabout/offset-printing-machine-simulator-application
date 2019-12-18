@@ -15,21 +15,21 @@ class MachineView;
 class MachineView : public QFrame
 {
     Q_OBJECT
-    std::map<QLabel*, QMovie*> labels;
-    Simulator& simulator;
-    std::shared_ptr<ExternalMachineStateReceiver> listener;
-    std::shared_ptr<CountMessageReceiver> feederListener;
-    std::shared_ptr<CountMessageReceiver> cyanListener;
-    std::shared_ptr<CountMessageReceiver> magentaListener;
-    std::shared_ptr<CountMessageReceiver> yellowListener;
-    std::shared_ptr<CountMessageReceiver> blackListener;
-    std::shared_ptr<CountMessageReceiver> deliveryListener;
-    std::shared_ptr<ConveyorRateMessageReceiver> conveyorListener;
-    QWidget* feederWidget;
-    QWidget *cyanWidget, *magentaWidget, *yellowWidget, *blackWidget;
-    QWidget* deliveyWidget;
-    QWidget* conveyorWidget;
-    QMovie* animation;
+    std::map<QLabel*, QMovie*> m_labels;
+    Simulator& m_simulator;
+    std::shared_ptr<ExternalMachineStateReceiver> m_listener;
+    std::shared_ptr<CountMessageReceiver> m_feederListener;
+    std::shared_ptr<CountMessageReceiver> m_cyanListener;
+    std::shared_ptr<CountMessageReceiver> m_magentaListener;
+    std::shared_ptr<CountMessageReceiver> m_yellowListener;
+    std::shared_ptr<CountMessageReceiver> m_blackListener;
+    std::shared_ptr<CountMessageReceiver> m_deliveryListener;
+    std::shared_ptr<ConveyorRateMessageReceiver> m_conveyorListener;
+    QWidget* m_feederWidget;
+    QWidget *m_cyanWidget, *m_magentaWidget, *m_yellowWidget, *m_blackWidget;
+    QWidget* m_deliveyWidget;
+    QWidget* m_conveyorWidget;
+    QMovie* m_animation;
 public:
     MachineView(Simulator& simulator, QWidget *parent = nullptr);
     ~MachineView();
@@ -78,7 +78,7 @@ private:
 class ViewMachineStateListener : public QObject, public ExternalMachineStateReceiver {
 private:
     Q_OBJECT
-    MachineView& machineView;
+    MachineView& m_machineView;
 public:
     ViewMachineStateListener(MachineView&);
     void ReceiveMachineState(bool x) override;

@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::DeliveryControl *ui;
-    Delivery& delivery;
+    Delivery& m_delivery;
     std::shared_ptr<CountMessageReceiver> countListener;
 };
 

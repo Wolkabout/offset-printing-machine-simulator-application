@@ -3,34 +3,34 @@
 #include <math.h>
 
 CountListener::CountListener(TempoComponent& tempoComponent, QLabel * label, QLabel * optionalLabel)
-    : tempoComponent(tempoComponent), label(label), optionalLabel(optionalLabel), button(nullptr) {
+    : m_tempoComponent(tempoComponent), m_label(label), m_optionalLabel(optionalLabel), m_button(nullptr) {
     QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 CountListener::CountListener(TempoComponent& tempoComponent, QLabel * label)
-    : tempoComponent(tempoComponent), label(label), optionalLabel(nullptr), button(nullptr) {
+    : m_tempoComponent(tempoComponent), m_label(label), m_optionalLabel(nullptr), m_button(nullptr) {
     QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 CountListener::CountListener(TempoComponent& tempoComponent, QPushButton * button)
-    : tempoComponent(tempoComponent), label(nullptr), optionalLabel(nullptr), button(button) {
+    : m_tempoComponent(tempoComponent), m_label(nullptr), m_optionalLabel(nullptr), m_button(button) {
     QObject::connect(this, SIGNAL(receiveLabels(QString, QString)), this, SLOT(setLabels(QString, QString)), Qt::ConnectionType::QueuedConnection);
 }
 
 void CountListener::setLabels(QString one, QString two)
 {
-    if (button == nullptr) {
-        if (optionalLabel == nullptr) {
-            QStringList list = label->text().split('/');
-            label->setText(one + '/' + two);
+    if (m_button == nullptr) {
+        if (m_optionalLabel == nullptr) {
+            QStringList list = m_label->text().split('/');
+            m_label->setText(one + '/' + two);
         } else {
-            label->setText(Utility::replaceNumbers(label->text(), one));
-            optionalLabel->setText(Utility::replaceNumbers(optionalLabel->text(), two));
+            m_label->setText(Utility::replaceNumbers(m_label->text(), one));
+            m_optionalLabel->setText(Utility::replaceNumbers(m_optionalLabel->text(), two));
         }
     } else {
-        button->setText(button->text().split(' ')[0] + " (" + one + '/' + two + ')');
+        m_button->setText(m_button->text().split(' ')[0] + " (" + one + '/' + two + ')');
     }
-};
+}
 
 void CountListener::ReceiveMessage(std::shared_ptr<CountMessage> message) {
     emit receiveLabels(QString::number(message->getCount()), QString::number(std::round(message->getPercentage() * 100)) + '%');

@@ -15,12 +15,12 @@ class Settings;
 class Settings : public QFrame
 {
     Q_OBJECT
-    Simulator& simulator;
-    QString addressString;
-    ModbusThread &thread;
-    bool toggled;
-    std::vector<int> currentConfig;
-    std::vector<QLineEdit*> forms;
+    Simulator& m_simulator;
+    QString m_addressString;
+    ModbusThread &m_thread;
+    bool m_toggled;
+    std::vector<int> m_currentConfig;
+    std::vector<QLineEdit*> m_forms;
     Ui::Settings *ui;
 public:
     Settings(Simulator& simulator, ModbusThread &thread, QWidget *parent = nullptr);

@@ -14,10 +14,10 @@ class Logs;
 class Logs : public QFrame
 {
     Q_OBJECT
-    Simulator& simulator;
+    Simulator& m_simulator;
+    modbus_mapping_t * m_mappings;
     std::shared_ptr<ExternalMachineMessageReceiver> listener;
     QString convertType(ComponentMessageType type);
-    modbus_mapping_t * mappings;
     BitToggleThread * toggle;
     Ui::Logs *ui;
 public:
@@ -27,7 +27,7 @@ public:
 
     class LogsMessageReceiver : public ExternalMachineMessageReceiver {
     private:
-        Logs& logs;
+        Logs& m_logs;
     public:
         LogsMessageReceiver(Logs&);
         void ReceiveMessage(std::shared_ptr<ComponentMessage>) override;

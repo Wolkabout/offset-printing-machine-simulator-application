@@ -1,18 +1,18 @@
 #ifndef COUNTLISTENER_H
 #define COUNTLISTENER_H
 
-#include <Interfaces/CountMessageReceiver.h>
-#include <Components/TempoComponent.h>
+#include "Interfaces/CountMessageReceiver.h"
+#include "Components/TempoComponent.h"
 #include <QLabel>
 #include <QPushButton>
 
 class CountListener : public QObject, public CountMessageReceiver {
 private:
     Q_OBJECT
-    TempoComponent& tempoComponent;
-    QPushButton * button = nullptr;
-    QLabel * label;
-    QLabel * optionalLabel;
+    TempoComponent& m_tempoComponent;
+    QPushButton * m_button = nullptr;
+    QLabel * m_label;
+    QLabel * m_optionalLabel;
 public:
     CountListener(TempoComponent&, QLabel *, QLabel * optionalLabel);
     CountListener(TempoComponent&, QLabel *);

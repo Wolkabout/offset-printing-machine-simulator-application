@@ -11,8 +11,8 @@
 
 PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *parent) :
     QWidget(parent),
-    paintStation(paintStation),
-    ui(new Ui::PaintStationControl)
+    ui(new Ui::PaintStationControl),
+    m_paintStation(paintStation)
 {
     int width = 400;
     int height = 360;
@@ -44,8 +44,8 @@ PaintStationControl::PaintStationControl(PaintStation& paintStation, QWidget *pa
     std::string animationPath = ":/Images/" + paint + ".svg";
     ui->image->setPixmap(QPixmap(QString::fromStdString(animationPath)));
 
-    countListener = std::make_shared<CountListener>(paintStation, ui->count, ui->percentage);
-    paintStation.getCountMessageReceiver().push_back(countListener);
+    m_countListener = std::make_shared<CountListener>(paintStation, ui->count, ui->percentage);
+    paintStation.getCountMessageReceiver().push_back(m_countListener);
 }
 
 PaintStationControl::~PaintStationControl()
@@ -67,7 +67,7 @@ void PaintStationControl::on_ok_clicked()
 
 void PaintStationControl::on_edit_clicked()
 {
-    int maxNew = paintStation.getCapacity() - paintStation.getCount();
+    int maxNew = m_paintStation.getCapacity() - m_paintStation.getCount();
     maxNew = (maxNew / 100) * 100;
     if (maxNew < 1) {
 
@@ -82,7 +82,7 @@ void PaintStationControl::on_edit_clicked()
                 MessageAlert * ma = new MessageAlert("Paint Station", QString("There has to be atleast 100 papers in delivery!"), this);
                 return;
             }
-            paintStation.modifyCount(paper);
+            m_paintStation.modifyCount(paper);
         } catch (std::exception &e) {
             MessageAlert * ma = new MessageAlert("Paint Station", e.what(), this);
         }
@@ -96,5 +96,5 @@ void PaintStationControl::on_edit_clicked()
 void PaintStationControl::on_failure_clicked()
 {
     hide();
-    paintStation.Emit(Severe, paintStation.getName() + " has stopped working!");
+    m_paintStation.Emit(Severe, m_paintStation.getName() + " has stopped working!");
 }

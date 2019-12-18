@@ -1,11 +1,10 @@
-#include "configurations.h"
+#include "Settings/configurations.h"
 #include "modbusthreadmessagehandler.h"
 
 ModbusThreadMessageHandler::ModbusThreadMessageHandler(modbus_mapping_t * mappings, Simulator& simulator) :
-    simulator(simulator),
-    callback(callback) {
-    this->mappings = mappings;
-}
+    m_mappings(mappings),
+    m_simulator(simulator),
+    m_callback(nullptr) { }
 
 void ModbusThreadMessageHandler::handleMessage(uint8_t message[])
 {
@@ -16,35 +15,35 @@ void ModbusThreadMessageHandler::handleMessage(uint8_t message[])
     if (message[0] == 5) {
         if (registerIndex == 0) {
             if (value != 0) {
-                simulator.getMachine()->start();
+                m_simulator.getMachine()->start();
             }
             else {
-                simulator.getMachine()->stop();
+                m_simulator.getMachine()->stop();
             }
         }
     } else if (message[0] == 6) {
         if (registerIndex == 3) {
-            simulator.getConveyor()->setRatePerHour(value);
+            m_simulator.getConveyor()->setRatePerHour(value);
         }
         else {
             switch (registerIndex) {
                 case 6:
-                simulator.getFeeder()->modifyCount(value);
+                m_simulator.getFeeder()->modifyCount(value);
                 break;
                 case 9:
-                simulator.getDelivery()->modifyCount(value);
+                m_simulator.getDelivery()->modifyCount(value);
                 break;
                 case 12:
-                simulator.getCyanPaint()->modifyCount(value);
+                m_simulator.getCyanPaint()->modifyCount(value);
                 break;
                 case 15:
-                simulator.getMagentaPaint()->modifyCount(value);
+                m_simulator.getMagentaPaint()->modifyCount(value);
                 break;
                 case 18:
-                simulator.getYellowPaint()->modifyCount(value);
+                m_simulator.getYellowPaint()->modifyCount(value);
                 break;
                 case 21:
-                simulator.getBlackPaint()->modifyCount(value);
+                m_simulator.getBlackPaint()->modifyCount(value);
                 break;
                 case 25:
                 case 26:
@@ -53,8 +52,8 @@ void ModbusThreadMessageHandler::handleMessage(uint8_t message[])
                 qDebug("Setting configuration value : %i %i", registerIndex, value);
                 auto values = Configurations::load();
                 values[registerIndex - 22] = value;
-                if (callback != nullptr) {
-                    callback(values);
+                if (m_callback != nullptr) {
+                    m_callback(values);
                 }
                 break;
             }
@@ -64,5 +63,5 @@ void ModbusThreadMessageHandler::handleMessage(uint8_t message[])
 
 void ModbusThreadMessageHandler::setCallback(std::function<void (std::vector<int>)> callback)
 {
-    this->callback = callback;
+    this->m_callback = callback;
 }

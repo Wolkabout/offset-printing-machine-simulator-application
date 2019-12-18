@@ -8,10 +8,10 @@
 
 AlarmAlert::AlarmAlert(QString message, Simulator& simulator, QWidget* component, QWidget *parent) :
     QWidget(parent),
-    message(message),
-    component(component),
-    simulator(simulator),
-    ui(new Ui::AlarmAlert)
+    m_message(message),
+    m_component(component),
+    ui(new Ui::AlarmAlert),
+    m_simulator(simulator)
 {
     int width = 360;
     int height = 216;
@@ -58,18 +58,18 @@ void AlarmAlert::on_ok_clicked()
 
 void AlarmAlert::on_goto_2_clicked()
 {
-    if (message.contains("Feeder")) {
-        simulator.getFeederWidget()->show();
-    } else if (message.contains("Cyan")) {
-        simulator.getCyanWidget()->show();
-    } else if (message.contains("Magenta")) {
-        simulator.getMagentaWidget()->show();
-    } else if (message.contains("Yellow")) {
-        simulator.getYellowWidget()->show();
-    } else if (message.contains("Black")) {
-        simulator.getBlackWidget()->show();
-    } else if (message.contains("Delivery")) {
-        simulator.getDeliveryWidget()->show();
+    if (m_message.contains("Feeder")) {
+        m_simulator.getFeederWidget()->show();
+    } else if (m_message.contains("Cyan")) {
+        m_simulator.getCyanWidget()->show();
+    } else if (m_message.contains("Magenta")) {
+        m_simulator.getMagentaWidget()->show();
+    } else if (m_message.contains("Yellow")) {
+        m_simulator.getYellowWidget()->show();
+    } else if (m_message.contains("Black")) {
+        m_simulator.getBlackWidget()->show();
+    } else if (m_message.contains("Delivery")) {
+        m_simulator.getDeliveryWidget()->show();
     }
     hide();
 }

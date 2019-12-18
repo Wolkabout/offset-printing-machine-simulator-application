@@ -15,43 +15,43 @@
 
 QWidget *MachineView::getFeederWidget() const
 {
-    return feederWidget;
+    return m_feederWidget;
 }
 
 QWidget *MachineView::getCyanWidget() const
 {
-    return cyanWidget;
+    return m_cyanWidget;
 }
 
 QWidget *MachineView::getMagentaWidget() const
 {
-    return magentaWidget;
+    return m_magentaWidget;
 }
 
 QWidget *MachineView::getYellowWidget() const
 {
-    return yellowWidget;
+    return m_yellowWidget;
 }
 
 QWidget *MachineView::getBlackWidget() const
 {
-    return blackWidget;
+    return m_blackWidget;
 }
 
 QWidget *MachineView::getDeliveyWidget() const
 {
-    return deliveyWidget;
+    return m_deliveyWidget;
 }
 
 QWidget *MachineView::getConveyorWidget() const
 {
-    return conveyorWidget;
+    return m_conveyorWidget;
 }
 
 MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::MachineView),
-    simulator(simulator)
+    m_simulator(simulator),
+    ui(new Ui::MachineView)
 {
     ui->setupUi(this);
 
@@ -76,53 +76,53 @@ MachineView::MachineView(Simulator& simulator, QWidget *parent) :
     ui->blackCount->setFont(robotoMedium14);
 
     ui->image->setPixmap(QPixmap(":/Images/Offset.svg"));
-    animation = new QMovie(":/Images/offset_machine.gif");
-    ui->image->setMovie(animation);
-    animation->setScaledSize(QSize(667, 390));
-    animation->start();
-    animation->stop();
-    animation->setSpeed(500);
+    m_animation = new QMovie(":/Images/offset_machine.gif");
+    ui->image->setMovie(m_animation);
+    m_animation->setScaledSize(QSize(667, 390));
+    m_animation->start();
+    m_animation->stop();
+    m_animation->setSpeed(500);
 
-    feederWidget = new FeederControl(*simulator.getFeeder(), this);
-    cyanWidget = new PaintStationControl(*simulator.getCyanPaint(), this);
-    magentaWidget = new PaintStationControl(*simulator.getMagentaPaint(), this);
-    yellowWidget = new PaintStationControl(*simulator.getYellowPaint(), this);
-    blackWidget = new PaintStationControl(*simulator.getBlackPaint(), this);
-    deliveyWidget = new DeliveryControl(*simulator.getDelivery(), this);
-    conveyorWidget = new ConveyorControl(*simulator.getConveyor(), this);
+    m_feederWidget = new FeederControl(*simulator.getFeeder(), this);
+    m_cyanWidget = new PaintStationControl(*simulator.getCyanPaint(), this);
+    m_magentaWidget = new PaintStationControl(*simulator.getMagentaPaint(), this);
+    m_yellowWidget = new PaintStationControl(*simulator.getYellowPaint(), this);
+    m_blackWidget = new PaintStationControl(*simulator.getBlackPaint(), this);
+    m_deliveyWidget = new DeliveryControl(*simulator.getDelivery(), this);
+    m_conveyorWidget = new ConveyorControl(*simulator.getConveyor(), this);
 
-    listener = std::make_shared<ViewMachineStateListener>(*this);
-    simulator.getMachine()->getExternalMachineStateReceivers().push_back(listener);
+    m_listener = std::make_shared<ViewMachineStateListener>(*this);
+    simulator.getMachine()->getExternalMachineStateReceivers().push_back(m_listener);
 
     ui->feederManage->setText(ui->feederManage->text().split(' ')[0] +
             " (" + QString::number(simulator.getFeeder()->getCount()) + "/" + QString::number(simulator.getFeeder()->getPercentage() * 100) + "%)");
-    feederListener = std::make_shared<CountListener>(*(simulator.getFeeder().get()), ui->feederManage);
-    simulator.getFeeder()->getCountMessageReceiver().push_back(feederListener);
+    m_feederListener = std::make_shared<CountListener>(*(simulator.getFeeder().get()), ui->feederManage);
+    simulator.getFeeder()->getCountMessageReceiver().push_back(m_feederListener);
 
-    cyanListener = std::make_shared<CountListener>(*(simulator.getCyanPaint().get()), ui->cyanCount);
-    simulator.getCyanPaint()->getCountMessageReceiver().push_back(cyanListener);
+    m_cyanListener = std::make_shared<CountListener>(*(simulator.getCyanPaint().get()), ui->cyanCount);
+    simulator.getCyanPaint()->getCountMessageReceiver().push_back(m_cyanListener);
 
-    magentaListener = std::make_shared<CountListener>(*(simulator.getMagentaPaint().get()), ui->magentaCount);
-    simulator.getMagentaPaint()->getCountMessageReceiver().push_back(magentaListener);
+    m_magentaListener = std::make_shared<CountListener>(*(simulator.getMagentaPaint().get()), ui->magentaCount);
+    simulator.getMagentaPaint()->getCountMessageReceiver().push_back(m_magentaListener);
 
-    yellowListener = std::make_shared<CountListener>(*(simulator.getYellowPaint().get()), ui->yellowCount);
-    simulator.getYellowPaint()->getCountMessageReceiver().push_back(yellowListener);
+    m_yellowListener = std::make_shared<CountListener>(*(simulator.getYellowPaint().get()), ui->yellowCount);
+    simulator.getYellowPaint()->getCountMessageReceiver().push_back(m_yellowListener);
 
-    blackListener = std::make_shared<CountListener>(*(simulator.getBlackPaint().get()), ui->blackCount);
-    simulator.getBlackPaint()->getCountMessageReceiver().push_back(blackListener);
+    m_blackListener = std::make_shared<CountListener>(*(simulator.getBlackPaint().get()), ui->blackCount);
+    simulator.getBlackPaint()->getCountMessageReceiver().push_back(m_blackListener);
 
     ui->deliverManage->setText(ui->deliverManage->text().split(' ')[0] +
             " (" + QString::number(simulator.getDelivery()->getCount()) + "/" + QString::number(simulator.getDelivery()->getPercentage() * 100) + "%)");
-    deliveryListener = std::make_shared<CountListener>(*(simulator.getDelivery().get()), ui->deliverManage);
-    simulator.getDelivery()->getCountMessageReceiver().push_back(deliveryListener);
+    m_deliveryListener = std::make_shared<CountListener>(*(simulator.getDelivery().get()), ui->deliverManage);
+    simulator.getDelivery()->getCountMessageReceiver().push_back(m_deliveryListener);
 
     ui->tempoManage->setText("Tempo " + QString::number(simulator.getConveyor()->getRatePerHour()) + " pph");
-    conveyorListener = std::make_shared<RateListener>(*(simulator.getConveyor().get()), ui->tempoManage);
-    simulator.getConveyor()->getRateMessageReceivers().push_back(conveyorListener);
+    m_conveyorListener = std::make_shared<RateListener>(*(simulator.getConveyor().get()), ui->tempoManage);
+    simulator.getConveyor()->getRateMessageReceivers().push_back(m_conveyorListener);
 }
 
-ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : machineView(machineView) {
-    QObject::connect(this, SIGNAL(stateChange(bool)), &machineView, SLOT(machineStateChange(bool)), Qt::ConnectionType::QueuedConnection);
+ViewMachineStateListener::ViewMachineStateListener(MachineView& machineView) : m_machineView(machineView) {
+    QObject::connect(this, SIGNAL(stateChange(bool)), &m_machineView, SLOT(machineStateChange(bool)), Qt::ConnectionType::QueuedConnection);
 }
 
 void ViewMachineStateListener::ReceiveMachineState(bool x) {
@@ -133,67 +133,67 @@ void MachineView::machineStateChange(bool state) {
     if (state) {
         ui->startButton->setText("Stop");
         ui->startButton->setStyleSheet("color: #ffffff;\nborder-radius: 4px;\nbackground-color: #323232");
-        animation->start();
+        m_animation->start();
     } else {
         ui->startButton->setText("Start");
         ui->startButton->setStyleSheet("color: #ffffff;\nborder-radius: 4px;\nbackground-color: #00afff");
-        animation->stop();
+        m_animation->stop();
     }
 }
 
 void MachineView::on_feederManage_clicked()
 {
-    feederWidget->show();
+    m_feederWidget->show();
 }
 
 void MachineView::on_deliverManage_clicked()
 {
-    deliveyWidget->show();
+    m_deliveyWidget->show();
 }
 
 void MachineView::on_cyanManage_clicked()
 {
-    cyanWidget->show();
+    m_cyanWidget->show();
 }
 
 void MachineView::on_magentaManage_clicked()
 {
-    magentaWidget->show();
+    m_magentaWidget->show();
 }
 
 void MachineView::on_yellowManage_clicked()
 {
-    yellowWidget->show();
+    m_yellowWidget->show();
 }
 
 void MachineView::on_blackManage_clicked()
 {
-    blackWidget->show();
+    m_blackWidget->show();
 }
 
 void MachineView::on_tempoManage_clicked()
 {
-    conveyorWidget->show();
+    m_conveyorWidget->show();
 }
 
 void MachineView::on_emergencyStop_clicked()
 {
     std::shared_ptr<ComponentMessage> message = std::make_shared<ComponentMessage>(Severe, "The Emergency Button was triggered!");
-    simulator.getMachine()->receiveMessages(message);
+    m_simulator.getMachine()->receiveMessages(message);
 }
 
 void MachineView::on_paperJam_clicked()
 {
     std::shared_ptr<ComponentMessage> message = std::make_shared<ComponentMessage>(Severe, "A paper jammed the machine!");
-    simulator.getMachine()->receiveMessages(message);
+    m_simulator.getMachine()->receiveMessages(message);
 }
 
 void MachineView::on_startButton_clicked()
 {
-    if (simulator.getMachine()->isRunning()) {
-        simulator.getMachine()->stop();
+    if (m_simulator.getMachine()->isRunning()) {
+        m_simulator.getMachine()->stop();
     } else {
-        simulator.getMachine()->start();
+        m_simulator.getMachine()->start();
     }
 }
 

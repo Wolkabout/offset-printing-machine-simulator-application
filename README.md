@@ -15,7 +15,7 @@ refer to the [Mappings](MAPPINGS.md).
 
 Clone the repository:
 ```
-git clone *link to here* --recurse-submodules
+git clone https://github.com/Wolkabout/offset-printing-machine-simulator-application --recurse-submodules
 ```
 
 ### Dependencies

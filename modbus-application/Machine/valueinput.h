@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::ValueInput *ui;
-    std::function<void(std::string)> callback;
+    std::function<void(std::string)> m_callback;
 };
 
 #endif // VALUEINPUT_H

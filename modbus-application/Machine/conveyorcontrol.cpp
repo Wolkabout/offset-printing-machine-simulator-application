@@ -7,7 +7,7 @@
 
 ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
     QWidget(parent),
-    conveyor(conveyor),
+    m_conveyor(conveyor),
     ui(new Ui::ConveyorControl)
 {
     int width = 400;
@@ -33,8 +33,8 @@ ConveyorControl::ConveyorControl(Conveyor& conveyor, QWidget *parent) :
 
     ui->rate->setText(QString::number(conveyor.getRatePerHour()));
 
-    listener = std::make_shared<RateListener>(conveyor, ui->rate);
-    conveyor.getRateMessageReceivers().push_back(listener);
+    m_listener = std::make_shared<RateListener>(conveyor, ui->rate);
+    conveyor.getRateMessageReceivers().push_back(m_listener);
 }
 
 ConveyorControl::~ConveyorControl()
@@ -51,22 +51,22 @@ void ConveyorControl::windowActivationChange(bool oldChange)
 
 void ConveyorControl::on_decrease_clicked()
 {
-    if (conveyor.getRatePerHour() > conveyor.getMinRatePerHour()) {
-        conveyor.setRatePerHour(conveyor.getRatePerHour() - 100);
+    if (m_conveyor.getRatePerHour() > m_conveyor.getMinRatePerHour()) {
+        m_conveyor.setRatePerHour(m_conveyor.getRatePerHour() - 100);
     }
 }
 
 void ConveyorControl::on_increase_clicked()
 {
-    if (conveyor.getRatePerHour() < conveyor.getMaxRatePerHour()) {
-        conveyor.setRatePerHour(conveyor.getRatePerHour() + 100);
+    if (m_conveyor.getRatePerHour() < m_conveyor.getMaxRatePerHour()) {
+        m_conveyor.setRatePerHour(m_conveyor.getRatePerHour() + 100);
     }
 }
 
 void ConveyorControl::on_failure_clicked()
 {
     hide();
-    conveyor.Emit(Severe, conveyor.getName() + " has stopped working!");
+    m_conveyor.Emit(Severe, m_conveyor.getName() + " has stopped working!");
 }
 
 void ConveyorControl::on_ok_clicked()

@@ -30,8 +30,8 @@ private slots:
 
 private:
     Ui::ConveyorControl *ui;
-    Conveyor& conveyor;
-    std::shared_ptr<ConveyorRateMessageReceiver> listener;
+    Conveyor& m_conveyor;
+    std::shared_ptr<ConveyorRateMessageReceiver> m_listener;
 };
 
 #endif // CONVEYORCONTROL_H

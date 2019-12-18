@@ -13,8 +13,8 @@
 
 DeliveryControl::DeliveryControl(Delivery &delivery, QWidget *parent) :
     QWidget(parent),
-    delivery(delivery),
-    ui(new Ui::DeliveryControl)
+    ui(new Ui::DeliveryControl),
+    m_delivery(delivery)
 {
     int width = 400;
     int height = 360;
@@ -65,7 +65,7 @@ void DeliveryControl::on_ok_clicked()
 
 void DeliveryControl::on_edit_clicked()
 {
-    int maxNew = delivery.getCount();
+    int maxNew = m_delivery.getCount();
     maxNew = (maxNew / 100) * 100;
     if (maxNew < 1) {
         MessageAlert * ma = new MessageAlert("Delivery", QString("There has to be atleast 100 papers in delivery!"), this);
@@ -79,7 +79,7 @@ void DeliveryControl::on_edit_clicked()
                 MessageAlert * ma = new MessageAlert("Delivery", QString("The ammount you entered is not in range (0 - " + QString::number(maxNew) + ")."), this);
                 return;
             }
-            delivery.modifyCount(paper);
+            m_delivery.modifyCount(paper);
         } catch (std::exception &e) {
             MessageAlert * ma = new MessageAlert("Delivery", e.what(),this);
         }
@@ -93,5 +93,5 @@ void DeliveryControl::on_edit_clicked()
 void DeliveryControl::on_failure_clicked()
 {
     hide();
-    delivery.Emit(Severe, delivery.getName() + " has stopped working!");
+    m_delivery.Emit(Severe, m_delivery.getName() + " has stopped working!");
 }

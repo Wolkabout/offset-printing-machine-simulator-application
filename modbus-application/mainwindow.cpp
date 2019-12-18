@@ -12,8 +12,8 @@
 
 MainWindow::MainWindow(Simulator &simulator, QWidget *parent) :
     QMainWindow(parent),
-    simulator(simulator),
-    windowManager(),
+    m_windowManager(),
+    m_simulator(simulator),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -65,7 +65,7 @@ MainWindow::~MainWindow()
 }
 
 WindowManager& MainWindow::getWindowManager() {
-    return windowManager;
+    return m_windowManager;
 }
 
 QFrame * MainWindow::frameHolder() {
@@ -90,25 +90,25 @@ void MainWindow::timerEvent(QTimerEvent *event) {
 
 void MainWindow::on_backButton_clicked()
 {
-    windowManager.goBack();
+    m_windowManager.goBack();
 }
 
 void MainWindow::on_homeButton_clicked()
 {
-    windowManager.hideEverything();
+    m_windowManager.hideEverything();
 }
 
 void MainWindow::on_logButton_clicked()
 {
-    windowManager.showFrame(0);
+    m_windowManager.showFrame(0);
 }
 
 void MainWindow::on_settingsButton_clicked()
 {
-    windowManager.showFrame(1);
+    m_windowManager.showFrame(1);
 }
 
 void MainWindow::on_machineButton_clicked()
 {
-    windowManager.showFrame(2);
+    m_windowManager.showFrame(2);
 }

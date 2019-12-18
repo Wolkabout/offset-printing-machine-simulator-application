@@ -11,10 +11,10 @@
 class RateListener : public QObject, public ConveyorRateMessageReceiver {
 private:
     Q_OBJECT
-    Conveyor& conveyor;
-    QLabel * rateLabel;
-    QPushButton * button;
-    QLineEdit * lineEdit;
+    Conveyor& m_conveyor;
+    QLabel * m_rateLabel;
+    QPushButton * m_button;
+    QLineEdit * m_lineEdit;
     Q_INVOKABLE void setButtonLabel(QString);
 public:
     RateListener(Conveyor&, QLabel *);

@@ -25,10 +25,10 @@ private slots:
     void on_goto_2_clicked();
 
 private:
-    QString message;
-    QWidget *component;
+    QString m_message;
+    QWidget *m_component;
     Ui::AlarmAlert *ui;
-    Simulator& simulator;
+    Simulator& m_simulator;
 };
 
 #endif // ALARMALERT_H

@@ -13,8 +13,8 @@
 
 FeederControl::FeederControl(Feeder &feeder, QWidget *parent) :
     QWidget(parent),
-    feeder(feeder),
-    ui(new Ui::FeederControl)
+    ui(new Ui::FeederControl),
+    m_feeder(feeder)
 {
     int width = 400;
     int height = 360;
@@ -65,7 +65,7 @@ void FeederControl::on_ok_clicked()
 
 void FeederControl::on_edit_clicked()
 {
-    int maxNew = feeder.getCapacity() - feeder.getCount();
+    int maxNew = m_feeder.getCapacity() - m_feeder.getCount();
     maxNew = (maxNew / 100) * 100;
     if (maxNew < 1) {
         MessageAlert * ma = new MessageAlert("Feeder", "There has to be atleast 100 papers missing!", this);
@@ -79,7 +79,7 @@ void FeederControl::on_edit_clicked()
                 MessageAlert * ma = new MessageAlert("Feeder", "The amount is not in range (0 - " + QString::number(maxNew) + ").", this);
                 return;
             }
-            feeder.modifyCount(paper);
+            m_feeder.modifyCount(paper);
         } catch (std::exception &e) {
             MessageAlert * ma = new MessageAlert("Feeder", e.what(), this);
         }
@@ -93,5 +93,5 @@ void FeederControl::on_edit_clicked()
 void FeederControl::on_failure_clicked()
 {
     hide();
-    feeder.Emit(Severe, feeder.getName() + " has stopped working!");
+    m_feeder.Emit(Severe, m_feeder.getName() + " has stopped working!");
 }

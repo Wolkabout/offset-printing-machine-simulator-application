@@ -20,8 +20,8 @@ QMAKE_CXXFLAGS += -pedantic-errors -Wcast-align -Wcast-qual -Wconversion
 QMAKE_CXXFLAGS += -Wdisabled-optimization -Wfloat-equal -Wformat=2
 QMAKE_CXXFLAGS += -Werror=init-self -Werror=return-type -Werror=missing-field-initializers
 QMAKE_CXXFLAGS += -Wmissing-format-attribute -Wmissing-include-dirs
-QMAKE_CXXFLAGS += -Wmissing-noreturn -Werror=pointer-arith -Wno-packed  -Wno-padded
-QMAKE_CXXFLAGS += -Wredundant-decls -Werror=shadow -Werror=stack-protector                                     \
+QMAKE_CXXFLAGS += -Wmissing-noreturn -Werror=pointer-arith -Wno-packed -Wno-padded
+QMAKE_CXXFLAGS += -Wredundant-decls -Werror=shadow -Werror=stack-protector
 QMAKE_CXXFLAGS += -Wstrict-aliasing=2 -Werror=unreachable-code -Wno-unused -Wvariadic-macros
 QMAKE_CXXFLAGS += -Wwrite-strings -Werror=non-virtual-dtor
 
@@ -101,15 +101,20 @@ FORMS += \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/binunix: LIBS += -L$$PWD/../offset-printing-machine-simulator-lib/out/ -lopm-simulator
+
+INCLUDEPATH += $$PWD/../offset-printing-machine-simulator-lib/src
+DEPENDPATH += $$PWD/../offset-printing-machine-simulator-lib/src
+
+unix: PRE_TARGETDEPS += $$PWD/../offset-printing-machine-simulator-lib/out/libopm-simulator.a
 !isEmpty(target.path): INSTALLS += target
 
-unix:!macx: LIBS += -L$$PWD/../modbus-simulator-cpp/out/ -lmodbus_simulator_cpp
+unix: LIBS += -L$$PWD/../offset-printing-machine-simulator-lib/out/ -lopm-simulator
 
-INCLUDEPATH += $$PWD/../modbus-simulator-cpp
-DEPENDPATH += $$PWD/../modbus-simulator-cpp
+INCLUDEPATH += $$PWD/../offset-printing-machine-simulator-lib/src
+DEPENDPATH += $$PWD/../offset-printing-machine-simulator-lib/src
 
-unix:!macx: PRE_TARGETDEPS += $$PWD/../modbus-simulator-cpp/out/libmodbus_simulator_cpp.a
+unix: PRE_TARGETDEPS += $$PWD/../offset-printing-machine-simulator-lib/out/libopm-simulator.a
 
 RESOURCES += \
     Resources/fonts.qrc \

@@ -6,7 +6,7 @@
 ValueInput::ValueInput(QString title, QString message, QWidget *parent, std::function<void (std::string)> callback) :
     QWidget(parent),
     ui(new Ui::ValueInput),
-    callback(callback)
+    m_callback(callback)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
@@ -40,8 +40,8 @@ ValueInput::~ValueInput()
 
 void ValueInput::on_apply_clicked()
 {
-    if (callback != nullptr) {
-        callback(ui->input->text().toStdString());
+    if (m_callback != nullptr) {
+        m_callback(ui->input->text().toStdString());
     }
     close();
 }

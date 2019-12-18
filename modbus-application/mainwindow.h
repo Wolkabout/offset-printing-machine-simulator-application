@@ -32,8 +32,8 @@ private slots:
     void on_machineButton_clicked();
 
 private:
-    WindowManager windowManager;
-    Simulator &simulator;
+    WindowManager m_windowManager;
+    Simulator &m_simulator;
     Ui::MainWindow *ui;
     void timerEvent(QTimerEvent *event) override;
 };
