@@ -19,7 +19,6 @@ git clone *link to here* --recurse-submodules
 ```
 
 ### Dependencies
-
 There is a shortcut for this, you can just run my shell script
 ```
 . dependencies.sh
@@ -31,6 +30,14 @@ dependencies are gcc, make & cmake, libpthread, libmodbus and QT 4, and to insta
 sudo snap install cmake --classic
 sudo apt install gcc make libmodbus-dev libqt4-dev libqt4-dev-bin libpthread-stubs0-dev
 ```
+
+#### Setting up QT Creator
+In QT Creator you need to setup the Kit to use the QT 4.8.7 version for this application.
+After you installed the dependencies, go to Tools/Options/Kits, and add a new one. Set the device 
+to Local PC, device type Desktop, Compiler to use GCC, System GDB for debug, and QT 4.8.7 in PATH for Qt version.
+When you import the project, choose this as kit for the project.
+
+![](user-guide/img/kit.png)
 
 ### Compile & Run
 

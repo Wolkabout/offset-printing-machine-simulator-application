@@ -7,12 +7,24 @@
 QT       += core gui network widgets svg
 LIBS     += -lmodbus -pthread
 
+lessThan(QT_MAJOR_VERSION, 4): error("requires Qt 4")
 greaterThan(QT_MAJOR_VERSION, 4)
+greaterThan(QT_MAJOR_VERSION, 5): error("requires Qt 4")
 
 TARGET = modbus-application
 TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=gnu++17 -pthread
+QMAKE_CXXFLAGS += -Wall -Wextra -pedantic
+QMAKE_CXXFLAGS += -pedantic-errors -Wcast-align -Wcast-qual -Wconversion
+QMAKE_CXXFLAGS += -Wdisabled-optimization -Wfloat-equal -Wformat=2
+QMAKE_CXXFLAGS += -Werror=init-self -Werror=return-type -Werror=missing-field-initializers
+QMAKE_CXXFLAGS += -Wmissing-format-attribute -Wmissing-include-dirs
+QMAKE_CXXFLAGS += -Wmissing-noreturn -Werror=pointer-arith -Wno-packed  -Wno-padded
+QMAKE_CXXFLAGS += -Wredundant-decls -Werror=shadow -Werror=stack-protector                                     \
+QMAKE_CXXFLAGS += -Wstrict-aliasing=2 -Werror=unreachable-code -Wno-unused -Wvariadic-macros
+QMAKE_CXXFLAGS += -Wwrite-strings -Werror=non-virtual-dtor
+
 QMAKE_CFLAGS += -std=gnu++17 -pthread
 
 # The following define makes your compiler emit warnings if you use
