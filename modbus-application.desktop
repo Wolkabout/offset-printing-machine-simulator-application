@@ -5,4 +5,4 @@ Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
 Name=Modbus Application
-Comment=Yello!
+Comment=This is an HMI QT application. This application is simulating the workings of an offset printing machine in HMI format, and exposes its data through Modbus registers (specifically, Modbus TCP). 
