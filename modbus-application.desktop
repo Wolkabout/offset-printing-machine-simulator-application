@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Exec=/home/[USER_NAME]/modbus-application-cpp/modbus-application/out/modbus-application
+Exec=/home/[USER_NAME]/offset-printing-machine-simulator-application/modbus-application/out/modbus-application
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
 Name=Modbus Application
-Comment=Yello!
+Comment=This is an HMI QT application. This application is simulating the workings of an offset printing machine in HMI format, and exposes its data through Modbus registers (specifically, Modbus TCP). 
