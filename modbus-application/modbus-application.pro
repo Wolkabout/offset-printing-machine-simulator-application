@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui network widgets svg
-LIBS     += -lmodbus -pthread
+LIBS     += -pthread
 
 lessThan(QT_MAJOR_VERSION, 4): error("requires Qt 4")
 greaterThan(QT_MAJOR_VERSION, 4)
@@ -110,11 +110,12 @@ unix: PRE_TARGETDEPS += $$PWD/../offset-printing-machine-simulator-lib/out/libop
 !isEmpty(target.path): INSTALLS += target
 
 unix: LIBS += -L$$PWD/../offset-printing-machine-simulator-lib/out/ -lopm-simulator
+unix: LIBS += -L$$PWD/../dependencies/out/lib/ -lmodbus
 
-INCLUDEPATH += $$PWD/../offset-printing-machine-simulator-lib/src
-DEPENDPATH += $$PWD/../offset-printing-machine-simulator-lib/src
+INCLUDEPATH += $$PWD/../dependencies/include
+DEPENDPATH += $$PWD/../dependencies/include
 
-unix: PRE_TARGETDEPS += $$PWD/../offset-printing-machine-simulator-lib/out/libopm-simulator.a
+unix: PRE_TARGETDEPS += $$PWD/../dependencies/out/lib/libmodbus.a
 
 RESOURCES += \
     Resources/fonts.qrc \
