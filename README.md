@@ -21,6 +21,7 @@ git clone https://github.com/Wolkabout/offset-printing-machine-simulator-applica
 ### Dependencies
 There is a shortcut for this, you can just run my shell script
 ```
+sudo chmod +x dependencies.sh
 . dependencies.sh
 ```
 
@@ -32,7 +33,10 @@ sudo apt install gcc make libmodbus-dev=3.1.4-2 libqt4-dev libqt4-dev-bin libpth
 ```
 
 #### Setting up QT Creator
-In QT Creator you need to setup the Kit to use the QT 4.8.7 version for this application.
+This sections is for those who intend to edit the source code.
+
+In [QT Creator](https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4) 
+you need to setup the Kit to use the QT 4.8.7 version for this application.
 After you installed the dependencies, go to Tools/Options/Kits, and add a new one. Set the device 
 to Local PC, device type Desktop, Compiler to use GCC, System GDB for debug, and QT 4.8.7 in PATH for Qt version.
 When you import the project, choose this as kit for the project.
@@ -43,6 +47,7 @@ When you import the project, choose this as kit for the project.
 
 For this, there is also a shortcut. In the root of the git, run
 ```
+sudo chmod +x build.sh
 . build.sh
 (this will move you to /modbus-application-cpp/modbus-application/out/)
 ```

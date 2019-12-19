@@ -1,5 +1,6 @@
-cd offset-printing-machine-simulator-lib
+pushd offset-printing-machine-simulator-lib
 . build.sh
-cd ../..
-cd modbus-application
+popd
+popd
+pushd modbus-application
 . build.sh
