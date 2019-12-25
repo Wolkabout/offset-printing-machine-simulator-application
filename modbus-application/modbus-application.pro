@@ -42,62 +42,62 @@ CONFIG += c++17 thread
 UI_DIR = $$PWD
 
 SOURCES += \
-        Logs/alarmalert.cpp \
-        Settings/configurations.cpp \
-        Machine/conveyorcontrol.cpp \
-        Machine/countlistener.cpp \
-        Machine/deliverycontrol.cpp \
-        Machine/feedercontrol.cpp \
-        Logs/logs.cpp \
-        Machine/machineview.cpp \
-        main.cpp \
-        mainwindow.cpp \
-        Settings/messagealert.cpp \
-        Modbus/modbusthread.cpp \
-        Modbus/modbusthread_listeners.cpp \
-        Modbus/modbusthreadmessagehandler.cpp \
-        Machine/paintstationcontrol.cpp \
-        Machine/ratelistener.cpp \
-        Settings/settings.cpp \
-        simulator.cpp \
-        Machine/valueinput.cpp \
-        windowmanager.cpp
+        logs/AlarmAlert.cpp \
+        logs/Logs.cpp \
+        machine/ConveyorControl.cpp \
+        machine/CountListener.cpp \
+        machine/DeliveryControl.cpp \
+        machine/FeederControl.cpp \
+        machine/MachineView.cpp \
+        machine/PaintStationControl.cpp \
+        machine/RateListener.cpp \
+        machine/ValueInput.cpp \
+        external/ModbusThread.cpp \
+        external/ModbusThreadListeners.cpp \
+        external/ModbusThreadMessageHandler.cpp \
+        settings/Configurations.cpp \
+        settings/MessageAlert.cpp \
+        settings/Settings.cpp \
+        Main.cpp \
+        MainWindow.cpp \
+        Simulator.cpp \
+        WindowManager.cpp
 
 HEADERS += \
-        Logs/alarmalert.h \
-        Modbus/bittogglethread.h \
-        Settings/configurations.h \
-        Machine/conveyorcontrol.h \
-        Machine/countlistener.h \
-        Machine/deliverycontrol.h \
-        Machine/feedercontrol.h \
-        Logs/logs.h \
-        Machine/machineview.h \
-        mainwindow.h \
-        Settings/messagealert.h \
-        Modbus/modbusthread.h \
-        Modbus/modbusthread_listeners.h \
-        Modbus/modbusthreadmessagehandler.h \
-        Machine/paintstationcontrol.h \
-        Machine/ratelistener.h \
-        Settings/settings.h \
-        simulator.h \
-        utility.h \
-        Machine/valueinput.h \
-        windowmanager.h
+        logs/AlarmAlert.h \
+        logs/Logs.h \
+        machine/ConveyorControl.h \
+        machine/CountListener.h \
+        machine/DeliveryControl.h \
+        machine/FeederControl.h \
+        machine/MachineView.h \
+        machine/PaintStationControl.h \
+        machine/RateListener.h \
+        machine/ValueInput.h \
+        external/BitToggleThread.h \
+        external/ModbusThread.h \
+        external/ModbusThreadListeners.h \
+        external/ModbusThreadMessageHandler.h \
+        settings/Configurations.h \
+        settings/MessageAlert.h \
+        settings/Settings.h \
+        MainWindow.h \
+        Simulator.h \
+        Utility.h \
+        WindowManager.h
 
 FORMS += \
-        Logs/alarmalert.ui \
-        Machine/conveyorcontrol.ui \
-        Machine/deliverycontrol.ui \
-        Machine/feedercontrol.ui \
-        Logs/logs.ui \
-        Machine/machineview.ui \
-        mainwindow.ui \
-        Settings/messagealert.ui \
-        Machine/paintstationcontrol.ui \
-        Settings/settings.ui \
-        Machine/valueinput.ui
+        logs/AlarmAlert.ui \
+        logs/Logs.ui \
+        machine/ConveyorControl.ui \
+        machine/DeliveryControl.ui \
+        machine/FeederControl.ui \
+        machine/MachineView.ui \
+        machine/PaintStationControl.ui \
+        machine/ValueInput.ui \
+        settings/MessageAlert.ui \
+        settings/Settings.ui \
+        MainWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -118,6 +118,6 @@ DEPENDPATH += $$PWD/../dependencies/include
 unix: PRE_TARGETDEPS += $$PWD/../dependencies/out/lib/libmodbus.a
 
 RESOURCES += \
-    Resources/fonts.qrc \
-    Resources/icons.qrc \
-    Resources/images.qrc
+    resources/fonts.qrc \
+    resources/icons.qrc \
+    resources/images.qrc
