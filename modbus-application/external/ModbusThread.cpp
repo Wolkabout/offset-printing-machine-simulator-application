@@ -20,7 +20,7 @@ ModbusThread::ModbusThread(const Simulator& simulator) :
     modbus_set_debug(m_modbus, TRUE);
 #endif
 
-    modbus_set_response_timeout(m_modbus, 0, 0);
+    modbus_set_response_timeout(m_modbus, 0, 200000);
 
     m_messageHandler.setCallback([&](std::vector<int> values) {
         if (onConfigurations != nullptr)
